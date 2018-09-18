@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'faraday', '~> 0.14.0'
   spec.add_runtime_dependency 'mimemagic', '~> 0.3.2'
-  spec.add_runtime_dependency 'addressable', '~> 2.5.2'
+  spec.add_runtime_dependency 'addressable', '~> 2.5', '>= 2.5.2'
   
   spec.add_development_dependency 'groupdocs_storage_cloud', '~> 18.6', '>= 18.5'
   spec.add_development_dependency 'minitest', '~> 5.11', '>= 5.11.3'
