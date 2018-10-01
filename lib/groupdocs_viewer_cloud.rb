@@ -73,32 +73,3 @@ require_relative 'groupdocs_viewer_cloud/models/image_options'
 
 # APIs
 require_relative 'groupdocs_viewer_cloud/api/viewer_api'
-
-module GroupDocsViewerCloud
-  # Main module
-  class << self
-    # Initialize SDK with API keys.
-    # 
-    # app_sid = "xxx"
-    # app_key = "xxx"
-    #
-    # GroupDocsViewerCloud.from_keys(app_sid, app_key)
-    def from_keys(app_sid, app_key)
-      ViewerApi.from_keys(app_sid, app_key)
-    end
-
-    # Initialize SDK with Configuration.
-    # 
-    # app_sid = "xxx"
-    # app_key = "xxx"
-    #
-    # config = GroupDocsViewerCloud::Configuration.new(app_sid, app_key)
-    # config.debugging = true
-    # config.temp_folder_path = "./temp"
-    #
-    # GroupDocsViewerCloud.from_config(config)
-    def from_config(config)
-      ViewerApi.from_config(config)
-    end
-  end
-end

@@ -159,7 +159,8 @@ module GroupDocsViewerCloud
       file = TestFile.from_url_with_notes_pptx
 
       pdf_file_options = PdfFileOptions.new
-      pdf_file_options.password = file.password
+      pdf_file_options.slides_options = SlidesOptions.new
+      pdf_file_options.slides_options.render_notes = true
 
       request = HtmlCreatePdfFileFromUrlRequest.new(file.url)
       request.pdf_file_options = pdf_file_options

@@ -27,7 +27,7 @@ app_sid = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 app_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 # Create instance of the API class
-api = GroupDocsViewerCloud.from_keys(app_sid, app_key)
+api = GroupDocsViewerCloud::ViewerApi.from_keys(app_sid, app_key)
 
 # Retrieve supported file-formats
 response = api.get_supported_file_formats

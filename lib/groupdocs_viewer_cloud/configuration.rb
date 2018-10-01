@@ -34,7 +34,7 @@ module GroupDocsViewerCloud
     # @return [String] Api base url
     attr_accessor :api_base_url
 
-    # Api version, default is ''
+    # Api version, default is '/v1'
     #
     # @return [String] Api version
     attr_accessor :api_version

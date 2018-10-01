@@ -101,7 +101,7 @@ module GroupDocsViewerCloud
       assert response != nil
     end
 
-     # unit tests for html_get_pages
+    # unit tests for html_get_pages
     # Retrieves list of document pages as HTML.
     # 
     # @param file_name The file name.
@@ -355,7 +355,7 @@ module GroupDocsViewerCloud
       @viewer_api.html_delete_pages_cache request
     end
 
-     # Retrieves test file
+    # Retrieves test file
     def get_test_file(file)
       if file == nil then 
         return 
