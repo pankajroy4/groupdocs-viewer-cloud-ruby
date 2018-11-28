@@ -37,11 +37,19 @@ module GroupDocsViewerCloud
     # The time unit to use as minimal point. Supported values {Unknown|Days|ThirdsOfMonths|Months}: 1. Unknown - unknown, unspecified time scale. 2. Days - one day interval. 3. ThirdsOfMonths - one third of the month. 4. Months - one month interval.
     attr_accessor :time_unit
 
+    # The start date of a Gantt Chart View to render.        
+    attr_accessor :start_date
+
+    # The end date of a Gantt Chart View to render.
+    attr_accessor :end_date
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'page_size' => :'pageSize',
-        :'time_unit' => :'timeUnit'
+        :'time_unit' => :'timeUnit',
+        :'start_date' => :'startDate',
+        :'end_date' => :'endDate'
       }
     end
 
@@ -49,7 +57,9 @@ module GroupDocsViewerCloud
     def self.swagger_types
       {
         :'page_size' => :'String',
-        :'time_unit' => :'String'
+        :'time_unit' => :'String',
+        :'start_date' => :'DateTime',
+        :'end_date' => :'DateTime'
       }
     end
 
@@ -67,6 +77,14 @@ module GroupDocsViewerCloud
 
       if attributes.key?(:'timeUnit')
         self.time_unit = attributes[:'timeUnit']
+      end
+
+      if attributes.key?(:'startDate')
+        self.start_date = attributes[:'startDate']
+      end
+
+      if attributes.key?(:'endDate')
+        self.end_date = attributes[:'endDate']
       end
 
     end
@@ -90,7 +108,9 @@ module GroupDocsViewerCloud
       return true if self.equal?(other)
       self.class == other.class &&
           page_size == other.page_size &&
-          time_unit == other.time_unit
+          time_unit == other.time_unit &&
+          start_date == other.start_date &&
+          end_date == other.end_date
     end
 
     # @see the `==` method
@@ -102,7 +122,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [page_size, time_unit].hash
+      [page_size, time_unit, start_date, end_date].hash
     end
 
     # Builds the object from hash
@@ -133,9 +153,9 @@ module GroupDocsViewerCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer

@@ -55,6 +55,12 @@ module GroupDocsViewerCloud
     # The list of layers contained in a CAD document.
     attr_accessor :layers
 
+    # For MS Project documents, The date time from which the project started.
+    attr_accessor :start_date
+
+    # For MS Project documents, the date time when the project is to be completed.
+    attr_accessor :end_date
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -65,7 +71,9 @@ module GroupDocsViewerCloud
         :'date_modified' => :'dateModified',
         :'pages' => :'pages',
         :'attachments' => :'attachments',
-        :'layers' => :'layers'
+        :'layers' => :'layers',
+        :'start_date' => :'startDate',
+        :'end_date' => :'endDate'
       }
     end
 
@@ -79,7 +87,9 @@ module GroupDocsViewerCloud
         :'date_modified' => :'DateTime',
         :'pages' => :'Array<PageInfo>',
         :'attachments' => :'Array<AttachmentInfo>',
-        :'layers' => :'Array<String>'
+        :'layers' => :'Array<String>',
+        :'start_date' => :'DateTime',
+        :'end_date' => :'DateTime'
       }
     end
 
@@ -129,6 +139,14 @@ module GroupDocsViewerCloud
         end
       end
 
+      if attributes.key?(:'startDate')
+        self.start_date = attributes[:'startDate']
+      end
+
+      if attributes.key?(:'endDate')
+        self.end_date = attributes[:'endDate']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -156,7 +174,9 @@ module GroupDocsViewerCloud
           date_modified == other.date_modified &&
           pages == other.pages &&
           attachments == other.attachments &&
-          layers == other.layers
+          layers == other.layers &&
+          start_date == other.start_date &&
+          end_date == other.end_date
     end
 
     # @see the `==` method
@@ -168,7 +188,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_name, extension, file_format, size, date_modified, pages, attachments, layers].hash
+      [file_name, extension, file_format, size, date_modified, pages, attachments, layers, start_date, end_date].hash
     end
 
     # Builds the object from hash
@@ -199,9 +219,9 @@ module GroupDocsViewerCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer

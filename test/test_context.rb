@@ -24,12 +24,15 @@
 # </summary>
 # --------------------------------------------------------------------------------------------------------------------
 #
-module GroupDocsViewerCloud
+module GroupDocsViewerCloud  
+    
+  require 'openssl'    
+    OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
     require "minitest/autorun"
     require "minitest/unit"
     require 'groupdocs_storage_cloud'
-    
+
     require_relative './../lib/groupdocs_viewer_cloud'
     require_relative './test_settings'
 
@@ -43,7 +46,9 @@ module GroupDocsViewerCloud
       def setup
         init_viewer_api
         init_storage_api
-        upload_test_files
+        #NOTE: this method doesn't work because of issue in groupdocs_storage_cloud gem
+        #      for more details see https://github.com/groupdocs-storage-cloud/groupdocs-storage-cloud-ruby/issues/1
+        #upload_test_files
       end
 
       def teardown 
@@ -75,7 +80,7 @@ module GroupDocsViewerCloud
 
       def upload_test_files
         unless @@test_files_uploaded then
-          test_file_path = File.dirname(__FILE__) + "./test_files/"
+          test_file_path = "test/test_files/"
           test_files = list_files test_file_path
 
           test_files.each do |file_path|
@@ -99,7 +104,7 @@ module GroupDocsViewerCloud
       end
 
       def get_test_file(file) 
-        base_path = File.dirname(__FILE__) + "/test_files"
+        base_path = "test/test_files"
         test_file_folder = file.folder.sub("\\", "/")
         test_file_path = "#{base_path}/#{test_file_folder}/#{file.file_name}"
 

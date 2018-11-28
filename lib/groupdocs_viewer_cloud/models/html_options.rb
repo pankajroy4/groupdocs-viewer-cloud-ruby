@@ -76,6 +76,9 @@ module GroupDocsViewerCloud
     # The Microsoft Project documents rendering options.
     attr_accessor :project_options
 
+    # The Outlook Data File document (PST/OST) rendering options.
+    attr_accessor :outlook_options
+
     # Allows to specify document page number as starting page to render. 
     attr_accessor :start_page_number
 
@@ -100,6 +103,9 @@ module GroupDocsViewerCloud
     # Prevents adding fonts to the output HTML document.  
     attr_accessor :exclude_fonts
 
+    # The list of font names, that will be excluded from HTML.
+    attr_accessor :exclude_fonts_list
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -118,6 +124,7 @@ module GroupDocsViewerCloud
         :'pdf_options' => :'pdfOptions',
         :'slides_options' => :'slidesOptions',
         :'project_options' => :'projectOptions',
+        :'outlook_options' => :'outlookOptions',
         :'start_page_number' => :'startPageNumber',
         :'count_pages' => :'countPages',
         :'resource_path' => :'resourcePath',
@@ -125,7 +132,8 @@ module GroupDocsViewerCloud
         :'embed_resources' => :'embedResources',
         :'enable_minification' => :'enableMinification',
         :'enable_responsive_rendering' => :'enableResponsiveRendering',
-        :'exclude_fonts' => :'excludeFonts'
+        :'exclude_fonts' => :'excludeFonts',
+        :'exclude_fonts_list' => :'excludeFontsList'
       }
     end
 
@@ -147,6 +155,7 @@ module GroupDocsViewerCloud
         :'pdf_options' => :'PdfOptions',
         :'slides_options' => :'SlidesOptions',
         :'project_options' => :'ProjectOptions',
+        :'outlook_options' => :'OutlookOptions',
         :'start_page_number' => :'Integer',
         :'count_pages' => :'Integer',
         :'resource_path' => :'String',
@@ -154,7 +163,8 @@ module GroupDocsViewerCloud
         :'embed_resources' => :'BOOLEAN',
         :'enable_minification' => :'BOOLEAN',
         :'enable_responsive_rendering' => :'BOOLEAN',
-        :'exclude_fonts' => :'BOOLEAN'
+        :'exclude_fonts' => :'BOOLEAN',
+        :'exclude_fonts_list' => :'Array<String>'
       }
     end
 
@@ -228,6 +238,10 @@ module GroupDocsViewerCloud
         self.project_options = attributes[:'projectOptions']
       end
 
+      if attributes.key?(:'outlookOptions')
+        self.outlook_options = attributes[:'outlookOptions']
+      end
+
       if attributes.key?(:'startPageNumber')
         self.start_page_number = attributes[:'startPageNumber']
       end
@@ -258,6 +272,12 @@ module GroupDocsViewerCloud
 
       if attributes.key?(:'excludeFonts')
         self.exclude_fonts = attributes[:'excludeFonts']
+      end
+
+      if attributes.key?(:'excludeFontsList')
+        if (value = attributes[:'excludeFontsList']).is_a?(Array)
+          self.exclude_fonts_list = value
+        end
       end
 
     end
@@ -295,6 +315,7 @@ module GroupDocsViewerCloud
           pdf_options == other.pdf_options &&
           slides_options == other.slides_options &&
           project_options == other.project_options &&
+          outlook_options == other.outlook_options &&
           start_page_number == other.start_page_number &&
           count_pages == other.count_pages &&
           resource_path == other.resource_path &&
@@ -302,7 +323,8 @@ module GroupDocsViewerCloud
           embed_resources == other.embed_resources &&
           enable_minification == other.enable_minification &&
           enable_responsive_rendering == other.enable_responsive_rendering &&
-          exclude_fonts == other.exclude_fonts
+          exclude_fonts == other.exclude_fonts &&
+          exclude_fonts_list == other.exclude_fonts_list
     end
 
     # @see the `==` method
@@ -314,7 +336,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [password, attachment_password, extract_text, render_comments, render_hidden_pages, transforms, default_font_name, watermark, cells_options, cad_options, email_options, words_options, pdf_options, slides_options, project_options, start_page_number, count_pages, resource_path, ignore_resource_path_in_resources, embed_resources, enable_minification, enable_responsive_rendering, exclude_fonts].hash
+      [password, attachment_password, extract_text, render_comments, render_hidden_pages, transforms, default_font_name, watermark, cells_options, cad_options, email_options, words_options, pdf_options, slides_options, project_options, outlook_options, start_page_number, count_pages, resource_path, ignore_resource_path_in_resources, embed_resources, enable_minification, enable_responsive_rendering, exclude_fonts, exclude_fonts_list].hash
     end
 
     # Builds the object from hash
@@ -345,9 +367,9 @@ module GroupDocsViewerCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer

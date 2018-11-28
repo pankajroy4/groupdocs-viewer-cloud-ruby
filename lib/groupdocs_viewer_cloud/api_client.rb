@@ -69,18 +69,8 @@ module GroupDocsViewerCloud
       end
 
       unless response.success?
-        if response.status == 0
-          # Errors from libcurl will be made visible here
-          raise ApiError.new(:code => 0,
-                            :message => response.reason_phrase)
-        else
-          raise ApiError.new(:code => response.status,
-                            :response_headers => response.headers,
-                            :response_body => response.body),
-               response.reason_phrase
-        end
+        raise ApiError.new(:code => response.status, :response_body => response.body)
       end
-
       
       data = deserialize(response, opts[:return_type]) if opts[:return_type]
       [data, response.status, response.headers]

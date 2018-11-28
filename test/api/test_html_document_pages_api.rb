@@ -355,6 +355,56 @@ module GroupDocsViewerCloud
       @viewer_api.html_delete_pages_cache request
     end
 
+    # unit tests for html_create_pages_cache
+    # Creates document pages as HTML and saves them in cache with project options. 
+    # 
+    def test_html_create_pages_cache_project_options
+      file = TestFile.project_mpp
+
+      project_options = ProjectOptions.new
+      project_options.time_unit = "Days"
+      project_options.start_date = "2008/07/01"
+      project_options.end_date = "2008/07/31"
+
+      html_options = HtmlOptions.new
+      html_options.embed_resources =  true
+      html_options.project_options = project_options
+
+      request = HtmlCreatePagesCacheRequest.new(file.file_name)
+      request.html_options = html_options
+      request.folder = file.folder
+
+      response = @viewer_api.html_create_pages_cache request
+
+      assert_equal 1, response.pages.size
+      assert_equal file.file_name, response.file_name
+      assert_equal file.folder, response.folder
+    end
+
+    # unit tests for html_create_pages_cache
+    # Creates document pages as HTML and saves them in cache with outlook options.
+    # 
+    def test_html_create_pages_cache_outlook_options
+      file = TestFile.outlook_pst
+
+      outlook_options = OutlookOptions.new
+      outlook_options.max_items_in_folder = 5
+
+      html_options = HtmlOptions.new
+      html_options.embed_resources =  true
+      html_options.outlook_options = outlook_options
+
+      request = HtmlCreatePagesCacheRequest.new(file.file_name)
+      request.html_options = html_options
+      request.folder = file.folder
+
+      response = @viewer_api.html_create_pages_cache request
+
+      assert response.pages.size > 0
+      assert_equal file.file_name, response.file_name
+      assert_equal file.folder, response.folder
+    end    
+
     # Retrieves test file
     def get_test_file(file)
       if file == nil then 

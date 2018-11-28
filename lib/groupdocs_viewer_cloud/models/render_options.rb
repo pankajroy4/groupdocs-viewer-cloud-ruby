@@ -76,6 +76,9 @@ module GroupDocsViewerCloud
     # The Microsoft Project documents rendering options.
     attr_accessor :project_options
 
+    # The Outlook Data File document (PST/OST) rendering options.
+    attr_accessor :outlook_options
+
     # Allows to specify document page number as starting page to render. 
     attr_accessor :start_page_number
 
@@ -100,6 +103,7 @@ module GroupDocsViewerCloud
         :'pdf_options' => :'pdfOptions',
         :'slides_options' => :'slidesOptions',
         :'project_options' => :'projectOptions',
+        :'outlook_options' => :'outlookOptions',
         :'start_page_number' => :'startPageNumber',
         :'count_pages' => :'countPages'
       }
@@ -123,6 +127,7 @@ module GroupDocsViewerCloud
         :'pdf_options' => :'PdfOptions',
         :'slides_options' => :'SlidesOptions',
         :'project_options' => :'ProjectOptions',
+        :'outlook_options' => :'OutlookOptions',
         :'start_page_number' => :'Integer',
         :'count_pages' => :'Integer'
       }
@@ -198,6 +203,10 @@ module GroupDocsViewerCloud
         self.project_options = attributes[:'projectOptions']
       end
 
+      if attributes.key?(:'outlookOptions')
+        self.outlook_options = attributes[:'outlookOptions']
+      end
+
       if attributes.key?(:'startPageNumber')
         self.start_page_number = attributes[:'startPageNumber']
       end
@@ -241,6 +250,7 @@ module GroupDocsViewerCloud
           pdf_options == other.pdf_options &&
           slides_options == other.slides_options &&
           project_options == other.project_options &&
+          outlook_options == other.outlook_options &&
           start_page_number == other.start_page_number &&
           count_pages == other.count_pages
     end
@@ -254,7 +264,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [password, attachment_password, extract_text, render_comments, render_hidden_pages, transforms, default_font_name, watermark, cells_options, cad_options, email_options, words_options, pdf_options, slides_options, project_options, start_page_number, count_pages].hash
+      [password, attachment_password, extract_text, render_comments, render_hidden_pages, transforms, default_font_name, watermark, cells_options, cad_options, email_options, words_options, pdf_options, slides_options, project_options, outlook_options, start_page_number, count_pages].hash
     end
 
     # Builds the object from hash
@@ -285,9 +295,9 @@ module GroupDocsViewerCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer

@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="html_page_collection.rb">
+ # <copyright company="Aspose Pty Ltd" file="outlook_options.rb">
  #   Copyright (c) 2003-2018 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,33 +28,23 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Describes collection of HTML pages.
-  class HtmlPageCollection
+  # The Outlook data files rendering options.
+  class OutlookOptions
 
-    # The name of the file.
-    attr_accessor :file_name
-
-    # The file folder.
-    attr_accessor :folder
-
-    # Pages list.
-    attr_accessor :pages
+    # The limit of items to render in mailbox folders
+    attr_accessor :max_items_in_folder
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'file_name' => :'fileName',
-        :'folder' => :'folder',
-        :'pages' => :'pages'
+        :'max_items_in_folder' => :'maxItemsInFolder'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'file_name' => :'String',
-        :'folder' => :'String',
-        :'pages' => :'Array<HtmlPage>'
+        :'max_items_in_folder' => :'Integer'
       }
     end
 
@@ -66,18 +56,8 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'fileName')
-        self.file_name = attributes[:'fileName']
-      end
-
-      if attributes.key?(:'folder')
-        self.folder = attributes[:'folder']
-      end
-
-      if attributes.key?(:'pages')
-        if (value = attributes[:'pages']).is_a?(Array)
-          self.pages = value
-        end
+      if attributes.key?(:'maxItemsInFolder')
+        self.max_items_in_folder = attributes[:'maxItemsInFolder']
       end
 
     end
@@ -100,9 +80,7 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          file_name == other.file_name &&
-          folder == other.folder &&
-          pages == other.pages
+          max_items_in_folder == other.max_items_in_folder
     end
 
     # @see the `==` method
@@ -114,7 +92,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_name, folder, pages].hash
+      [max_items_in_folder].hash
     end
 
     # Builds the object from hash

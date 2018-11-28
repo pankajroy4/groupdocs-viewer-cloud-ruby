@@ -28,7 +28,7 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # The CAD documents rendering options.
+  # The CAD documents rendering options. Rendering of CAD file formats is not supported at the moment.
   class CadOptions
 
     # The scale factor affects the size of an output document.        
@@ -187,9 +187,9 @@ module GroupDocsViewerCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer

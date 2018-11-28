@@ -379,6 +379,27 @@ module GroupDocsViewerCloud
       @viewer_api.image_delete_pages_cache request
     end
 
+    # unit tests for image_create_pages_cache
+    # Creates document pages as image and saves them in cache for supported file formats
+    def test_image_create_pages_cache_formats
+      for file in TestFile.supported
+
+        image_options = ImageOptions.new
+        image_options.format = "jpg"
+
+        request = ImageCreatePagesCacheRequest.new(file.file_name)
+        request.image_options = image_options
+        request.folder = file.folder
+
+        response = @viewer_api.image_create_pages_cache request
+
+        assert response.pages.size > 0
+        assert_equal file.file_name, response.file_name
+        assert_equal file.folder, response.folder
+
+      end
+    end    
+
      # Retrieves test file
     def get_test_file(file)
       if file == nil then 

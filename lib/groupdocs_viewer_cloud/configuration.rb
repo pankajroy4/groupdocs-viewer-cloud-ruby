@@ -80,7 +80,7 @@ module GroupDocsViewerCloud
     # @param [app_key] Application private key (App Key)
     # @return [Configuration] New instance of Configuration
     def initialize(app_sid, app_key)
-      @api_base_url = "https://api.groupdocs.cloud"
+      @api_base_url = "http://api.groupdocs.cloud"
       @api_version = '/v1'
       @app_sid = app_sid
       @app_key = app_key

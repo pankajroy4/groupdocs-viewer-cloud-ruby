@@ -316,6 +316,35 @@ module GroupDocsViewerCloud
       assert_equal "with-notes.pptx", response.file_name
     end
 
+    # unit tests for html_get_document_info_with_options
+    # Retrieves document information with specified DocumentInfoOptions and ProjectOptions.
+    # 
+    def test_html_get_document_info_with_project_options
+      file = TestFile.project_mpp
+      
+      project_options = ProjectOptions.new
+      project_options.page_size = "Unknown"
+      project_options.time_unit = "Months"
+      project_options.start_date = "2008/07/01"
+      project_options.end_date = "2008/07/31"
+
+      document_info_options = DocumentInfoOptions.new
+      document_info_options.project_options = project_options
+
+      request = HtmlGetDocumentInfoWithOptionsRequest.new(file.file_name)
+      request.file_name = file.file_name
+      request.folder = file.folder
+      request.document_info_options = document_info_options
+
+      response = @viewer_api.html_get_document_info_with_options request
+
+      assert_equal 2, response.pages.size
+      assert_equal ".mpp", response.extension
+      assert_equal file.file_name, response.file_name
+      assert_equal "2008-06-01", response.start_date.to_s
+      assert_equal "2008-09-03", response.end_date.to_s
+    end
+
     # Retrieves test file
     def get_test_file(file)
       if file == nil then 

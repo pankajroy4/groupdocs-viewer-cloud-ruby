@@ -76,6 +76,9 @@ module GroupDocsViewerCloud
     # The Microsoft Project documents rendering options.
     attr_accessor :project_options
 
+    # The Outlook Data File document (PST/OST) rendering options.
+    attr_accessor :outlook_options
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -93,7 +96,8 @@ module GroupDocsViewerCloud
         :'words_options' => :'wordsOptions',
         :'pdf_options' => :'pdfOptions',
         :'slides_options' => :'slidesOptions',
-        :'project_options' => :'projectOptions'
+        :'project_options' => :'projectOptions',
+        :'outlook_options' => :'outlookOptions'
       }
     end
 
@@ -114,7 +118,8 @@ module GroupDocsViewerCloud
         :'words_options' => :'WordsOptions',
         :'pdf_options' => :'PdfOptions',
         :'slides_options' => :'SlidesOptions',
-        :'project_options' => :'ProjectOptions'
+        :'project_options' => :'ProjectOptions',
+        :'outlook_options' => :'OutlookOptions'
       }
     end
 
@@ -188,6 +193,10 @@ module GroupDocsViewerCloud
         self.project_options = attributes[:'projectOptions']
       end
 
+      if attributes.key?(:'outlookOptions')
+        self.outlook_options = attributes[:'outlookOptions']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -222,7 +231,8 @@ module GroupDocsViewerCloud
           words_options == other.words_options &&
           pdf_options == other.pdf_options &&
           slides_options == other.slides_options &&
-          project_options == other.project_options
+          project_options == other.project_options &&
+          outlook_options == other.outlook_options
     end
 
     # @see the `==` method
@@ -234,7 +244,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [password, attachment_password, extract_text, render_comments, render_hidden_pages, transforms, default_font_name, watermark, cells_options, cad_options, email_options, words_options, pdf_options, slides_options, project_options].hash
+      [password, attachment_password, extract_text, render_comments, render_hidden_pages, transforms, default_font_name, watermark, cells_options, cad_options, email_options, words_options, pdf_options, slides_options, project_options, outlook_options].hash
     end
 
     # Builds the object from hash
@@ -265,9 +275,9 @@ module GroupDocsViewerCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer

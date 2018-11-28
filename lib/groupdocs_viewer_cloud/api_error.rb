@@ -39,7 +39,9 @@ module GroupDocsViewerCloud
         
         if arg.key?(:response_body) then
           data = JSON.parse(arg[:response_body], :symbolize_names => true)
-          if !data.nil? && !data[:error].nil? then
+          if !data.nil? && !data[:error_description].nil? then
+            @message = data[:error_description]
+          elsif !data.nil? && !data[:error].nil? && !data[:error][:message].nil? then
             @message = data[:error][:message]
           end
         end

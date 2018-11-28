@@ -118,5 +118,60 @@ module GroupDocsViewerCloud
 
             f
         end
+
+        def self.project_mpp
+            f = TestFile.new
+            f.file_name = "sample.mpp"
+            f.folder = "project\\mpp"
+    
+            f
+        end
+
+        def self.outlook_pst
+            f = TestFile.new
+            f.file_name = "sample.pst"
+            f.folder = "email\\outlook"
+    
+            f
+        end
+
+        def self.image_cgm
+            f = TestFile.new
+            f.file_name = "nasa.cgm"
+            f.folder = "image"
+    
+            f
+        end
+
+        def self.print_pcl
+            f = TestFile.new
+            f.file_name = "print.pcl"
+            f.folder = "print"
+    
+            f
+        end
+
+        def self.print_ps
+            f = TestFile.new
+            f.file_name = "sample.ps"
+            f.folder = "print"
+    
+            f
+        end
+
+        def self.supported
+            [
+                self.with_attachment_msg,
+                self.uses_custom_font_pptx,
+                self.one_page_docx,
+                self.with_attachment_pdf,
+                self.two_hidden_pages_vsd,
+                self.project_mpp,
+                self.outlook_pst,
+                self.image_cgm,
+                self.print_pcl,
+                self.print_ps
+            ]        
+        end
     end
 end
