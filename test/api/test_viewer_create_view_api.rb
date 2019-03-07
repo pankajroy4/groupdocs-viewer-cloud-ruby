@@ -169,7 +169,7 @@ module GroupDocsViewerCloud
       viewOptions = ViewOptions.new
       viewOptions.file_info = file.file_info
       cadOptions = CadOptions.new
-      cadOptions.scale_factor = 5.0
+      cadOptions.width = 800
       renderOptions = RenderOptions.new
       renderOptions.cad_options = cadOptions
       viewOptions.render_options = renderOptions
