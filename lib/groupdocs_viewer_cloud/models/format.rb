@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="format.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,28 +28,28 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Format description.
+  # File-format
   class Format
 
-    # File format.
-    attr_accessor :file_format
-
-    # File extension.
+    # File extension
     attr_accessor :extension
+
+    # File format
+    attr_accessor :file_format
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'file_format' => :'fileFormat',
-        :'extension' => :'extension'
+        :'extension' => :'Extension',
+        :'file_format' => :'FileFormat'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'file_format' => :'String',
-        :'extension' => :'String'
+        :'extension' => :'String',
+        :'file_format' => :'String'
       }
     end
 
@@ -61,12 +61,12 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'fileFormat')
-        self.file_format = attributes[:'fileFormat']
+      if attributes.key?(:'Extension')
+        self.extension = attributes[:'Extension']
       end
 
-      if attributes.key?(:'extension')
-        self.extension = attributes[:'extension']
+      if attributes.key?(:'FileFormat')
+        self.file_format = attributes[:'FileFormat']
       end
 
     end
@@ -89,8 +89,8 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          file_format == other.file_format &&
-          extension == other.extension
+          extension == other.extension &&
+          file_format == other.file_format
     end
 
     # @see the `==` method
@@ -102,7 +102,13 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_format, extension].hash
+      [extension, file_format].hash
+    end
+
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
     end
 
     # Builds the object from hash
@@ -111,14 +117,16 @@ module GroupDocsViewerCloud
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        elsif !value.nil?
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end

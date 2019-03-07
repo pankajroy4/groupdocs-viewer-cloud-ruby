@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="watermark.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,16 +28,16 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Provides options to configure watermark appearance. 
+  # Text watermark
   class Watermark
 
-    # The watermark text.
+    # Watermark text.
     attr_accessor :text
 
-    # The watermark color. Supported formats {Magenta|(112,222,11)|(50,112,222,11)}. Default value is \"Red\".
+    # Watermark color. Supported formats {Magenta|(112,222,11)|(50,112,222,11)}. Default value is \"Red\".
     attr_accessor :color
 
-    # The watermark position. Supported positions {Diagonal|TopLeft|TopCenter|TopRight|BottomLeft|BottomCenter|BottomRight}. Default value is \"Diagonal\".
+    # Watermark position. Supported positions {Diagonal|TopLeft|TopCenter|TopRight|BottomLeft|BottomCenter|BottomRight}. Default value is \"Diagonal\".
     attr_accessor :position
 
     # Watermark size in percents. Default value is 100.
@@ -46,10 +46,10 @@ module GroupDocsViewerCloud
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'text' => :'text',
-        :'color' => :'color',
-        :'position' => :'position',
-        :'size' => :'size'
+        :'text' => :'Text',
+        :'color' => :'Color',
+        :'position' => :'Position',
+        :'size' => :'Size'
       }
     end
 
@@ -71,20 +71,20 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'text')
-        self.text = attributes[:'text']
+      if attributes.key?(:'Text')
+        self.text = attributes[:'Text']
       end
 
-      if attributes.key?(:'color')
-        self.color = attributes[:'color']
+      if attributes.key?(:'Color')
+        self.color = attributes[:'Color']
       end
 
-      if attributes.key?(:'position')
-        self.position = attributes[:'position']
+      if attributes.key?(:'Position')
+        self.position = attributes[:'Position']
       end
 
-      if attributes.key?(:'size')
-        self.size = attributes[:'size']
+      if attributes.key?(:'Size')
+        self.size = attributes[:'Size']
       end
 
     end
@@ -93,12 +93,17 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @size.nil?
+        invalid_properties.push("invalid value for 'size', size cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @size.nil?
       return true
     end
 
@@ -125,20 +130,28 @@ module GroupDocsViewerCloud
       [text, color, position, size].hash
     end
 
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
+    end
+
     # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        elsif !value.nil?
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end

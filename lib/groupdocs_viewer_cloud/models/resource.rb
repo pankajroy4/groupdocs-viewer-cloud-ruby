@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="resource.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,28 +28,28 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Describes resource.
+  # Reference to resource
   class Resource
 
-    # ULR to retrieve resource.
-    attr_accessor :url
+    # Path of resource file in storage
+    attr_accessor :path
 
-    # HTML resource (image, style, graphics or font) file name.
-    attr_accessor :name
+    # ULR to retrieve resource.
+    attr_accessor :download_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'url' => :'url',
-        :'name' => :'name'
+        :'path' => :'Path',
+        :'download_url' => :'DownloadUrl'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'url' => :'String',
-        :'name' => :'String'
+        :'path' => :'String',
+        :'download_url' => :'String'
       }
     end
 
@@ -61,12 +61,12 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.key?(:'Path')
+        self.path = attributes[:'Path']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'DownloadUrl')
+        self.download_url = attributes[:'DownloadUrl']
       end
 
     end
@@ -89,8 +89,8 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          url == other.url &&
-          name == other.name
+          path == other.path &&
+          download_url == other.download_url
     end
 
     # @see the `==` method
@@ -102,7 +102,13 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [url, name].hash
+      [path, download_url].hash
+    end
+
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
     end
 
     # Builds the object from hash
@@ -111,14 +117,16 @@ module GroupDocsViewerCloud
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        elsif !value.nil?
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end

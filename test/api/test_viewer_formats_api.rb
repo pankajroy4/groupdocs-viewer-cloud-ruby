@@ -1,6 +1,6 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
-# <copyright company="Aspose Pty Ltd" file="test_auth_api.rb">
+# <copyright company="Aspose Pty Ltd">
 #    Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
@@ -26,48 +26,22 @@
 #
 
 module GroupDocsViewerCloud
-  
-  require "minitest/autorun"
-  require "minitest/unit"
 
-  require_relative './../../lib/groupdocs_viewer_cloud'
-  require_relative '../test_settings'
+  require_relative './../test_context'
 
-  class TestAuthApi < Minitest::Test
+  class TestViewerFormatsApi < TestContext
     
-    def init_viewer_api(app_sid, app_key)
-      config = Configuration.new(app_sid, app_key)
-      config.api_base_url = TestSettings::API_BASE_URL
-      
-      ViewerApi.from_config(config)
-    end
-
-    # unit tests to check auth error
-    def test_auth_error_when_app_sid_not_found
-      app_sid = "test"
-      app_key = "test"
-
-      viewer_api = init_viewer_api(app_sid, app_key)
-
-      error = assert_raises ApiError do
-        viewer_api.get_supported_file_formats
+    # unit tests for get_supported_file_formats
+    # Retrieves list of supported file formats.
+    # 
+    # @param [Hash] opts the optional parameters
+    # @return [FormatCollection]
+    def test_get_supported_file_formats
+      response = @viewer_api.get_supported_file_formats
+      response.formats.each do |format|
+        assert_equal false, format.file_format.empty? 
+        assert_equal false, format.extension.empty?
       end
-
-      assert_equal "invalid_client", error.message
-    end
-
-    # unit tests to check auth error
-    def test_auth_error_when_app_key_not_found
-      app_sid = TestSettings::APP_SID
-      app_key = "test"
-
-      viewer_api = init_viewer_api(app_sid, app_key)
-
-      error = assert_raises ApiError do
-        viewer_api.get_supported_file_formats
-      end
-
-      assert_equal "invalid_client", error.message
     end
 
   end

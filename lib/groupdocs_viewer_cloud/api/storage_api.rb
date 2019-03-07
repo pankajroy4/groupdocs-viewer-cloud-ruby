@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------------
-# <copyright company="Aspose Pty Ltd" file="viewer.rb">
+# <copyright company="Aspose Pty Ltd" file="storage.rb">
 #   Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
@@ -30,65 +30,68 @@ module GroupDocsViewerCloud
   #
   # GroupDocs.Viewer Cloud API
   #
-  class ViewerApi
+  class StorageApi
     attr_accessor :config
 
-    #make ViewerApi.new private 
+    #make StorageApi.new private 
     private_class_method :new
 
-    # Initializes new instance of ViewerApi
+    # Initializes new instance of StorageApi
     #
     # @param [config] Configuration 
-    # @return [ViewerApi] New instance of ViewerApi
+    # @return [StorageApi] New instance of StorageApi
     def initialize(config)
       @config = config
       @api_client = ApiClient.new(config)
       @access_token = nil
     end
 
-    # Initializes new instance of ViewerApi
+    # Initializes new instance of StorageApi
     #
     # @param [app_sid] Application identifier (App SID)
     # @param [app_key] Application private key (App Key)
-    # @return [ViewerApi] New instance of ViewerApi
+    # @return [StorageApi] New instance of StorageApi
     def self.from_keys(app_sid, app_key)
       config = Configuration.new(app_sid, app_key)
       return new(config)
     end
 
-    # Initializes new instance of ViewerApi
+    # Initializes new instance of StorageApi
     #
     # @param [config] Configuration 
-    # @return [ViewerApi] New instance of ViewerApi
+    # @return [StorageApi] New instance of StorageApi
     def self.from_config(config)
       return new(config)
     end
 
-    # Create new view if it not exists
+    # Get disc usage
     # 
-    # @param request create_view_request
-    # @return [ViewResult]
-    def create_view(request)
-      data, _status_code, _headers = create_view_with_http_info(request)
+    # @param request get_disc_usage_request
+    # @return [DiscUsage]
+    def get_disc_usage(request)
+      data, _status_code, _headers = get_disc_usage_with_http_info(request)
       data
     end
 
-    # Create new view if it not exists
+    # Get disc usage
     # 
-    # @param request create_view_request
-    # @return [Array<(ViewResult, Fixnum, Hash)>]
-    # ViewResult data, response status code and response headers
-    def create_view_with_http_info(request)
-      raise ArgumentError, 'Incorrect request type' unless request.is_a? CreateViewRequest
+    # @param request get_disc_usage_request
+    # @return [Array<(DiscUsage, Fixnum, Hash)>]
+    # DiscUsage data, response status code and response headers
+    def get_disc_usage_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? GetDiscUsageRequest
 
-      @api_client.config.logger.debug 'Calling API: ViewerApi.create_view ...' if @api_client.config.debugging
-      # verify the required parameter 'view_options' is set
-      raise ArgumentError, 'Missing the required parameter view_options when calling ViewerApi.create_view' if @api_client.config.client_side_validation && request.view_options.nil?
+      @api_client.config.logger.debug 'Calling API: StorageApi.get_disc_usage ...' if @api_client.config.debugging
       # resource path
-      local_var_path = '/viewer/view'
+      local_var_path = '/viewer/storage/disc'
 
       # query parameters
       query_params = {}
+      if local_var_path.include? ('{' + downcase_first_letter('storageName') + '}')
+        local_var_path = local_var_path.sub('{' + downcase_first_letter('storageName') + '}', request.storage_name.to_s)
+      else
+        query_params[downcase_first_letter('storageName')] = request.storage_name unless request.storage_name.nil?
+      end
 
       # header parameters
       header_params = {}
@@ -101,97 +104,52 @@ module GroupDocsViewerCloud
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(request.view_options)
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+      post_body = nil
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
                                                         header_params: header_params,
                                                         query_params: query_params,
                                                         form_params: form_params,
                                                         body: post_body,
                                                         access_token: get_access_token,
-                                                        return_type: 'ViewResult')
+                                                        return_type: 'DiscUsage')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called:
-        ViewerApi#create_view\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        StorageApi#get_disc_usage\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       [data, status_code, headers]
     end
 
-    # Delete view
+    # Get file versions
     # 
-    # @param request delete_view_request
-    # @return [nil]
-    def delete_view(request)
-      delete_view_with_http_info(request)
-      nil
-    end
-
-    # Delete view
-    # 
-    # @param request delete_view_request
-    # @return [Array<(nil, Fixnum, Hash)>]
-    # nil, response status code and response headers
-    def delete_view_with_http_info(request)
-      raise ArgumentError, 'Incorrect request type' unless request.is_a? DeleteViewRequest
-
-      @api_client.config.logger.debug 'Calling API: ViewerApi.delete_view ...' if @api_client.config.debugging
-      # verify the required parameter 'delete_view_options' is set
-      raise ArgumentError, 'Missing the required parameter delete_view_options when calling ViewerApi.delete_view' if @api_client.config.client_side_validation && request.delete_view_options.nil?
-      # resource path
-      local_var_path = '/viewer/view'
-
-      # query parameters
-      query_params = {}
-
-      # header parameters
-      header_params = {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = @api_client.object_to_http_body(request.delete_view_options)
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
-                                                        header_params: header_params,
-                                                        query_params: query_params,
-                                                        form_params: form_params,
-                                                        body: post_body,
-                                                        access_token: get_access_token)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called:
-        ViewerApi#delete_view\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      [data, status_code, headers]
-    end
-
-    # Get information about view
-    # 
-    # @param request get_info_request
-    # @return [InfoResult]
-    def get_info(request)
-      data, _status_code, _headers = get_info_with_http_info(request)
+    # @param request get_file_versions_request
+    # @return [FileVersions]
+    def get_file_versions(request)
+      data, _status_code, _headers = get_file_versions_with_http_info(request)
       data
     end
 
-    # Get information about view
+    # Get file versions
     # 
-    # @param request get_info_request
-    # @return [Array<(InfoResult, Fixnum, Hash)>]
-    # InfoResult data, response status code and response headers
-    def get_info_with_http_info(request)
-      raise ArgumentError, 'Incorrect request type' unless request.is_a? GetInfoRequest
+    # @param request get_file_versions_request
+    # @return [Array<(FileVersions, Fixnum, Hash)>]
+    # FileVersions data, response status code and response headers
+    def get_file_versions_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? GetFileVersionsRequest
 
-      @api_client.config.logger.debug 'Calling API: ViewerApi.get_info ...' if @api_client.config.debugging
-      # verify the required parameter 'view_options' is set
-      raise ArgumentError, 'Missing the required parameter view_options when calling ViewerApi.get_info' if @api_client.config.client_side_validation && request.view_options.nil?
+      @api_client.config.logger.debug 'Calling API: StorageApi.get_file_versions ...' if @api_client.config.debugging
+      # verify the required parameter 'path' is set
+      raise ArgumentError, 'Missing the required parameter path when calling StorageApi.get_file_versions' if @api_client.config.client_side_validation && request.path.nil?
       # resource path
-      local_var_path = '/viewer/info'
+      local_var_path = '/viewer/storage/version/{path}'
+      local_var_path = local_var_path.sub('{' + downcase_first_letter('path') + '}', request.path.to_s)
 
       # query parameters
       query_params = {}
+      if local_var_path.include? ('{' + downcase_first_letter('storageName') + '}')
+        local_var_path = local_var_path.sub('{' + downcase_first_letter('storageName') + '}', request.storage_name.to_s)
+      else
+        query_params[downcase_first_letter('storageName')] = request.storage_name unless request.storage_name.nil?
+      end
 
       # header parameters
       header_params = {}
@@ -204,40 +162,107 @@ module GroupDocsViewerCloud
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(request.view_options)
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+      post_body = nil
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
                                                         header_params: header_params,
                                                         query_params: query_params,
                                                         form_params: form_params,
                                                         body: post_body,
                                                         access_token: get_access_token,
-                                                        return_type: 'InfoResult')
+                                                        return_type: 'FileVersions')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called:
-        ViewerApi#get_info\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        StorageApi#get_file_versions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       [data, status_code, headers]
     end
 
-    # Get supported file formats
+    # Check if file or folder exists
     # 
-    # @return [FormatsResult]
-    def get_supported_file_formats()
-      data, _status_code, _headers = get_supported_file_formats_with_http_info()
+    # @param request object_exists_request
+    # @return [ObjectExist]
+    def object_exists(request)
+      data, _status_code, _headers = object_exists_with_http_info(request)
       data
     end
 
-    # Get supported file formats
+    # Check if file or folder exists
     # 
-    
-    # @return [Array<(FormatsResult, Fixnum, Hash)>]
-    # FormatsResult data, response status code and response headers
-    def get_supported_file_formats_with_http_info()
-      
+    # @param request object_exists_request
+    # @return [Array<(ObjectExist, Fixnum, Hash)>]
+    # ObjectExist data, response status code and response headers
+    def object_exists_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? ObjectExistsRequest
 
-      @api_client.config.logger.debug 'Calling API: ViewerApi.get_supported_file_formats ...' if @api_client.config.debugging
+      @api_client.config.logger.debug 'Calling API: StorageApi.object_exists ...' if @api_client.config.debugging
+      # verify the required parameter 'path' is set
+      raise ArgumentError, 'Missing the required parameter path when calling StorageApi.object_exists' if @api_client.config.client_side_validation && request.path.nil?
       # resource path
-      local_var_path = '/viewer/formats'
+      local_var_path = '/viewer/storage/exist/{path}'
+      local_var_path = local_var_path.sub('{' + downcase_first_letter('path') + '}', request.path.to_s)
+
+      # query parameters
+      query_params = {}
+      if local_var_path.include? ('{' + downcase_first_letter('storageName') + '}')
+        local_var_path = local_var_path.sub('{' + downcase_first_letter('storageName') + '}', request.storage_name.to_s)
+      else
+        query_params[downcase_first_letter('storageName')] = request.storage_name unless request.storage_name.nil?
+      end
+      if local_var_path.include? ('{' + downcase_first_letter('versionId') + '}')
+        local_var_path = local_var_path.sub('{' + downcase_first_letter('versionId') + '}', request.version_id.to_s)
+      else
+        query_params[downcase_first_letter('versionId')] = request.version_id unless request.version_id.nil?
+      end
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+                                                        header_params: header_params,
+                                                        query_params: query_params,
+                                                        form_params: form_params,
+                                                        body: post_body,
+                                                        access_token: get_access_token,
+                                                        return_type: 'ObjectExist')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called:
+        StorageApi#object_exists\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      [data, status_code, headers]
+    end
+
+    # Check if storage exists
+    # 
+    # @param request storage_exists_request
+    # @return [StorageExist]
+    def storage_exists(request)
+      data, _status_code, _headers = storage_exists_with_http_info(request)
+      data
+    end
+
+    # Check if storage exists
+    # 
+    # @param request storage_exists_request
+    # @return [Array<(StorageExist, Fixnum, Hash)>]
+    # StorageExist data, response status code and response headers
+    def storage_exists_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? StorageExistsRequest
+
+      @api_client.config.logger.debug 'Calling API: StorageApi.storage_exists ...' if @api_client.config.debugging
+      # verify the required parameter 'storage_name' is set
+      raise ArgumentError, 'Missing the required parameter storage_name when calling StorageApi.storage_exists' if @api_client.config.client_side_validation && request.storage_name.nil?
+      # resource path
+      local_var_path = '/viewer/storage/{storageName}/exist'
+      local_var_path = local_var_path.sub('{' + downcase_first_letter('storageName') + '}', request.storage_name.to_s)
 
       # query parameters
       query_params = {}
@@ -260,10 +285,10 @@ module GroupDocsViewerCloud
                                                         form_params: form_params,
                                                         body: post_body,
                                                         access_token: get_access_token,
-                                                        return_type: 'FormatsResult')
+                                                        return_type: 'StorageExist')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called:
-        ViewerApi#get_supported_file_formats\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        StorageApi#storage_exists\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       [data, status_code, headers]
     end
@@ -324,7 +349,7 @@ module GroupDocsViewerCloud
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="create_view_request.rb">
+ # <copyright company="Aspose Pty Ltd" file="get_disc_usage_request.rb">
  #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -352,24 +377,24 @@ end
 module GroupDocsViewerCloud
 
   #
-  # Request model for create_view operation.
+  # Request model for get_disc_usage operation.
   #
-  class CreateViewRequest
+  class GetDiscUsageRequest
 
-        # View options
-        attr_accessor :view_options
+        # Storage name
+        attr_accessor :storage_name
 	
         #
         # Initializes a new instance.
-        # @param view_options View options
-        def initialize(view_options)
-           self.view_options = view_options
+        # @param storage_name Storage name
+        def initialize(storage_name = nil)
+           self.storage_name = storage_name
         end
   end
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="delete_view_request.rb">
+ # <copyright company="Aspose Pty Ltd" file="get_file_versions_request.rb">
  #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -397,24 +422,28 @@ end
 module GroupDocsViewerCloud
 
   #
-  # Request model for delete_view operation.
+  # Request model for get_file_versions operation.
   #
-  class DeleteViewRequest
+  class GetFileVersionsRequest
 
-        # Delete options
-        attr_accessor :delete_view_options
+        # File path e.g. '/file.ext'
+        attr_accessor :path
+        # Storage name
+        attr_accessor :storage_name
 	
         #
         # Initializes a new instance.
-        # @param delete_view_options Delete options
-        def initialize(delete_view_options)
-           self.delete_view_options = delete_view_options
+        # @param path File path e.g. '/file.ext'
+        # @param storage_name Storage name
+        def initialize(path, storage_name = nil)
+           self.path = path
+           self.storage_name = storage_name
         end
   end
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="get_info_request.rb">
+ # <copyright company="Aspose Pty Ltd" file="object_exists_request.rb">
  #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -442,18 +471,71 @@ end
 module GroupDocsViewerCloud
 
   #
-  # Request model for get_info operation.
+  # Request model for object_exists operation.
   #
-  class GetInfoRequest
+  class ObjectExistsRequest
 
-        # View options
-        attr_accessor :view_options
+        # File or folder path e.g. '/file.ext' or '/folder'
+        attr_accessor :path
+        # Storage name
+        attr_accessor :storage_name
+        # File version ID
+        attr_accessor :version_id
 	
         #
         # Initializes a new instance.
-        # @param view_options View options
-        def initialize(view_options)
-           self.view_options = view_options
+        # @param path File or folder path e.g. '/file.ext' or '/folder'
+        # @param storage_name Storage name
+        # @param version_id File version ID
+        def initialize(path, storage_name = nil, version_id = nil)
+           self.path = path
+           self.storage_name = storage_name
+           self.version_id = version_id
+        end
+  end
+end
+ #
+ # --------------------------------------------------------------------------------------------------------------------
+ # <copyright company="Aspose Pty Ltd" file="storage_exists_request.rb">
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ # </copyright>
+ # <summary>
+ #  Permission is hereby granted, free of charge, to any person obtaining a copy
+ #  of this software and associated documentation files (the "Software"), to deal
+ #  in the Software without restriction, including without limitation the rights
+ #  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ #  copies of the Software, and to permit persons to whom the Software is
+ #  furnished to do so, subject to the following conditions:
+ # 
+ #  The above copyright notice and this permission notice shall be included in all
+ #  copies or substantial portions of the Software.
+ # 
+ #  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ #  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ #  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ #  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ #  SOFTWARE.
+ # </summary>
+ # --------------------------------------------------------------------------------------------------------------------
+ #
+
+module GroupDocsViewerCloud
+
+  #
+  # Request model for storage_exists operation.
+  #
+  class StorageExistsRequest
+
+        # Storage name
+        attr_accessor :storage_name
+	
+        #
+        # Initializes a new instance.
+        # @param storage_name Storage name
+        def initialize(storage_name)
+           self.storage_name = storage_name
         end
   end
 end

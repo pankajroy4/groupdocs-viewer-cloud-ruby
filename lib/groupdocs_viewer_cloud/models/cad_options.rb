@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="cad_options.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,40 +28,24 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # The CAD documents rendering options. Rendering of CAD file formats is not supported at the moment.
+  # Rendering options for CAD file formats. CAD file formats include files with extensions: .dwg, .dxf, .dgn, .ifc, .stl
   class CadOptions
 
-    # The scale factor affects the size of an output document.        
+    # Scale factor allows to change the size of the output document. Values higher than 1 will enlarge output result and values between 0 and 1 will make output result smaller. This option is ignored when either Height or Width options are set. 
     attr_accessor :scale_factor
 
-    # The width of the render result in pixels.        
+    # Width of the output result in pixels        
     attr_accessor :width
 
-    # The height of the render result in pixels.        
+    # Height of the output result in pixels     
     attr_accessor :height
-
-    # Indicates whether layouts from CAD document should be rendered.
-    attr_accessor :render_layouts
-
-    # The name of the specific layout to render.
-    attr_accessor :layout_name
-
-    # The list of document layers to render. By default all layers will be rendered. Layer names are case sensitive.
-    attr_accessor :layers
-
-    # The coordinates of the drawing regions, that should be rendered. Please note, that this option works only for DWG format. When the list is empty, then whole drawing is rendered. When the list contains at least one tile, then ScaleFactor, Width, Height, RenderLayouts and LayoutName properties are ignored. 
-    attr_accessor :tiles
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'scale_factor' => :'scaleFactor',
-        :'width' => :'width',
-        :'height' => :'height',
-        :'render_layouts' => :'renderLayouts',
-        :'layout_name' => :'layoutName',
-        :'layers' => :'layers',
-        :'tiles' => :'tiles'
+        :'scale_factor' => :'ScaleFactor',
+        :'width' => :'Width',
+        :'height' => :'Height'
       }
     end
 
@@ -70,11 +54,7 @@ module GroupDocsViewerCloud
       {
         :'scale_factor' => :'Float',
         :'width' => :'Integer',
-        :'height' => :'Integer',
-        :'render_layouts' => :'BOOLEAN',
-        :'layout_name' => :'String',
-        :'layers' => :'Array<String>',
-        :'tiles' => :'Array<Tile>'
+        :'height' => :'Integer'
       }
     end
 
@@ -86,36 +66,16 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'scaleFactor')
-        self.scale_factor = attributes[:'scaleFactor']
+      if attributes.key?(:'ScaleFactor')
+        self.scale_factor = attributes[:'ScaleFactor']
       end
 
-      if attributes.key?(:'width')
-        self.width = attributes[:'width']
+      if attributes.key?(:'Width')
+        self.width = attributes[:'Width']
       end
 
-      if attributes.key?(:'height')
-        self.height = attributes[:'height']
-      end
-
-      if attributes.key?(:'renderLayouts')
-        self.render_layouts = attributes[:'renderLayouts']
-      end
-
-      if attributes.key?(:'layoutName')
-        self.layout_name = attributes[:'layoutName']
-      end
-
-      if attributes.key?(:'layers')
-        if (value = attributes[:'layers']).is_a?(Array)
-          self.layers = value
-        end
-      end
-
-      if attributes.key?(:'tiles')
-        if (value = attributes[:'tiles']).is_a?(Array)
-          self.tiles = value
-        end
+      if attributes.key?(:'Height')
+        self.height = attributes[:'Height']
       end
 
     end
@@ -124,12 +84,27 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @scale_factor.nil?
+        invalid_properties.push("invalid value for 'scale_factor', scale_factor cannot be nil.")
+      end
+
+      if @width.nil?
+        invalid_properties.push("invalid value for 'width', width cannot be nil.")
+      end
+
+      if @height.nil?
+        invalid_properties.push("invalid value for 'height', height cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @scale_factor.nil?
+      return false if @width.nil?
+      return false if @height.nil?
       return true
     end
 
@@ -140,11 +115,7 @@ module GroupDocsViewerCloud
       self.class == other.class &&
           scale_factor == other.scale_factor &&
           width == other.width &&
-          height == other.height &&
-          render_layouts == other.render_layouts &&
-          layout_name == other.layout_name &&
-          layers == other.layers &&
-          tiles == other.tiles
+          height == other.height
     end
 
     # @see the `==` method
@@ -156,7 +127,13 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [scale_factor, width, height, render_layouts, layout_name, layers, tiles].hash
+      [scale_factor, width, height].hash
+    end
+
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
     end
 
     # Builds the object from hash
@@ -165,14 +142,16 @@ module GroupDocsViewerCloud
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        elsif !value.nil?
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end

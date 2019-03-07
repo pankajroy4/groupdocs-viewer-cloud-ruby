@@ -1,6 +1,6 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
-# <copyright company="Aspose Pty Ltd" file="test_auth_api.rb">
+# <copyright company="Aspose Pty Ltd">
 #    Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
@@ -26,48 +26,46 @@
 #
 
 module GroupDocsViewerCloud
-  
-  require "minitest/autorun"
-  require "minitest/unit"
 
-  require_relative './../../lib/groupdocs_viewer_cloud'
-  require_relative '../test_settings'
+  require_relative './../test_context'
+  require_relative './../test_file'
 
-  class TestAuthApi < Minitest::Test
+  class TestStorageApi < TestContext
     
-    def init_viewer_api(app_sid, app_key)
-      config = Configuration.new(app_sid, app_key)
-      config.api_base_url = TestSettings::API_BASE_URL
+    def test_GetDiscUsage
+      request = GetDiscUsageRequest.new
       
-      ViewerApi.from_config(config)
+      response = @storage_api.get_disc_usage(request)
+
+      assert_operator response.total_size, :>, 0  
+      assert_operator response.used_size, :>, 0  
     end
 
-    # unit tests to check auth error
-    def test_auth_error_when_app_sid_not_found
-      app_sid = "test"
-      app_key = "test"
+    def test_GetStorageExists
+      request = StorageExistsRequest.new "First Storage"
 
-      viewer_api = init_viewer_api(app_sid, app_key)
+      response = @storage_api.storage_exists(request)
 
-      error = assert_raises ApiError do
-        viewer_api.get_supported_file_formats
-      end
-
-      assert_equal "invalid_client", error.message
+      assert_equal true, response.exists
     end
 
-    # unit tests to check auth error
-    def test_auth_error_when_app_key_not_found
-      app_sid = TestSettings::APP_SID
-      app_key = "test"
+    def test_GetListFileVersions
+      file = TestFile.one_page_docx;
+      request = GetFileVersionsRequest.new file.path
 
-      viewer_api = init_viewer_api(app_sid, app_key)
+      response = @storage_api.get_file_versions(request)
 
-      error = assert_raises ApiError do
-        viewer_api.get_supported_file_formats
-      end
+      assert_operator response.value.size, :>, 0  
+    end
 
-      assert_equal "invalid_client", error.message
+    def test_GetObjectExists
+      file = TestFile.one_page_docx;
+      request = ObjectExistsRequest.new file.path
+
+      response = @storage_api.object_exists(request)
+
+      assert_equal true, response.exists
+      assert_equal false, response.is_folder
     end
 
   end

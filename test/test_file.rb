@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="test_file.rb">
-#    Copyright (c) 2003-2018 Aspose Pty Ltd
+#    Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,147 +30,101 @@ module GroupDocsViewerCloud
         attr_accessor :file_name;
         attr_accessor :folder;
         attr_accessor :password;
-        attr_accessor :url;
-        attr_accessor :attachment_name;
-        attr_accessor :attachment_password;
-
-        def self.with_attachment_msg
-            f = TestFile.new
-            f.file_name = "with-attachment.msg"
-            f.folder = "email\\msg"
-            f.attachment_name = "password-protected.docx"
-            f.attachment_password = "password"
-
-            f
+        
+        def path
+            folder + file_name
         end
 
-        def self.from_url_one_page_docx 
-            f = TestFile.new
-            f.file_name = "one-page.docx"
-            f.url = "https://www.dropbox.com/s/j260ve4f90h1p41/one-page.docx?dl=1"
-
-            f
-        end
-
-        def self.from_url_with_notes_pptx
-            f = TestFile.new
-            f.file_name = "with-notes.pptx"
-            f.url = "https://www.dropbox.com/s/r2eioe2atushqcf/with-notes.pptx?dl=1"
-                
-            f
-        end
-
-        def self.uses_custom_font_pptx
-            f = TestFile.new
-            f.file_name = "uses-custom-font.pptx"
-            f.folder = "slides\\pptx"
-
-            f
-        end
+        def file_info
+            info = FileInfo.new
+            info.file_path = path
+            info.password = password
+            info
+        end        
 
         def self.one_page_docx
             f = TestFile.new
             f.file_name = "one-page.docx"
-            f.folder = "words\\docx"
-
+            f.folder = "words\\docx\\"
             f
         end
 
-        def self.four_pages_docx
+        def self.not_exist
             f = TestFile.new
-            f.file_name = "four-pages.docx"
-            f.folder = "words\\docx"
-
+            f.file_name = "notexist.docx"
+            f.folder = "some-folder\\"
             f
         end
 
         def self.password_protected_docx
             f = TestFile.new
             f.file_name = "password-protected.docx"
-            f.folder = "words\\docx"
+            f.folder = "words\\docx\\"
             f.password = "password"
-
-            f
-        end
-
-        def self.with_attachment_pdf
-            f = TestFile.new
-            f.file_name = "with-attachment.pdf"
-            f.folder = "pdf\\pdf"
-            f.attachment_name = "password-protected.docx"
-            f.attachment_password = "password"
-
             f
         end
 
         def self.two_hidden_pages_vsd
             f = TestFile.new
             f.file_name = "two-hidden-pages.vsd"
-            f.folder = "diagram\\vsd"
-
+            f.folder = "diagram\\vsd\\"
             f
         end
 
-        def self.corrupted_pdf
+        def self.with_hidden_rows_and_columns
             f = TestFile.new
-            f.file_name = "corrupted.pdf"
-            f.folder = "pdf\\pdf"
+            f.file_name = "with-hidden-rows-and-columns.xlsx"
+            f.folder = "cells\\xlsx\\"
+            f
+        end        
 
+        def self.three_layouts_dwf
+            f = TestFile.new
+            f.file_name = "three-layouts.dwf"
+            f.folder = "cad\\dwf\\"    
             f
         end
 
         def self.project_mpp
             f = TestFile.new
             f.file_name = "sample.mpp"
-            f.folder = "project\\mpp"
-    
+            f.folder = "project\\mpp\\"
             f
         end
 
-        def self.outlook_pst
+        def self.uses_custom_font_pptx
             f = TestFile.new
-            f.file_name = "sample.pst"
-            f.folder = "email\\outlook"
-    
+            f.file_name = "uses-custom-font.pptx"
+            f.folder = "slides\\pptx\\"
             f
         end
 
-        def self.image_cgm
+        def self.font_ttf
             f = TestFile.new
-            f.file_name = "nasa.cgm"
-            f.folder = "image"
-    
+            f.file_name = "foo.ttf"
+            f.folder = "font\\ttf\\"
             f
         end
 
-        def self.print_pcl
+        def self.four_pages_docx
             f = TestFile.new
-            f.file_name = "print.pcl"
-            f.folder = "print"
-    
+            f.file_name = "four-pages.docx"
+            f.folder = "words\\docx\\"
             f
         end
 
-        def self.print_ps
-            f = TestFile.new
-            f.file_name = "sample.ps"
-            f.folder = "print"
-    
-            f
-        end
 
-        def self.supported
+        def self.test_files_list
             [
-                self.with_attachment_msg,
-                self.uses_custom_font_pptx,
                 self.one_page_docx,
-                self.with_attachment_pdf,
+                self.password_protected_docx,
                 self.two_hidden_pages_vsd,
+                self.with_hidden_rows_and_columns,
+                self.three_layouts_dwf,
                 self.project_mpp,
-                self.outlook_pst,
-                self.image_cgm,
-                self.print_pcl,
-                self.print_ps
+                self.uses_custom_font_pptx,
+                self.font_ttf,
+                self.four_pages_docx
             ]        
         end
     end

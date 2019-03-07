@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="render_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="file_versions.rb">
  #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,68 +28,23 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Rendering options
-  class RenderOptions
+  # File versions FileVersion.
+  class FileVersions
 
-    # Page number from which rendering should be started
-    attr_accessor :start_page_number
-
-    # Count pages which should be rendered
-    attr_accessor :count_pages_to_render
-
-    # Default font name may be specified in following cases: - You want to generally specify the default font to fall back on, if particular font   in the document cannot be found during rendering. - Your document uses fonts, that contain non-English characters and you want to make sure   any missing font is replaced with one that has the same character set available.
-    attr_accessor :default_font_name
-
-    # Default encoding for the plain text files such as .csv, .txt and .eml files when encoding is not specified in header
-    attr_accessor :default_encoding
-
-    # When enabled comments will be rendered to the output.
-    attr_accessor :render_comments
-
-    # When enabled hidden pages, sheets or slides will be rendered to the output
-    attr_accessor :render_hidden_pages
-
-    # Rendering options for Spreadsheet file formats. Spreadsheet file formats include files with extensions: .xls, .xlsx, .xlsm, .xlsb, .csv, .ods, .ots, .xltx, .xltm, .tsv 
-    attr_accessor :spreadsheet_options
-
-    # Rendering options for CAD file formats. CAD file formats include files with extensions: .dwg, .dxf, .dgn, .ifc, .stl
-    attr_accessor :cad_options
-
-    # Rendering options for Email file formats. Email file formats include files with extensions: .msg, .eml, .emlx, .ifc, .stl
-    attr_accessor :email_options
-
-    # Rendering options for Project file formats. Project file formats include files with extensions: .mpt, .mpp
-    attr_accessor :project_management_options
+    # File versions FileVersion.
+    attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'start_page_number' => :'StartPageNumber',
-        :'count_pages_to_render' => :'CountPagesToRender',
-        :'default_font_name' => :'DefaultFontName',
-        :'default_encoding' => :'DefaultEncoding',
-        :'render_comments' => :'RenderComments',
-        :'render_hidden_pages' => :'RenderHiddenPages',
-        :'spreadsheet_options' => :'SpreadsheetOptions',
-        :'cad_options' => :'CadOptions',
-        :'email_options' => :'EmailOptions',
-        :'project_management_options' => :'ProjectManagementOptions'
+        :'value' => :'Value'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'start_page_number' => :'Integer',
-        :'count_pages_to_render' => :'Integer',
-        :'default_font_name' => :'String',
-        :'default_encoding' => :'String',
-        :'render_comments' => :'BOOLEAN',
-        :'render_hidden_pages' => :'BOOLEAN',
-        :'spreadsheet_options' => :'SpreadsheetOptions',
-        :'cad_options' => :'CadOptions',
-        :'email_options' => :'EmailOptions',
-        :'project_management_options' => :'ProjectManagementOptions'
+        :'value' => :'Array<FileVersion>'
       }
     end
 
@@ -101,44 +56,10 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'StartPageNumber')
-        self.start_page_number = attributes[:'StartPageNumber']
-      end
-
-      if attributes.key?(:'CountPagesToRender')
-        self.count_pages_to_render = attributes[:'CountPagesToRender']
-      end
-
-      if attributes.key?(:'DefaultFontName')
-        self.default_font_name = attributes[:'DefaultFontName']
-      end
-
-      if attributes.key?(:'DefaultEncoding')
-        self.default_encoding = attributes[:'DefaultEncoding']
-      end
-
-      if attributes.key?(:'RenderComments')
-        self.render_comments = attributes[:'RenderComments']
-      end
-
-      if attributes.key?(:'RenderHiddenPages')
-        self.render_hidden_pages = attributes[:'RenderHiddenPages']
-      end
-
-      if attributes.key?(:'SpreadsheetOptions')
-        self.spreadsheet_options = attributes[:'SpreadsheetOptions']
-      end
-
-      if attributes.key?(:'CadOptions')
-        self.cad_options = attributes[:'CadOptions']
-      end
-
-      if attributes.key?(:'EmailOptions')
-        self.email_options = attributes[:'EmailOptions']
-      end
-
-      if attributes.key?(:'ProjectManagementOptions')
-        self.project_management_options = attributes[:'ProjectManagementOptions']
+      if attributes.key?(:'Value')
+        if (value = attributes[:'Value']).is_a?(Array)
+          self.value = value
+        end
       end
 
     end
@@ -147,32 +68,12 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @start_page_number.nil?
-        invalid_properties.push("invalid value for 'start_page_number', start_page_number cannot be nil.")
-      end
-
-      if @count_pages_to_render.nil?
-        invalid_properties.push("invalid value for 'count_pages_to_render', count_pages_to_render cannot be nil.")
-      end
-
-      if @render_comments.nil?
-        invalid_properties.push("invalid value for 'render_comments', render_comments cannot be nil.")
-      end
-
-      if @render_hidden_pages.nil?
-        invalid_properties.push("invalid value for 'render_hidden_pages', render_hidden_pages cannot be nil.")
-      end
-
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @start_page_number.nil?
-      return false if @count_pages_to_render.nil?
-      return false if @render_comments.nil?
-      return false if @render_hidden_pages.nil?
       return true
     end
 
@@ -181,16 +82,7 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          start_page_number == other.start_page_number &&
-          count_pages_to_render == other.count_pages_to_render &&
-          default_font_name == other.default_font_name &&
-          default_encoding == other.default_encoding &&
-          render_comments == other.render_comments &&
-          render_hidden_pages == other.render_hidden_pages &&
-          spreadsheet_options == other.spreadsheet_options &&
-          cad_options == other.cad_options &&
-          email_options == other.email_options &&
-          project_management_options == other.project_management_options
+          value == other.value
     end
 
     # @see the `==` method
@@ -202,7 +94,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [start_page_number, count_pages_to_render, default_font_name, default_encoding, render_comments, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options].hash
+      [value].hash
     end
 
     # Downcases first letter.

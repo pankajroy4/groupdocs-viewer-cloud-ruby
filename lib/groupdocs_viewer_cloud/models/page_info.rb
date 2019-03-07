@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="page_info.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,40 +28,28 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Page information.
+  # Page information
   class PageInfo
 
-    # Page number.
+    # Page number
     attr_accessor :number
 
-    # Page name.
-    attr_accessor :name
-
-    # Page width.
+    # Image Page width
     attr_accessor :width
 
-    # Page height.
+    # Image Page height
     attr_accessor :height
 
-    # Page angle.
-    attr_accessor :angle
-
-    # Page visibility.
-    attr_accessor :visible
-
-    # Page rows.
+    # Image Page rows
     attr_accessor :rows
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'number' => :'number',
-        :'name' => :'name',
-        :'width' => :'width',
-        :'height' => :'height',
-        :'angle' => :'angle',
-        :'visible' => :'visible',
-        :'rows' => :'rows'
+        :'number' => :'Number',
+        :'width' => :'Width',
+        :'height' => :'Height',
+        :'rows' => :'Rows'
       }
     end
 
@@ -69,12 +57,9 @@ module GroupDocsViewerCloud
     def self.swagger_types
       {
         :'number' => :'Integer',
-        :'name' => :'String',
         :'width' => :'Integer',
         :'height' => :'Integer',
-        :'angle' => :'Integer',
-        :'visible' => :'BOOLEAN',
-        :'rows' => :'Array<RowInfo>'
+        :'rows' => :'Array<Row>'
       }
     end
 
@@ -86,32 +71,20 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'number')
-        self.number = attributes[:'number']
+      if attributes.key?(:'Number')
+        self.number = attributes[:'Number']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'Width')
+        self.width = attributes[:'Width']
       end
 
-      if attributes.key?(:'width')
-        self.width = attributes[:'width']
+      if attributes.key?(:'Height')
+        self.height = attributes[:'Height']
       end
 
-      if attributes.key?(:'height')
-        self.height = attributes[:'height']
-      end
-
-      if attributes.key?(:'angle')
-        self.angle = attributes[:'angle']
-      end
-
-      if attributes.key?(:'visible')
-        self.visible = attributes[:'visible']
-      end
-
-      if attributes.key?(:'rows')
-        if (value = attributes[:'rows']).is_a?(Array)
+      if attributes.key?(:'Rows')
+        if (value = attributes[:'Rows']).is_a?(Array)
           self.rows = value
         end
       end
@@ -122,12 +95,27 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @number.nil?
+        invalid_properties.push("invalid value for 'number', number cannot be nil.")
+      end
+
+      if @width.nil?
+        invalid_properties.push("invalid value for 'width', width cannot be nil.")
+      end
+
+      if @height.nil?
+        invalid_properties.push("invalid value for 'height', height cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @number.nil?
+      return false if @width.nil?
+      return false if @height.nil?
       return true
     end
 
@@ -137,11 +125,8 @@ module GroupDocsViewerCloud
       return true if self.equal?(other)
       self.class == other.class &&
           number == other.number &&
-          name == other.name &&
           width == other.width &&
           height == other.height &&
-          angle == other.angle &&
-          visible == other.visible &&
           rows == other.rows
     end
 
@@ -154,7 +139,13 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [number, name, width, height, angle, visible, rows].hash
+      [number, width, height, rows].hash
+    end
+
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
     end
 
     # Builds the object from hash
@@ -163,14 +154,16 @@ module GroupDocsViewerCloud
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        elsif !value.nil?
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end

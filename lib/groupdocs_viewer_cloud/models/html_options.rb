@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="html_options.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,143 +28,78 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Provides options for rendering document pages as HTML.
+  # Options for rendering document into HTML
   class HtmlOptions
 
-    # Allows to specify document password in case when document is password-protected.
-    attr_accessor :password
-
-    # Allows to specify attachment password in case when attachment is password-protected.
-    attr_accessor :attachment_password
-
-    # Enables document text extraction. For rendering document as image only.
-    attr_accessor :extract_text
-
-    # Enables document comments rendering.
-    attr_accessor :render_comments
-
-    # Enables rendering of document hidden pages, sheets or slides.
-    attr_accessor :render_hidden_pages
-
-    # Transforms to apply. Available transforms [\"Rotate\",\"Reorder\",\"AddPrintAction\"]. 1. Rotate - pages will be rotated on angle if angle was set before. 2. Reorder - for rendering document as PDF only. Pages will be ordered according to rearrangements made before. 3. AddPrintAction - for rendering document as PDF only. An JavaScript action will be added which opens print dialog when PDF document is opened.   
-    attr_accessor :transforms
-
-    # The name of the default font. Default font name may be specified in following cases: - You want to generally specify the default font to fall back on, if particular font   in the document cannot be found during rendering. - Your document uses fonts, that contain non-English characters and you want to make sure   any missing font is replaced with one that has the same character set available.
-    attr_accessor :default_font_name
-
-    # Allows to specify watermark.
-    attr_accessor :watermark
-
-    # The Spreadsheet documents rendering options.
-    attr_accessor :cells_options
-
-    # The CAD documents rendering options.
-    attr_accessor :cad_options
-
-    # The Email documents rendering options.
-    attr_accessor :email_options
-
-    # The Text documents rendering options.
-    attr_accessor :words_options
-
-    # The PDF documents rendering options.
-    attr_accessor :pdf_options
-
-    # The Presentation documents rendering options.
-    attr_accessor :slides_options
-
-    # The Microsoft Project documents rendering options.
-    attr_accessor :project_options
-
-    # The Outlook Data File document (PST/OST) rendering options.
-    attr_accessor :outlook_options
-
-    # Allows to specify document page number as starting page to render. 
+    # Page number from which rendering should be started
     attr_accessor :start_page_number
 
-    # Allows to specify count of document pages to render.
-    attr_accessor :count_pages
+    # Count pages which should be rendered
+    attr_accessor :count_pages_to_render
 
-    # Allows to specify HTML resources (styles, images and fonts) path. For example when resource path is http://example.com/api/pages/{page-number}/resources/{resource-name} the {page-number} and {resource-name} templates will be replaced with page number and resource name accordingly. Ignored when EmbedResources option is set to true.
+    # Default font name may be specified in following cases: - You want to generally specify the default font to fall back on, if particular font   in the document cannot be found during rendering. - Your document uses fonts, that contain non-English characters and you want to make sure   any missing font is replaced with one that has the same character set available.
+    attr_accessor :default_font_name
+
+    # Default encoding for the plain text files such as .csv, .txt and .eml files when encoding is not specified in header
+    attr_accessor :default_encoding
+
+    # When enabled comments will be rendered to the output.
+    attr_accessor :render_comments
+
+    # When enabled hidden pages, sheets or slides will be rendered to the output
+    attr_accessor :render_hidden_pages
+
+    # Rendering options for Spreadsheet file formats. Spreadsheet file formats include files with extensions: .xls, .xlsx, .xlsm, .xlsb, .csv, .ods, .ots, .xltx, .xltm, .tsv 
+    attr_accessor :spreadsheet_options
+
+    # Rendering options for CAD file formats. CAD file formats include files with extensions: .dwg, .dxf, .dgn, .ifc, .stl
+    attr_accessor :cad_options
+
+    # Rendering options for Email file formats. Email file formats include files with extensions: .msg, .eml, .emlx, .ifc, .stl
+    attr_accessor :email_options
+
+    # Rendering options for Project file formats. Project file formats include files with extensions: .mpt, .mpp
+    attr_accessor :project_management_options
+
+    # Controls output HTML document resources (styles, images and fonts) linking. By default this option is disabled and all the resources are embedded into HTML document.
+    attr_accessor :external_resources
+
+    # Path for the HTML resources (styles, images and fonts). For example when resource path is http://example.com/api/pages/{page-number}/resources/{resource-name} the {page-number} and {resource-name} templates will be replaced with page number and resource name accordingly. This option is ignored when ExternalResources option is disabled.
     attr_accessor :resource_path
-
-    # Allows to ignore ResourcePath when processing *.css files.  When this options is enabled ResourcePath won't be added to resource references in *.css file.
-    attr_accessor :ignore_resource_path_in_resources
-
-    # Controls output HTML document resources (styles, images and fonts) saving. When this options set to true all resources will be embedded into HTML document and ResourcePath option value will be ignored.
-    attr_accessor :embed_resources
-
-    # Enables content (HTML, CSS and SVG) minification.
-    attr_accessor :enable_minification
-
-    # Indicates whether rendering will provide responsive web pages, that look well on different device types.
-    attr_accessor :enable_responsive_rendering
-
-    # Prevents adding fonts to the output HTML document.  
-    attr_accessor :exclude_fonts
-
-    # The list of font names, that will be excluded from HTML.
-    attr_accessor :exclude_fonts_list
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'password' => :'password',
-        :'attachment_password' => :'attachmentPassword',
-        :'extract_text' => :'extractText',
-        :'render_comments' => :'renderComments',
-        :'render_hidden_pages' => :'renderHiddenPages',
-        :'transforms' => :'transforms',
-        :'default_font_name' => :'defaultFontName',
-        :'watermark' => :'watermark',
-        :'cells_options' => :'cellsOptions',
-        :'cad_options' => :'cadOptions',
-        :'email_options' => :'emailOptions',
-        :'words_options' => :'wordsOptions',
-        :'pdf_options' => :'pdfOptions',
-        :'slides_options' => :'slidesOptions',
-        :'project_options' => :'projectOptions',
-        :'outlook_options' => :'outlookOptions',
-        :'start_page_number' => :'startPageNumber',
-        :'count_pages' => :'countPages',
-        :'resource_path' => :'resourcePath',
-        :'ignore_resource_path_in_resources' => :'ignoreResourcePathInResources',
-        :'embed_resources' => :'embedResources',
-        :'enable_minification' => :'enableMinification',
-        :'enable_responsive_rendering' => :'enableResponsiveRendering',
-        :'exclude_fonts' => :'excludeFonts',
-        :'exclude_fonts_list' => :'excludeFontsList'
+        :'start_page_number' => :'StartPageNumber',
+        :'count_pages_to_render' => :'CountPagesToRender',
+        :'default_font_name' => :'DefaultFontName',
+        :'default_encoding' => :'DefaultEncoding',
+        :'render_comments' => :'RenderComments',
+        :'render_hidden_pages' => :'RenderHiddenPages',
+        :'spreadsheet_options' => :'SpreadsheetOptions',
+        :'cad_options' => :'CadOptions',
+        :'email_options' => :'EmailOptions',
+        :'project_management_options' => :'ProjectManagementOptions',
+        :'external_resources' => :'ExternalResources',
+        :'resource_path' => :'ResourcePath'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'password' => :'String',
-        :'attachment_password' => :'String',
-        :'extract_text' => :'BOOLEAN',
+        :'start_page_number' => :'Integer',
+        :'count_pages_to_render' => :'Integer',
+        :'default_font_name' => :'String',
+        :'default_encoding' => :'String',
         :'render_comments' => :'BOOLEAN',
         :'render_hidden_pages' => :'BOOLEAN',
-        :'transforms' => :'Array<String>',
-        :'default_font_name' => :'String',
-        :'watermark' => :'Watermark',
-        :'cells_options' => :'CellsOptions',
+        :'spreadsheet_options' => :'SpreadsheetOptions',
         :'cad_options' => :'CadOptions',
         :'email_options' => :'EmailOptions',
-        :'words_options' => :'WordsOptions',
-        :'pdf_options' => :'PdfOptions',
-        :'slides_options' => :'SlidesOptions',
-        :'project_options' => :'ProjectOptions',
-        :'outlook_options' => :'OutlookOptions',
-        :'start_page_number' => :'Integer',
-        :'count_pages' => :'Integer',
-        :'resource_path' => :'String',
-        :'ignore_resource_path_in_resources' => :'BOOLEAN',
-        :'embed_resources' => :'BOOLEAN',
-        :'enable_minification' => :'BOOLEAN',
-        :'enable_responsive_rendering' => :'BOOLEAN',
-        :'exclude_fonts' => :'BOOLEAN',
-        :'exclude_fonts_list' => :'Array<String>'
+        :'project_management_options' => :'ProjectManagementOptions',
+        :'external_resources' => :'BOOLEAN',
+        :'resource_path' => :'String'
       }
     end
 
@@ -176,108 +111,52 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'password')
-        self.password = attributes[:'password']
+      if attributes.key?(:'StartPageNumber')
+        self.start_page_number = attributes[:'StartPageNumber']
       end
 
-      if attributes.key?(:'attachmentPassword')
-        self.attachment_password = attributes[:'attachmentPassword']
+      if attributes.key?(:'CountPagesToRender')
+        self.count_pages_to_render = attributes[:'CountPagesToRender']
       end
 
-      if attributes.key?(:'extractText')
-        self.extract_text = attributes[:'extractText']
+      if attributes.key?(:'DefaultFontName')
+        self.default_font_name = attributes[:'DefaultFontName']
       end
 
-      if attributes.key?(:'renderComments')
-        self.render_comments = attributes[:'renderComments']
+      if attributes.key?(:'DefaultEncoding')
+        self.default_encoding = attributes[:'DefaultEncoding']
       end
 
-      if attributes.key?(:'renderHiddenPages')
-        self.render_hidden_pages = attributes[:'renderHiddenPages']
+      if attributes.key?(:'RenderComments')
+        self.render_comments = attributes[:'RenderComments']
       end
 
-      if attributes.key?(:'transforms')
-        if (value = attributes[:'transforms']).is_a?(Array)
-          self.transforms = value
-        end
+      if attributes.key?(:'RenderHiddenPages')
+        self.render_hidden_pages = attributes[:'RenderHiddenPages']
       end
 
-      if attributes.key?(:'defaultFontName')
-        self.default_font_name = attributes[:'defaultFontName']
+      if attributes.key?(:'SpreadsheetOptions')
+        self.spreadsheet_options = attributes[:'SpreadsheetOptions']
       end
 
-      if attributes.key?(:'watermark')
-        self.watermark = attributes[:'watermark']
+      if attributes.key?(:'CadOptions')
+        self.cad_options = attributes[:'CadOptions']
       end
 
-      if attributes.key?(:'cellsOptions')
-        self.cells_options = attributes[:'cellsOptions']
+      if attributes.key?(:'EmailOptions')
+        self.email_options = attributes[:'EmailOptions']
       end
 
-      if attributes.key?(:'cadOptions')
-        self.cad_options = attributes[:'cadOptions']
+      if attributes.key?(:'ProjectManagementOptions')
+        self.project_management_options = attributes[:'ProjectManagementOptions']
       end
 
-      if attributes.key?(:'emailOptions')
-        self.email_options = attributes[:'emailOptions']
+      if attributes.key?(:'ExternalResources')
+        self.external_resources = attributes[:'ExternalResources']
       end
 
-      if attributes.key?(:'wordsOptions')
-        self.words_options = attributes[:'wordsOptions']
-      end
-
-      if attributes.key?(:'pdfOptions')
-        self.pdf_options = attributes[:'pdfOptions']
-      end
-
-      if attributes.key?(:'slidesOptions')
-        self.slides_options = attributes[:'slidesOptions']
-      end
-
-      if attributes.key?(:'projectOptions')
-        self.project_options = attributes[:'projectOptions']
-      end
-
-      if attributes.key?(:'outlookOptions')
-        self.outlook_options = attributes[:'outlookOptions']
-      end
-
-      if attributes.key?(:'startPageNumber')
-        self.start_page_number = attributes[:'startPageNumber']
-      end
-
-      if attributes.key?(:'countPages')
-        self.count_pages = attributes[:'countPages']
-      end
-
-      if attributes.key?(:'resourcePath')
-        self.resource_path = attributes[:'resourcePath']
-      end
-
-      if attributes.key?(:'ignoreResourcePathInResources')
-        self.ignore_resource_path_in_resources = attributes[:'ignoreResourcePathInResources']
-      end
-
-      if attributes.key?(:'embedResources')
-        self.embed_resources = attributes[:'embedResources']
-      end
-
-      if attributes.key?(:'enableMinification')
-        self.enable_minification = attributes[:'enableMinification']
-      end
-
-      if attributes.key?(:'enableResponsiveRendering')
-        self.enable_responsive_rendering = attributes[:'enableResponsiveRendering']
-      end
-
-      if attributes.key?(:'excludeFonts')
-        self.exclude_fonts = attributes[:'excludeFonts']
-      end
-
-      if attributes.key?(:'excludeFontsList')
-        if (value = attributes[:'excludeFontsList']).is_a?(Array)
-          self.exclude_fonts_list = value
-        end
+      if attributes.key?(:'ResourcePath')
+        self.resource_path = attributes[:'ResourcePath']
       end
 
     end
@@ -286,12 +165,37 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @start_page_number.nil?
+        invalid_properties.push("invalid value for 'start_page_number', start_page_number cannot be nil.")
+      end
+
+      if @count_pages_to_render.nil?
+        invalid_properties.push("invalid value for 'count_pages_to_render', count_pages_to_render cannot be nil.")
+      end
+
+      if @render_comments.nil?
+        invalid_properties.push("invalid value for 'render_comments', render_comments cannot be nil.")
+      end
+
+      if @render_hidden_pages.nil?
+        invalid_properties.push("invalid value for 'render_hidden_pages', render_hidden_pages cannot be nil.")
+      end
+
+      if @external_resources.nil?
+        invalid_properties.push("invalid value for 'external_resources', external_resources cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @start_page_number.nil?
+      return false if @count_pages_to_render.nil?
+      return false if @render_comments.nil?
+      return false if @render_hidden_pages.nil?
+      return false if @external_resources.nil?
       return true
     end
 
@@ -300,31 +204,18 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          password == other.password &&
-          attachment_password == other.attachment_password &&
-          extract_text == other.extract_text &&
+          start_page_number == other.start_page_number &&
+          count_pages_to_render == other.count_pages_to_render &&
+          default_font_name == other.default_font_name &&
+          default_encoding == other.default_encoding &&
           render_comments == other.render_comments &&
           render_hidden_pages == other.render_hidden_pages &&
-          transforms == other.transforms &&
-          default_font_name == other.default_font_name &&
-          watermark == other.watermark &&
-          cells_options == other.cells_options &&
+          spreadsheet_options == other.spreadsheet_options &&
           cad_options == other.cad_options &&
           email_options == other.email_options &&
-          words_options == other.words_options &&
-          pdf_options == other.pdf_options &&
-          slides_options == other.slides_options &&
-          project_options == other.project_options &&
-          outlook_options == other.outlook_options &&
-          start_page_number == other.start_page_number &&
-          count_pages == other.count_pages &&
-          resource_path == other.resource_path &&
-          ignore_resource_path_in_resources == other.ignore_resource_path_in_resources &&
-          embed_resources == other.embed_resources &&
-          enable_minification == other.enable_minification &&
-          enable_responsive_rendering == other.enable_responsive_rendering &&
-          exclude_fonts == other.exclude_fonts &&
-          exclude_fonts_list == other.exclude_fonts_list
+          project_management_options == other.project_management_options &&
+          external_resources == other.external_resources &&
+          resource_path == other.resource_path
     end
 
     # @see the `==` method
@@ -336,7 +227,13 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [password, attachment_password, extract_text, render_comments, render_hidden_pages, transforms, default_font_name, watermark, cells_options, cad_options, email_options, words_options, pdf_options, slides_options, project_options, outlook_options, start_page_number, count_pages, resource_path, ignore_resource_path_in_resources, embed_resources, enable_minification, enable_responsive_rendering, exclude_fonts, exclude_fonts_list].hash
+      [start_page_number, count_pages_to_render, default_font_name, default_encoding, render_comments, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, external_resources, resource_path].hash
+    end
+
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
     end
 
     # Builds the object from hash
@@ -345,14 +242,16 @@ module GroupDocsViewerCloud
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        elsif !value.nil?
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end
