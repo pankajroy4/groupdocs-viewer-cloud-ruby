@@ -67,6 +67,9 @@ module GroupDocsViewerCloud
     # Path for the HTML resources (styles, images and fonts). For example when resource path is http://example.com/api/pages/{page-number}/resources/{resource-name} the {page-number} and {resource-name} templates will be replaced with page number and resource name accordingly. This option is ignored when ExternalResources option is disabled.
     attr_accessor :resource_path
 
+    # Indicates whether rendering will provide responsive web pages, that look well on different device types. Default value is false.
+    attr_accessor :is_responsive
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -81,7 +84,8 @@ module GroupDocsViewerCloud
         :'email_options' => :'EmailOptions',
         :'project_management_options' => :'ProjectManagementOptions',
         :'external_resources' => :'ExternalResources',
-        :'resource_path' => :'ResourcePath'
+        :'resource_path' => :'ResourcePath',
+        :'is_responsive' => :'IsResponsive'
       }
     end
 
@@ -99,7 +103,8 @@ module GroupDocsViewerCloud
         :'email_options' => :'EmailOptions',
         :'project_management_options' => :'ProjectManagementOptions',
         :'external_resources' => :'BOOLEAN',
-        :'resource_path' => :'String'
+        :'resource_path' => :'String',
+        :'is_responsive' => :'BOOLEAN'
       }
     end
 
@@ -159,6 +164,10 @@ module GroupDocsViewerCloud
         self.resource_path = attributes[:'ResourcePath']
       end
 
+      if attributes.key?(:'IsResponsive')
+        self.is_responsive = attributes[:'IsResponsive']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -185,6 +194,10 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'external_resources', external_resources cannot be nil.")
       end
 
+      if @is_responsive.nil?
+        invalid_properties.push("invalid value for 'is_responsive', is_responsive cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -196,6 +209,7 @@ module GroupDocsViewerCloud
       return false if @render_comments.nil?
       return false if @render_hidden_pages.nil?
       return false if @external_resources.nil?
+      return false if @is_responsive.nil?
       return true
     end
 
@@ -215,7 +229,8 @@ module GroupDocsViewerCloud
           email_options == other.email_options &&
           project_management_options == other.project_management_options &&
           external_resources == other.external_resources &&
-          resource_path == other.resource_path
+          resource_path == other.resource_path &&
+          is_responsive == other.is_responsive
     end
 
     # @see the `==` method
@@ -227,7 +242,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [start_page_number, count_pages_to_render, default_font_name, default_encoding, render_comments, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, external_resources, resource_path].hash
+      [start_page_number, count_pages_to_render, default_font_name, default_encoding, render_comments, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, external_resources, resource_path, is_responsive].hash
     end
 
     # Downcases first letter.
