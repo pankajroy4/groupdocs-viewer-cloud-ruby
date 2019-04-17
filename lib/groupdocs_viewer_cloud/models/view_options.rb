@@ -37,6 +37,9 @@ module GroupDocsViewerCloud
     # View format (HTML, PNG, JPG, BMP or PDF) Default value is HTML.
     attr_accessor :view_format
 
+    # The output path. Default value is 'viewer\\{input file path}_{file extension}\\'
+    attr_accessor :output_path
+
     # The path to directory containing custom fonts in storage
     attr_accessor :fonts_path
 
@@ -72,6 +75,7 @@ module GroupDocsViewerCloud
       {
         :'file_info' => :'FileInfo',
         :'view_format' => :'ViewFormat',
+        :'output_path' => :'OutputPath',
         :'fonts_path' => :'FontsPath',
         :'watermark' => :'Watermark',
         :'render_options' => :'RenderOptions'
@@ -83,6 +87,7 @@ module GroupDocsViewerCloud
       {
         :'file_info' => :'FileInfo',
         :'view_format' => :'String',
+        :'output_path' => :'String',
         :'fonts_path' => :'String',
         :'watermark' => :'Watermark',
         :'render_options' => :'RenderOptions'
@@ -103,6 +108,10 @@ module GroupDocsViewerCloud
 
       if attributes.key?(:'ViewFormat')
         self.view_format = attributes[:'ViewFormat']
+      end
+
+      if attributes.key?(:'OutputPath')
+        self.output_path = attributes[:'OutputPath']
       end
 
       if attributes.key?(:'FontsPath')
@@ -160,6 +169,7 @@ module GroupDocsViewerCloud
       self.class == other.class &&
           file_info == other.file_info &&
           view_format == other.view_format &&
+          output_path == other.output_path &&
           fonts_path == other.fonts_path &&
           watermark == other.watermark &&
           render_options == other.render_options
@@ -174,7 +184,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_info, view_format, fonts_path, watermark, render_options].hash
+      [file_info, view_format, output_path, fonts_path, watermark, render_options].hash
     end
 
     # Downcases first letter.

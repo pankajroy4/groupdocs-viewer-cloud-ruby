@@ -64,7 +64,7 @@ module GroupDocsViewerCloud
       return new(config)
     end
 
-    # Create new view if it not exists
+    # Render document pages
     # 
     # @param request create_view_request
     # @return [ViewResult]
@@ -73,7 +73,7 @@ module GroupDocsViewerCloud
       data
     end
 
-    # Create new view if it not exists
+    # Render document pages
     # 
     # @param request create_view_request
     # @return [Array<(ViewResult, Fixnum, Hash)>]
@@ -116,7 +116,7 @@ module GroupDocsViewerCloud
       [data, status_code, headers]
     end
 
-    # Delete view
+    # Delete rendered pages
     # 
     # @param request delete_view_request
     # @return [nil]
@@ -125,7 +125,7 @@ module GroupDocsViewerCloud
       nil
     end
 
-    # Delete view
+    # Delete rendered pages
     # 
     # @param request delete_view_request
     # @return [Array<(nil, Fixnum, Hash)>]
@@ -167,7 +167,7 @@ module GroupDocsViewerCloud
       [data, status_code, headers]
     end
 
-    # Get information about view
+    # Retrieve information about document pages
     # 
     # @param request get_info_request
     # @return [InfoResult]
@@ -176,7 +176,7 @@ module GroupDocsViewerCloud
       data
     end
 
-    # Get information about view
+    # Retrieve information about document pages
     # 
     # @param request get_info_request
     # @return [Array<(InfoResult, Fixnum, Hash)>]
@@ -219,7 +219,7 @@ module GroupDocsViewerCloud
       [data, status_code, headers]
     end
 
-    # Get supported file formats
+    # List supported file formats
     # 
     # @return [FormatsResult]
     def get_supported_file_formats()
@@ -227,7 +227,7 @@ module GroupDocsViewerCloud
       data
     end
 
-    # Get supported file formats
+    # List supported file formats
     # 
     
     # @return [Array<(FormatsResult, Fixnum, Hash)>]
