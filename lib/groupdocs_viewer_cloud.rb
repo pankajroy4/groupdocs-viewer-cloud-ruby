@@ -67,5 +67,6 @@ require_relative 'groupdocs_viewer_cloud/models/page_view'
 # APIs
 require_relative 'groupdocs_viewer_cloud/api/file_api'
 require_relative 'groupdocs_viewer_cloud/api/folder_api'
+require_relative 'groupdocs_viewer_cloud/api/info_api'
 require_relative 'groupdocs_viewer_cloud/api/storage_api'
-require_relative 'groupdocs_viewer_cloud/api/viewer_api'
+require_relative 'groupdocs_viewer_cloud/api/view_api'

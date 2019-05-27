@@ -37,7 +37,7 @@ module GroupDocsViewerCloud
     # @param [Hash] opts the optional parameters
     # @return [FormatCollection]
     def test_get_supported_file_formats
-      response = @viewer_api.get_supported_file_formats
+      response = @info_api.get_supported_file_formats
       response.formats.each do |format|
         assert_equal false, format.file_format.empty? 
         assert_equal false, format.extension.empty?

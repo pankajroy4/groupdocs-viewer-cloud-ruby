@@ -40,7 +40,7 @@ module GroupDocsViewerCloud
       request = GetInfoRequest.new(viewOptions)      
 
       error = assert_raises ApiError do
-        @viewer_api.get_info(request)
+        @info_api.get_info(request)
       end
 
       assert_equal "Parameter 'FileInfo' is not specified.", error.message            
@@ -53,7 +53,7 @@ module GroupDocsViewerCloud
       request = GetInfoRequest.new(viewOptions)    
 
       error = assert_raises ApiError do
-        @viewer_api.get_info(request)
+        @info_api.get_info(request)
       end
 
       assert_equal "Can't find file located at 'some-folder\\notexist.docx'.", error.message            
@@ -65,7 +65,7 @@ module GroupDocsViewerCloud
       viewOptions.file_info = file.file_info
       request = GetInfoRequest.new(viewOptions)      
 
-      response = @viewer_api.get_info(request)
+      response = @info_api.get_info(request)
 
       assert_equal 4, response.pages.size
       assert_equal 0, response.attachments.size
@@ -77,7 +77,7 @@ module GroupDocsViewerCloud
       viewOptions.file_info = file.file_info
       request = GetInfoRequest.new(viewOptions)      
 
-      response = @viewer_api.get_info(request)
+      response = @info_api.get_info(request)
 
       assert_equal 1, response.pages.size
       assert_equal 0, response.attachments.size      
@@ -91,7 +91,7 @@ module GroupDocsViewerCloud
       viewOptions.view_format = "HTML"
       request = GetInfoRequest.new(viewOptions)      
 
-      response = @viewer_api.get_info(request)
+      response = @info_api.get_info(request)
 
       assert_equal 1, response.pages.size      
       assert_equal 1, response.pages[0].number
@@ -105,7 +105,7 @@ module GroupDocsViewerCloud
       viewOptions.view_format = "JPG"
       request = GetInfoRequest.new(viewOptions)      
 
-      response = @viewer_api.get_info(request)
+      response = @info_api.get_info(request)
 
       assert_equal 1, response.pages.size      
       assert_equal 1, response.pages[0].number
@@ -121,7 +121,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = GetInfoRequest.new(viewOptions)      
 
-      response = @viewer_api.get_info(request)
+      response = @info_api.get_info(request)
 
       assert_equal 3, response.pages.size           
     end
@@ -138,7 +138,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = GetInfoRequest.new(viewOptions)      
 
-      response = @viewer_api.get_info(request)
+      response = @info_api.get_info(request)
 
       assert_equal 2, response.pages.size           
     end
@@ -156,7 +156,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = GetInfoRequest.new(viewOptions)      
 
-      response = @viewer_api.get_info(request)
+      response = @info_api.get_info(request)
 
       assert_equal 3, response.pages.size           
     end    
@@ -172,7 +172,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = GetInfoRequest.new(viewOptions)      
 
-      response = @viewer_api.get_info(request)
+      response = @info_api.get_info(request)
 
       assert_equal 3, response.pages.size           
     end
@@ -191,7 +191,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = GetInfoRequest.new(viewOptions)      
 
-      response = @viewer_api.get_info(request)
+      response = @info_api.get_info(request)
 
       assert_equal 2, response.pages.size           
     end
@@ -206,7 +206,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions        
       request = GetInfoRequest.new(viewOptions)      
 
-      response = @viewer_api.get_info(request)
+      response = @info_api.get_info(request)
 
       assert_equal 1, response.pages.size
       assert_equal 0, response.attachments.size      

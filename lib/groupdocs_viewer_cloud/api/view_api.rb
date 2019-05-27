@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------------
-# <copyright company="Aspose Pty Ltd" file="viewer.rb">
+# <copyright company="Aspose Pty Ltd" file="view.rb">
 #   Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
@@ -30,36 +30,36 @@ module GroupDocsViewerCloud
   #
   # GroupDocs.Viewer Cloud API
   #
-  class ViewerApi
+  class ViewApi
     attr_accessor :config
 
-    #make ViewerApi.new private 
+    #make ViewApi.new private 
     private_class_method :new
 
-    # Initializes new instance of ViewerApi
+    # Initializes new instance of ViewApi
     #
     # @param [config] Configuration 
-    # @return [ViewerApi] New instance of ViewerApi
+    # @return [ViewApi] New instance of ViewApi
     def initialize(config)
       @config = config
       @api_client = ApiClient.new(config)
       @access_token = nil
     end
 
-    # Initializes new instance of ViewerApi
+    # Initializes new instance of ViewApi
     #
     # @param [app_sid] Application identifier (App SID)
     # @param [app_key] Application private key (App Key)
-    # @return [ViewerApi] New instance of ViewerApi
+    # @return [ViewApi] New instance of ViewApi
     def self.from_keys(app_sid, app_key)
       config = Configuration.new(app_sid, app_key)
       return new(config)
     end
 
-    # Initializes new instance of ViewerApi
+    # Initializes new instance of ViewApi
     #
     # @param [config] Configuration 
-    # @return [ViewerApi] New instance of ViewerApi
+    # @return [ViewApi] New instance of ViewApi
     def self.from_config(config)
       return new(config)
     end
@@ -81,9 +81,9 @@ module GroupDocsViewerCloud
     def create_view_with_http_info(request)
       raise ArgumentError, 'Incorrect request type' unless request.is_a? CreateViewRequest
 
-      @api_client.config.logger.debug 'Calling API: ViewerApi.create_view ...' if @api_client.config.debugging
+      @api_client.config.logger.debug 'Calling API: ViewApi.create_view ...' if @api_client.config.debugging
       # verify the required parameter 'view_options' is set
-      raise ArgumentError, 'Missing the required parameter view_options when calling ViewerApi.create_view' if @api_client.config.client_side_validation && request.view_options.nil?
+      raise ArgumentError, 'Missing the required parameter view_options when calling ViewApi.create_view' if @api_client.config.client_side_validation && request.view_options.nil?
       # resource path
       local_var_path = '/viewer/view'
 
@@ -111,7 +111,7 @@ module GroupDocsViewerCloud
                                                         return_type: 'ViewResult')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called:
-        ViewerApi#create_view\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        ViewApi#create_view\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       [data, status_code, headers]
     end
@@ -133,9 +133,9 @@ module GroupDocsViewerCloud
     def delete_view_with_http_info(request)
       raise ArgumentError, 'Incorrect request type' unless request.is_a? DeleteViewRequest
 
-      @api_client.config.logger.debug 'Calling API: ViewerApi.delete_view ...' if @api_client.config.debugging
+      @api_client.config.logger.debug 'Calling API: ViewApi.delete_view ...' if @api_client.config.debugging
       # verify the required parameter 'delete_view_options' is set
-      raise ArgumentError, 'Missing the required parameter delete_view_options when calling ViewerApi.delete_view' if @api_client.config.client_side_validation && request.delete_view_options.nil?
+      raise ArgumentError, 'Missing the required parameter delete_view_options when calling ViewApi.delete_view' if @api_client.config.client_side_validation && request.delete_view_options.nil?
       # resource path
       local_var_path = '/viewer/view'
 
@@ -162,108 +162,7 @@ module GroupDocsViewerCloud
                                                         access_token: get_access_token)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called:
-        ViewerApi#delete_view\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      [data, status_code, headers]
-    end
-
-    # Retrieve information about document pages
-    # 
-    # @param request get_info_request
-    # @return [InfoResult]
-    def get_info(request)
-      data, _status_code, _headers = get_info_with_http_info(request)
-      data
-    end
-
-    # Retrieve information about document pages
-    # 
-    # @param request get_info_request
-    # @return [Array<(InfoResult, Fixnum, Hash)>]
-    # InfoResult data, response status code and response headers
-    def get_info_with_http_info(request)
-      raise ArgumentError, 'Incorrect request type' unless request.is_a? GetInfoRequest
-
-      @api_client.config.logger.debug 'Calling API: ViewerApi.get_info ...' if @api_client.config.debugging
-      # verify the required parameter 'view_options' is set
-      raise ArgumentError, 'Missing the required parameter view_options when calling ViewerApi.get_info' if @api_client.config.client_side_validation && request.view_options.nil?
-      # resource path
-      local_var_path = '/viewer/info'
-
-      # query parameters
-      query_params = {}
-
-      # header parameters
-      header_params = {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = @api_client.object_to_http_body(request.view_options)
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
-                                                        header_params: header_params,
-                                                        query_params: query_params,
-                                                        form_params: form_params,
-                                                        body: post_body,
-                                                        access_token: get_access_token,
-                                                        return_type: 'InfoResult')
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called:
-        ViewerApi#get_info\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      [data, status_code, headers]
-    end
-
-    # List supported file formats
-    # 
-    # @return [FormatsResult]
-    def get_supported_file_formats()
-      data, _status_code, _headers = get_supported_file_formats_with_http_info()
-      data
-    end
-
-    # List supported file formats
-    # 
-    
-    # @return [Array<(FormatsResult, Fixnum, Hash)>]
-    # FormatsResult data, response status code and response headers
-    def get_supported_file_formats_with_http_info()
-      
-
-      @api_client.config.logger.debug 'Calling API: ViewerApi.get_supported_file_formats ...' if @api_client.config.debugging
-      # resource path
-      local_var_path = '/viewer/formats'
-
-      # query parameters
-      query_params = {}
-
-      # header parameters
-      header_params = {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = nil
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
-                                                        header_params: header_params,
-                                                        query_params: query_params,
-                                                        form_params: form_params,
-                                                        body: post_body,
-                                                        access_token: get_access_token,
-                                                        return_type: 'FormatsResult')
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called:
-        ViewerApi#get_supported_file_formats\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        ViewApi#delete_view\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       [data, status_code, headers]
     end
@@ -409,51 +308,6 @@ module GroupDocsViewerCloud
         # @param delete_view_options Delete options
         def initialize(delete_view_options)
            self.delete_view_options = delete_view_options
-        end
-  end
-end
- #
- # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="get_info_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
- # </copyright>
- # <summary>
- #  Permission is hereby granted, free of charge, to any person obtaining a copy
- #  of this software and associated documentation files (the "Software"), to deal
- #  in the Software without restriction, including without limitation the rights
- #  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- #  copies of the Software, and to permit persons to whom the Software is
- #  furnished to do so, subject to the following conditions:
- # 
- #  The above copyright notice and this permission notice shall be included in all
- #  copies or substantial portions of the Software.
- # 
- #  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- #  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- #  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- #  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- #  SOFTWARE.
- # </summary>
- # --------------------------------------------------------------------------------------------------------------------
- #
-
-module GroupDocsViewerCloud
-
-  #
-  # Request model for get_info operation.
-  #
-  class GetInfoRequest
-
-        # View options
-        attr_accessor :view_options
-	
-        #
-        # Initializes a new instance.
-        # @param view_options View options
-        def initialize(view_options)
-           self.view_options = view_options
         end
   end
 end

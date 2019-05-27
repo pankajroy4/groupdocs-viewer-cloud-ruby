@@ -40,7 +40,7 @@ module GroupDocsViewerCloud
       request = CreateViewRequest.new(viewOptions)      
 
       error = assert_raises ApiError do
-        @viewer_api.create_view(request)
+        @view_api.create_view(request)
       end
 
       assert_equal "Parameter 'FileInfo' is not specified.", error.message            
@@ -53,7 +53,7 @@ module GroupDocsViewerCloud
       request = CreateViewRequest.new(viewOptions)    
 
       error = assert_raises ApiError do
-        @viewer_api.create_view(request)
+        @view_api.create_view(request)
       end
 
       assert_equal "Can't find file located at 'some-folder\\notexist.docx'.", error.message            
@@ -65,7 +65,7 @@ module GroupDocsViewerCloud
       viewOptions.file_info = file.file_info
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 4, response.pages.size
       assert_equal 0, response.attachments.size
@@ -82,7 +82,7 @@ module GroupDocsViewerCloud
       viewOptions.file_info = file.file_info
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 1, response.pages.size
       assert_equal 0, response.attachments.size      
@@ -96,7 +96,7 @@ module GroupDocsViewerCloud
       viewOptions.view_format = "HTML"
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 1, response.pages.size      
       assert_equal 1, response.pages[0].number      
@@ -109,7 +109,7 @@ module GroupDocsViewerCloud
       viewOptions.view_format = "JPG"
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 1, response.pages.size      
       assert_equal 1, response.pages[0].number      
@@ -124,7 +124,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 3, response.pages.size           
     end
@@ -141,7 +141,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 2, response.pages.size           
     end
@@ -159,7 +159,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 3, response.pages.size           
     end    
@@ -175,7 +175,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 3, response.pages.size           
     end
@@ -194,7 +194,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 2, response.pages.size           
     end
@@ -207,7 +207,7 @@ module GroupDocsViewerCloud
       viewOptions.fonts_path = "font/ttf"
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 1, response.pages.size
     end
@@ -222,7 +222,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 2, response.pages.size    
       assert_equal 2, response.pages[0].number       
@@ -237,7 +237,7 @@ module GroupDocsViewerCloud
       viewOptions.render_options = renderOptions      
       request = CreateViewRequest.new(viewOptions)      
 
-      response = @viewer_api.create_view(request)
+      response = @view_api.create_view(request)
 
       assert_equal 1, response.pages.size
       assert_equal 0, response.attachments.size      

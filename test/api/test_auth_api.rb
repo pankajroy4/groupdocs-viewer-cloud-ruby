@@ -35,11 +35,11 @@ module GroupDocsViewerCloud
 
   class TestAuthApi < Minitest::Test
     
-    def init_viewer_api(app_sid, app_key)
+    def init_info_api(app_sid, app_key)
       config = Configuration.new(app_sid, app_key)
       config.api_base_url = TestSettings::API_BASE_URL
       
-      ViewerApi.from_config(config)
+      InfoApi.from_config(config)
     end
 
     # unit tests to check auth error
@@ -47,10 +47,10 @@ module GroupDocsViewerCloud
       app_sid = "test"
       app_key = "test"
 
-      viewer_api = init_viewer_api(app_sid, app_key)
+      info_api = init_info_api(app_sid, app_key)
 
       error = assert_raises ApiError do
-        viewer_api.get_supported_file_formats
+        info_api.get_supported_file_formats
       end
 
       assert_equal "invalid_client", error.message
@@ -61,10 +61,10 @@ module GroupDocsViewerCloud
       app_sid = TestSettings::APP_SID
       app_key = "test"
 
-      viewer_api = init_viewer_api(app_sid, app_key)
+      info_api = init_info_api(app_sid, app_key)
 
       error = assert_raises ApiError do
-        viewer_api.get_supported_file_formats
+        info_api.get_supported_file_formats
       end
 
       assert_equal "invalid_client", error.message

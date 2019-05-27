@@ -47,7 +47,8 @@ module GroupDocsViewerCloud
         config.api_base_url = TestSettings::API_BASE_URL
         #config.debugging = true
 
-        @viewer_api = ViewerApi.from_config(config)   
+        @info_api = InfoApi.from_config(config)
+        @view_api = ViewApi.from_config(config)
         @storage_api = StorageApi.from_config(config)   
         @folder_api = FolderApi.from_config(config)   
         @file_api = FileApi.from_config(config)   
