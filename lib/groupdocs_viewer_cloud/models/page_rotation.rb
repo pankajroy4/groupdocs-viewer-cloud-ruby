@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="info_result.rb">
+ # <copyright company="Aspose Pty Ltd" file="page_rotation.rb">
  #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,63 +28,49 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # View result information
-  class InfoResult
+  # Clockwise page rotation 
+  class PageRotation
 
-    # File format extension
-    attr_accessor :format_extension
+    # Page number to rotate
+    attr_accessor :page_number
 
-    # File format
-    attr_accessor :format
+    # Rotation angle
+    attr_accessor :rotation_angle
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # View result pages
-    attr_accessor :pages
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # Attachments
-    attr_accessor :attachments
-
-    # Represents view information for archive file
-    attr_accessor :archive_view_info
-
-    # Represents view information for CAD drawing
-    attr_accessor :cad_view_info
-
-    # Represents view information for MS Project document
-    attr_accessor :project_management_view_info
-
-    # Represents view information for Outlook Data file
-    attr_accessor :outlook_view_info
-
-    # Represents view information for PDF document
-    attr_accessor :pdf_view_info
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'format_extension' => :'FormatExtension',
-        :'format' => :'Format',
-        :'pages' => :'Pages',
-        :'attachments' => :'Attachments',
-        :'archive_view_info' => :'ArchiveViewInfo',
-        :'cad_view_info' => :'CadViewInfo',
-        :'project_management_view_info' => :'ProjectManagementViewInfo',
-        :'outlook_view_info' => :'OutlookViewInfo',
-        :'pdf_view_info' => :'PdfViewInfo'
+        :'page_number' => :'PageNumber',
+        :'rotation_angle' => :'RotationAngle'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'format_extension' => :'String',
-        :'format' => :'String',
-        :'pages' => :'Array<PageInfo>',
-        :'attachments' => :'Array<AttachmentInfo>',
-        :'archive_view_info' => :'ArchiveViewInfo',
-        :'cad_view_info' => :'CadViewInfo',
-        :'project_management_view_info' => :'ProjectManagementViewInfo',
-        :'outlook_view_info' => :'OutlookViewInfo',
-        :'pdf_view_info' => :'PdfViewInfo'
+        :'page_number' => :'Integer',
+        :'rotation_angle' => :'String'
       }
     end
 
@@ -96,44 +82,12 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FormatExtension')
-        self.format_extension = attributes[:'FormatExtension']
+      if attributes.key?(:'PageNumber')
+        self.page_number = attributes[:'PageNumber']
       end
 
-      if attributes.key?(:'Format')
-        self.format = attributes[:'Format']
-      end
-
-      if attributes.key?(:'Pages')
-        if (value = attributes[:'Pages']).is_a?(Array)
-          self.pages = value
-        end
-      end
-
-      if attributes.key?(:'Attachments')
-        if (value = attributes[:'Attachments']).is_a?(Array)
-          self.attachments = value
-        end
-      end
-
-      if attributes.key?(:'ArchiveViewInfo')
-        self.archive_view_info = attributes[:'ArchiveViewInfo']
-      end
-
-      if attributes.key?(:'CadViewInfo')
-        self.cad_view_info = attributes[:'CadViewInfo']
-      end
-
-      if attributes.key?(:'ProjectManagementViewInfo')
-        self.project_management_view_info = attributes[:'ProjectManagementViewInfo']
-      end
-
-      if attributes.key?(:'OutlookViewInfo')
-        self.outlook_view_info = attributes[:'OutlookViewInfo']
-      end
-
-      if attributes.key?(:'PdfViewInfo')
-        self.pdf_view_info = attributes[:'PdfViewInfo']
+      if attributes.key?(:'RotationAngle')
+        self.rotation_angle = attributes[:'RotationAngle']
       end
 
     end
@@ -142,13 +96,39 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @page_number.nil?
+        invalid_properties.push("invalid value for 'page_number', page_number cannot be nil.")
+      end
+
+      if @rotation_angle.nil?
+        invalid_properties.push("invalid value for 'rotation_angle', rotation_angle cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @page_number.nil?
+      return false if @rotation_angle.nil?
+      rotation_angle_validator = EnumAttributeValidator.new('String', ["On90Degree", "On180Degree", "On270Degree"])
+      return false unless rotation_angle_validator.valid?(@rotation_angle)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] rotation_angle Object to be assigned
+    def rotation_angle=(rotation_angle)
+      validator = EnumAttributeValidator.new('String', ["On90Degree", "On180Degree", "On270Degree"])
+      if rotation_angle.to_i == 0
+        unless validator.valid?(rotation_angle)
+          raise ArgumentError, "invalid value for 'rotation_angle', must be one of #{validator.allowable_values}."
+        end
+        @rotation_angle = rotation_angle
+      else
+        @rotation_angle = validator.allowable_values[rotation_angle.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -156,15 +136,8 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          format_extension == other.format_extension &&
-          format == other.format &&
-          pages == other.pages &&
-          attachments == other.attachments &&
-          archive_view_info == other.archive_view_info &&
-          cad_view_info == other.cad_view_info &&
-          project_management_view_info == other.project_management_view_info &&
-          outlook_view_info == other.outlook_view_info &&
-          pdf_view_info == other.pdf_view_info
+          page_number == other.page_number &&
+          rotation_angle == other.rotation_angle
     end
 
     # @see the `==` method
@@ -176,7 +149,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format_extension, format, pages, attachments, archive_view_info, cad_view_info, project_management_view_info, outlook_view_info, pdf_view_info].hash
+      [page_number, rotation_angle].hash
     end
 
     # Downcases first letter.

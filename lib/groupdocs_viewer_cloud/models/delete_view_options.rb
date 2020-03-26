@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="delete_view_options.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,17 +34,22 @@ module GroupDocsViewerCloud
     # File info
     attr_accessor :file_info
 
+    # The output path Default value is 'viewer\\{input file path}_{file extension}\\'
+    attr_accessor :output_path
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'file_info' => :'FileInfo'
+        :'file_info' => :'FileInfo',
+        :'output_path' => :'OutputPath'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'file_info' => :'FileInfo'
+        :'file_info' => :'FileInfo',
+        :'output_path' => :'String'
       }
     end
 
@@ -58,6 +63,10 @@ module GroupDocsViewerCloud
 
       if attributes.key?(:'FileInfo')
         self.file_info = attributes[:'FileInfo']
+      end
+
+      if attributes.key?(:'OutputPath')
+        self.output_path = attributes[:'OutputPath']
       end
 
     end
@@ -80,7 +89,8 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          file_info == other.file_info
+          file_info == other.file_info &&
+          output_path == other.output_path
     end
 
     # @see the `==` method
@@ -92,7 +102,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_info].hash
+      [file_info, output_path].hash
     end
 
     # Downcases first letter.

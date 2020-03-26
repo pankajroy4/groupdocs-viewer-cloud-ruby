@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="api_error.rb">
-#   Copyright (c) 2003-2019 Aspose Pty Ltd
+#   Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -40,9 +40,12 @@ module GroupDocsViewerCloud
         if arg.key?(:response_body) then
           data = JSON.parse(arg[:response_body], :symbolize_names => true)
           if !data.nil? && !data[:error].nil? then
-            @message = data[:error]
-          elsif !data.nil? && !data[:Error].nil? && !data[:Error][:Message].nil? then
-            @message = data[:Error][:Message]
+            error = data[:error]
+            if error.kind_of?(String) then
+              @message = error
+            else
+              @message = error[:message]
+            end
           end
         end
 

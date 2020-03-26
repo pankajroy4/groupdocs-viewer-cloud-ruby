@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="info_result.rb">
+ # <copyright company="Aspose Pty Ltd" file="project_management_view_info.rb">
  #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,63 +28,28 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # View result information
-  class InfoResult
+  # Represents view information for MS Project document
+  class ProjectManagementViewInfo
 
-    # File format extension
-    attr_accessor :format_extension
+    # The date time from which the project started
+    attr_accessor :start_date
 
-    # File format
-    attr_accessor :format
-
-    # View result pages
-    attr_accessor :pages
-
-    # Attachments
-    attr_accessor :attachments
-
-    # Represents view information for archive file
-    attr_accessor :archive_view_info
-
-    # Represents view information for CAD drawing
-    attr_accessor :cad_view_info
-
-    # Represents view information for MS Project document
-    attr_accessor :project_management_view_info
-
-    # Represents view information for Outlook Data file
-    attr_accessor :outlook_view_info
-
-    # Represents view information for PDF document
-    attr_accessor :pdf_view_info
+    # The date time when the project is to be completed
+    attr_accessor :end_date
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'format_extension' => :'FormatExtension',
-        :'format' => :'Format',
-        :'pages' => :'Pages',
-        :'attachments' => :'Attachments',
-        :'archive_view_info' => :'ArchiveViewInfo',
-        :'cad_view_info' => :'CadViewInfo',
-        :'project_management_view_info' => :'ProjectManagementViewInfo',
-        :'outlook_view_info' => :'OutlookViewInfo',
-        :'pdf_view_info' => :'PdfViewInfo'
+        :'start_date' => :'StartDate',
+        :'end_date' => :'EndDate'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'format_extension' => :'String',
-        :'format' => :'String',
-        :'pages' => :'Array<PageInfo>',
-        :'attachments' => :'Array<AttachmentInfo>',
-        :'archive_view_info' => :'ArchiveViewInfo',
-        :'cad_view_info' => :'CadViewInfo',
-        :'project_management_view_info' => :'ProjectManagementViewInfo',
-        :'outlook_view_info' => :'OutlookViewInfo',
-        :'pdf_view_info' => :'PdfViewInfo'
+        :'start_date' => :'DateTime',
+        :'end_date' => :'DateTime'
       }
     end
 
@@ -96,44 +61,12 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FormatExtension')
-        self.format_extension = attributes[:'FormatExtension']
+      if attributes.key?(:'StartDate')
+        self.start_date = attributes[:'StartDate']
       end
 
-      if attributes.key?(:'Format')
-        self.format = attributes[:'Format']
-      end
-
-      if attributes.key?(:'Pages')
-        if (value = attributes[:'Pages']).is_a?(Array)
-          self.pages = value
-        end
-      end
-
-      if attributes.key?(:'Attachments')
-        if (value = attributes[:'Attachments']).is_a?(Array)
-          self.attachments = value
-        end
-      end
-
-      if attributes.key?(:'ArchiveViewInfo')
-        self.archive_view_info = attributes[:'ArchiveViewInfo']
-      end
-
-      if attributes.key?(:'CadViewInfo')
-        self.cad_view_info = attributes[:'CadViewInfo']
-      end
-
-      if attributes.key?(:'ProjectManagementViewInfo')
-        self.project_management_view_info = attributes[:'ProjectManagementViewInfo']
-      end
-
-      if attributes.key?(:'OutlookViewInfo')
-        self.outlook_view_info = attributes[:'OutlookViewInfo']
-      end
-
-      if attributes.key?(:'PdfViewInfo')
-        self.pdf_view_info = attributes[:'PdfViewInfo']
+      if attributes.key?(:'EndDate')
+        self.end_date = attributes[:'EndDate']
       end
 
     end
@@ -142,12 +75,22 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @start_date.nil?
+        invalid_properties.push("invalid value for 'start_date', start_date cannot be nil.")
+      end
+
+      if @end_date.nil?
+        invalid_properties.push("invalid value for 'end_date', end_date cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @start_date.nil?
+      return false if @end_date.nil?
       return true
     end
 
@@ -156,15 +99,8 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          format_extension == other.format_extension &&
-          format == other.format &&
-          pages == other.pages &&
-          attachments == other.attachments &&
-          archive_view_info == other.archive_view_info &&
-          cad_view_info == other.cad_view_info &&
-          project_management_view_info == other.project_management_view_info &&
-          outlook_view_info == other.outlook_view_info &&
-          pdf_view_info == other.pdf_view_info
+          start_date == other.start_date &&
+          end_date == other.end_date
     end
 
     # @see the `==` method
@@ -176,7 +112,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format_extension, format, pages, attachments, archive_view_info, cad_view_info, project_management_view_info, outlook_view_info, pdf_view_info].hash
+      [start_date, end_date].hash
     end
 
     # Downcases first letter.

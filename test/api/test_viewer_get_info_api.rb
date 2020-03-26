@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -182,7 +182,7 @@ module GroupDocsViewerCloud
       viewOptions = ViewOptions.new
       viewOptions.file_info = file.file_info
       projectManagementOptions = ProjectManagementOptions.new
-      projectManagementOptions.page_size = "Unknown"
+      projectManagementOptions.page_size = "A4"
       projectManagementOptions.time_unit = "Months"
       projectManagementOptions.start_date = "2008/07/01"
       projectManagementOptions.end_date = "2008/07/31"      
@@ -193,7 +193,7 @@ module GroupDocsViewerCloud
 
       response = @info_api.get_info(request)
 
-      assert_equal 2, response.pages.size           
+      assert_equal 1, response.pages.size           
     end
     
     def test_GetInfoWithImageOptions
@@ -211,7 +211,7 @@ module GroupDocsViewerCloud
       assert_equal 1, response.pages.size
       assert_equal 0, response.attachments.size      
       assert_equal 1, response.pages[0].number
-      assert_operator response.pages[0].rows.length, :>, 0  
+      assert_operator response.pages[0].lines.length, :>, 0  
     end
 
   end

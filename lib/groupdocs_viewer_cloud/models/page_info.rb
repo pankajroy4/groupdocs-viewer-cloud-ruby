@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="page_info.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,17 +31,20 @@ module GroupDocsViewerCloud
   # Page information
   class PageInfo
 
-    # Page number
+    # The page number
     attr_accessor :number
 
-    # Image Page width
+    # The width of the page in pixels when viewing as JPG or PNG
     attr_accessor :width
 
-    # Image Page height
+    # The height of the page in pixels when viewing as JPG or PNG
     attr_accessor :height
 
-    # Image Page rows
-    attr_accessor :rows
+    # The page visibility indicator
+    attr_accessor :visible
+
+    # The lines contained by the page when viewing as JPG or PNG with enabled Text Extraction
+    attr_accessor :lines
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -49,7 +52,8 @@ module GroupDocsViewerCloud
         :'number' => :'Number',
         :'width' => :'Width',
         :'height' => :'Height',
-        :'rows' => :'Rows'
+        :'visible' => :'Visible',
+        :'lines' => :'Lines'
       }
     end
 
@@ -59,7 +63,8 @@ module GroupDocsViewerCloud
         :'number' => :'Integer',
         :'width' => :'Integer',
         :'height' => :'Integer',
-        :'rows' => :'Array<Row>'
+        :'visible' => :'BOOLEAN',
+        :'lines' => :'Array<Line>'
       }
     end
 
@@ -83,9 +88,13 @@ module GroupDocsViewerCloud
         self.height = attributes[:'Height']
       end
 
-      if attributes.key?(:'Rows')
-        if (value = attributes[:'Rows']).is_a?(Array)
-          self.rows = value
+      if attributes.key?(:'Visible')
+        self.visible = attributes[:'Visible']
+      end
+
+      if attributes.key?(:'Lines')
+        if (value = attributes[:'Lines']).is_a?(Array)
+          self.lines = value
         end
       end
 
@@ -107,6 +116,10 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'height', height cannot be nil.")
       end
 
+      if @visible.nil?
+        invalid_properties.push("invalid value for 'visible', visible cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -116,6 +129,7 @@ module GroupDocsViewerCloud
       return false if @number.nil?
       return false if @width.nil?
       return false if @height.nil?
+      return false if @visible.nil?
       return true
     end
 
@@ -127,7 +141,8 @@ module GroupDocsViewerCloud
           number == other.number &&
           width == other.width &&
           height == other.height &&
-          rows == other.rows
+          visible == other.visible &&
+          lines == other.lines
     end
 
     # @see the `==` method
@@ -139,7 +154,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [number, width, height, rows].hash
+      [number, width, height, visible, lines].hash
     end
 
     # Downcases first letter.

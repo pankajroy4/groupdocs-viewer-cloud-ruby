@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="view_options.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,10 +34,10 @@ module GroupDocsViewerCloud
     # File info
     attr_accessor :file_info
 
-    # View format (HTML, PNG, JPG, BMP or PDF) Default value is HTML.
+    # View format (HTML, PNG, JPG, or PDF) Default value is HTML.
     attr_accessor :view_format
 
-    # The output path. Default value is 'viewer\\{input file path}_{file extension}\\'
+    # The output path Default value is 'viewer\\{input file path}_{file extension}\\'
     attr_accessor :output_path
 
     # The path to directory containing custom fonts in storage
@@ -143,7 +143,7 @@ module GroupDocsViewerCloud
     # @return true if the model is valid
     def valid?
       return false if @view_format.nil?
-      view_format_validator = EnumAttributeValidator.new('String', ["HTML", "PNG", "JPG", "BMP", "PDF"])
+      view_format_validator = EnumAttributeValidator.new('String', ["HTML", "PNG", "JPG", "PDF"])
       return false unless view_format_validator.valid?(@view_format)
       return true
     end
@@ -151,7 +151,7 @@ module GroupDocsViewerCloud
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] view_format Object to be assigned
     def view_format=(view_format)
-      validator = EnumAttributeValidator.new('String', ["HTML", "PNG", "JPG", "BMP", "PDF"])
+      validator = EnumAttributeValidator.new('String', ["HTML", "PNG", "JPG", "PDF"])
       if view_format.to_i == 0
         unless validator.valid?(view_format)
           raise ArgumentError, "invalid value for 'view_format', must be one of #{validator.allowable_values}."

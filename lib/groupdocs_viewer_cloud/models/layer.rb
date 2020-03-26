@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="row.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ # <copyright company="Aspose Pty Ltd" file="layer.rb">
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,53 +28,28 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Page row with text
-  class Row
+  # Represents layer contained by the CAD drawing
+  class Layer
 
-    # Row text
-    attr_accessor :text
+    # The name of the layer
+    attr_accessor :name
 
-    # Row left coordinate
-    attr_accessor :row_left
-
-    # Row top coordinate
-    attr_accessor :row_top
-
-    # Row width
-    attr_accessor :row_width
-
-    # Row height
-    attr_accessor :row_height
-
-    # Text coordinates
-    attr_accessor :text_coordinates
-
-    # Characters coordinates
-    attr_accessor :character_coordinates
+    # The layer visibility indicator
+    attr_accessor :visible
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'text' => :'Text',
-        :'row_left' => :'RowLeft',
-        :'row_top' => :'RowTop',
-        :'row_width' => :'RowWidth',
-        :'row_height' => :'RowHeight',
-        :'text_coordinates' => :'TextCoordinates',
-        :'character_coordinates' => :'CharacterCoordinates'
+        :'name' => :'Name',
+        :'visible' => :'Visible'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'text' => :'String',
-        :'row_left' => :'Float',
-        :'row_top' => :'Float',
-        :'row_width' => :'Float',
-        :'row_height' => :'Float',
-        :'text_coordinates' => :'Array<Float>',
-        :'character_coordinates' => :'Array<Float>'
+        :'name' => :'String',
+        :'visible' => :'BOOLEAN'
       }
     end
 
@@ -86,36 +61,12 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'Text')
-        self.text = attributes[:'Text']
+      if attributes.key?(:'Name')
+        self.name = attributes[:'Name']
       end
 
-      if attributes.key?(:'RowLeft')
-        self.row_left = attributes[:'RowLeft']
-      end
-
-      if attributes.key?(:'RowTop')
-        self.row_top = attributes[:'RowTop']
-      end
-
-      if attributes.key?(:'RowWidth')
-        self.row_width = attributes[:'RowWidth']
-      end
-
-      if attributes.key?(:'RowHeight')
-        self.row_height = attributes[:'RowHeight']
-      end
-
-      if attributes.key?(:'TextCoordinates')
-        if (value = attributes[:'TextCoordinates']).is_a?(Array)
-          self.text_coordinates = value
-        end
-      end
-
-      if attributes.key?(:'CharacterCoordinates')
-        if (value = attributes[:'CharacterCoordinates']).is_a?(Array)
-          self.character_coordinates = value
-        end
+      if attributes.key?(:'Visible')
+        self.visible = attributes[:'Visible']
       end
 
     end
@@ -124,20 +75,8 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @row_left.nil?
-        invalid_properties.push("invalid value for 'row_left', row_left cannot be nil.")
-      end
-
-      if @row_top.nil?
-        invalid_properties.push("invalid value for 'row_top', row_top cannot be nil.")
-      end
-
-      if @row_width.nil?
-        invalid_properties.push("invalid value for 'row_width', row_width cannot be nil.")
-      end
-
-      if @row_height.nil?
-        invalid_properties.push("invalid value for 'row_height', row_height cannot be nil.")
+      if @visible.nil?
+        invalid_properties.push("invalid value for 'visible', visible cannot be nil.")
       end
 
       return invalid_properties
@@ -146,10 +85,7 @@ module GroupDocsViewerCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @row_left.nil?
-      return false if @row_top.nil?
-      return false if @row_width.nil?
-      return false if @row_height.nil?
+      return false if @visible.nil?
       return true
     end
 
@@ -158,13 +94,8 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          text == other.text &&
-          row_left == other.row_left &&
-          row_top == other.row_top &&
-          row_width == other.row_width &&
-          row_height == other.row_height &&
-          text_coordinates == other.text_coordinates &&
-          character_coordinates == other.character_coordinates
+          name == other.name &&
+          visible == other.visible
     end
 
     # @see the `==` method
@@ -176,7 +107,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [text, row_left, row_top, row_width, row_height, text_coordinates, character_coordinates].hash
+      [name, visible].hash
     end
 
     # Downcases first letter.

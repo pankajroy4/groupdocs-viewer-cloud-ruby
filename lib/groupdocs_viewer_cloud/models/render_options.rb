@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="render_options.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -37,43 +37,71 @@ module GroupDocsViewerCloud
     # Count pages which should be rendered
     attr_accessor :count_pages_to_render
 
+    # Pages list to render. Ignored, if StartPageNumber and CountPagesToRender are provided
+    attr_accessor :pages_to_render
+
+    # Page rotations
+    attr_accessor :page_rotations
+
     # Default font name may be specified in following cases: - You want to generally specify the default font to fall back on, if particular font   in the document cannot be found during rendering. - Your document uses fonts, that contain non-English characters and you want to make sure   any missing font is replaced with one that has the same character set available.
     attr_accessor :default_font_name
 
     # Default encoding for the plain text files such as .csv, .txt and .eml files when encoding is not specified in header
     attr_accessor :default_encoding
 
-    # When enabled comments will be rendered to the output.
+    # When enabled comments will be rendered to the output
     attr_accessor :render_comments
+
+    # When enabled notes will be rendered to the output
+    attr_accessor :render_notes
 
     # When enabled hidden pages, sheets or slides will be rendered to the output
     attr_accessor :render_hidden_pages
 
-    # Rendering options for Spreadsheet file formats. Spreadsheet file formats include files with extensions: .xls, .xlsx, .xlsm, .xlsb, .csv, .ods, .ots, .xltx, .xltm, .tsv 
+    # Rendering options for Spreadsheet source file formats Spreadsheet file formats include files with extensions: .xls, .xlsx, .xlsm, .xlsb, .csv, .ods, .ots, .xltx, .xltm, .tsv 
     attr_accessor :spreadsheet_options
 
-    # Rendering options for CAD file formats. CAD file formats include files with extensions: .dwg, .dxf, .dgn, .ifc, .stl
+    # Rendering options for CAD source file formats CAD file formats include files with extensions: .dwg, .dxf, .dgn, .ifc, .stl
     attr_accessor :cad_options
 
-    # Rendering options for Email file formats. Email file formats include files with extensions: .msg, .eml, .emlx, .ifc, .stl
+    # Rendering options for Email source file formats Email file formats include files with extensions: .msg, .eml, .emlx, .ifc, .stl
     attr_accessor :email_options
 
-    # Rendering options for Project file formats. Project file formats include files with extensions: .mpt, .mpp
+    # Rendering options for MS Project source file formats Project file formats include files with extensions: .mpt, .mpp
     attr_accessor :project_management_options
+
+    # Rendering options for PDF source file formats
+    attr_accessor :pdf_document_options
+
+    # Rendering options for WordProcessing source file formats
+    attr_accessor :word_processing_options
+
+    # Rendering options for Outlook source file formats
+    attr_accessor :outlook_options
+
+    # Rendering options for Archive source file formats
+    attr_accessor :archive_options
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'start_page_number' => :'StartPageNumber',
         :'count_pages_to_render' => :'CountPagesToRender',
+        :'pages_to_render' => :'PagesToRender',
+        :'page_rotations' => :'PageRotations',
         :'default_font_name' => :'DefaultFontName',
         :'default_encoding' => :'DefaultEncoding',
         :'render_comments' => :'RenderComments',
+        :'render_notes' => :'RenderNotes',
         :'render_hidden_pages' => :'RenderHiddenPages',
         :'spreadsheet_options' => :'SpreadsheetOptions',
         :'cad_options' => :'CadOptions',
         :'email_options' => :'EmailOptions',
-        :'project_management_options' => :'ProjectManagementOptions'
+        :'project_management_options' => :'ProjectManagementOptions',
+        :'pdf_document_options' => :'PdfDocumentOptions',
+        :'word_processing_options' => :'WordProcessingOptions',
+        :'outlook_options' => :'OutlookOptions',
+        :'archive_options' => :'ArchiveOptions'
       }
     end
 
@@ -82,14 +110,21 @@ module GroupDocsViewerCloud
       {
         :'start_page_number' => :'Integer',
         :'count_pages_to_render' => :'Integer',
+        :'pages_to_render' => :'Array<Integer>',
+        :'page_rotations' => :'Array<PageRotation>',
         :'default_font_name' => :'String',
         :'default_encoding' => :'String',
         :'render_comments' => :'BOOLEAN',
+        :'render_notes' => :'BOOLEAN',
         :'render_hidden_pages' => :'BOOLEAN',
         :'spreadsheet_options' => :'SpreadsheetOptions',
         :'cad_options' => :'CadOptions',
         :'email_options' => :'EmailOptions',
-        :'project_management_options' => :'ProjectManagementOptions'
+        :'project_management_options' => :'ProjectManagementOptions',
+        :'pdf_document_options' => :'PdfDocumentOptions',
+        :'word_processing_options' => :'WordProcessingOptions',
+        :'outlook_options' => :'OutlookOptions',
+        :'archive_options' => :'ArchiveOptions'
       }
     end
 
@@ -109,6 +144,18 @@ module GroupDocsViewerCloud
         self.count_pages_to_render = attributes[:'CountPagesToRender']
       end
 
+      if attributes.key?(:'PagesToRender')
+        if (value = attributes[:'PagesToRender']).is_a?(Array)
+          self.pages_to_render = value
+        end
+      end
+
+      if attributes.key?(:'PageRotations')
+        if (value = attributes[:'PageRotations']).is_a?(Array)
+          self.page_rotations = value
+        end
+      end
+
       if attributes.key?(:'DefaultFontName')
         self.default_font_name = attributes[:'DefaultFontName']
       end
@@ -119,6 +166,10 @@ module GroupDocsViewerCloud
 
       if attributes.key?(:'RenderComments')
         self.render_comments = attributes[:'RenderComments']
+      end
+
+      if attributes.key?(:'RenderNotes')
+        self.render_notes = attributes[:'RenderNotes']
       end
 
       if attributes.key?(:'RenderHiddenPages')
@@ -141,6 +192,22 @@ module GroupDocsViewerCloud
         self.project_management_options = attributes[:'ProjectManagementOptions']
       end
 
+      if attributes.key?(:'PdfDocumentOptions')
+        self.pdf_document_options = attributes[:'PdfDocumentOptions']
+      end
+
+      if attributes.key?(:'WordProcessingOptions')
+        self.word_processing_options = attributes[:'WordProcessingOptions']
+      end
+
+      if attributes.key?(:'OutlookOptions')
+        self.outlook_options = attributes[:'OutlookOptions']
+      end
+
+      if attributes.key?(:'ArchiveOptions')
+        self.archive_options = attributes[:'ArchiveOptions']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -159,6 +226,10 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'render_comments', render_comments cannot be nil.")
       end
 
+      if @render_notes.nil?
+        invalid_properties.push("invalid value for 'render_notes', render_notes cannot be nil.")
+      end
+
       if @render_hidden_pages.nil?
         invalid_properties.push("invalid value for 'render_hidden_pages', render_hidden_pages cannot be nil.")
       end
@@ -172,6 +243,7 @@ module GroupDocsViewerCloud
       return false if @start_page_number.nil?
       return false if @count_pages_to_render.nil?
       return false if @render_comments.nil?
+      return false if @render_notes.nil?
       return false if @render_hidden_pages.nil?
       return true
     end
@@ -183,14 +255,21 @@ module GroupDocsViewerCloud
       self.class == other.class &&
           start_page_number == other.start_page_number &&
           count_pages_to_render == other.count_pages_to_render &&
+          pages_to_render == other.pages_to_render &&
+          page_rotations == other.page_rotations &&
           default_font_name == other.default_font_name &&
           default_encoding == other.default_encoding &&
           render_comments == other.render_comments &&
+          render_notes == other.render_notes &&
           render_hidden_pages == other.render_hidden_pages &&
           spreadsheet_options == other.spreadsheet_options &&
           cad_options == other.cad_options &&
           email_options == other.email_options &&
-          project_management_options == other.project_management_options
+          project_management_options == other.project_management_options &&
+          pdf_document_options == other.pdf_document_options &&
+          word_processing_options == other.word_processing_options &&
+          outlook_options == other.outlook_options &&
+          archive_options == other.archive_options
     end
 
     # @see the `==` method
@@ -202,7 +281,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [start_page_number, count_pages_to_render, default_font_name, default_encoding, render_comments, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options].hash
+      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options].hash
     end
 
     # Downcases first letter.

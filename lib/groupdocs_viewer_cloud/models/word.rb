@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="info_result.rb">
+ # <copyright company="Aspose Pty Ltd" file="word.rb">
  #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,63 +28,48 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # View result information
-  class InfoResult
+  # Represents relatively positioned rectangle which contains single word
+  class Word
 
-    # File format extension
-    attr_accessor :format_extension
+    # The X coordinate of the highest left point on the page layout where the rectangle that contains element begins.             
+    attr_accessor :x
 
-    # File format
-    attr_accessor :format
+    # The Y coordinate of the highest left point on the page layout where the rectangle that contains element begins.             
+    attr_accessor :y
 
-    # View result pages
-    attr_accessor :pages
+    # The width of the rectangle which contains the element (in pixels).              
+    attr_accessor :width
 
-    # Attachments
-    attr_accessor :attachments
+    # The height of the rectangle which contains the element (in pixels).              
+    attr_accessor :height
 
-    # Represents view information for archive file
-    attr_accessor :archive_view_info
+    # The element value
+    attr_accessor :value
 
-    # Represents view information for CAD drawing
-    attr_accessor :cad_view_info
-
-    # Represents view information for MS Project document
-    attr_accessor :project_management_view_info
-
-    # Represents view information for Outlook Data file
-    attr_accessor :outlook_view_info
-
-    # Represents view information for PDF document
-    attr_accessor :pdf_view_info
+    # The characters contained by the word
+    attr_accessor :characters
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'format_extension' => :'FormatExtension',
-        :'format' => :'Format',
-        :'pages' => :'Pages',
-        :'attachments' => :'Attachments',
-        :'archive_view_info' => :'ArchiveViewInfo',
-        :'cad_view_info' => :'CadViewInfo',
-        :'project_management_view_info' => :'ProjectManagementViewInfo',
-        :'outlook_view_info' => :'OutlookViewInfo',
-        :'pdf_view_info' => :'PdfViewInfo'
+        :'x' => :'X',
+        :'y' => :'Y',
+        :'width' => :'Width',
+        :'height' => :'Height',
+        :'value' => :'Value',
+        :'characters' => :'Characters'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'format_extension' => :'String',
-        :'format' => :'String',
-        :'pages' => :'Array<PageInfo>',
-        :'attachments' => :'Array<AttachmentInfo>',
-        :'archive_view_info' => :'ArchiveViewInfo',
-        :'cad_view_info' => :'CadViewInfo',
-        :'project_management_view_info' => :'ProjectManagementViewInfo',
-        :'outlook_view_info' => :'OutlookViewInfo',
-        :'pdf_view_info' => :'PdfViewInfo'
+        :'x' => :'Float',
+        :'y' => :'Float',
+        :'width' => :'Float',
+        :'height' => :'Float',
+        :'value' => :'String',
+        :'characters' => :'Array<Character>'
       }
     end
 
@@ -96,44 +81,30 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FormatExtension')
-        self.format_extension = attributes[:'FormatExtension']
+      if attributes.key?(:'X')
+        self.x = attributes[:'X']
       end
 
-      if attributes.key?(:'Format')
-        self.format = attributes[:'Format']
+      if attributes.key?(:'Y')
+        self.y = attributes[:'Y']
       end
 
-      if attributes.key?(:'Pages')
-        if (value = attributes[:'Pages']).is_a?(Array)
-          self.pages = value
+      if attributes.key?(:'Width')
+        self.width = attributes[:'Width']
+      end
+
+      if attributes.key?(:'Height')
+        self.height = attributes[:'Height']
+      end
+
+      if attributes.key?(:'Value')
+        self.value = attributes[:'Value']
+      end
+
+      if attributes.key?(:'Characters')
+        if (value = attributes[:'Characters']).is_a?(Array)
+          self.characters = value
         end
-      end
-
-      if attributes.key?(:'Attachments')
-        if (value = attributes[:'Attachments']).is_a?(Array)
-          self.attachments = value
-        end
-      end
-
-      if attributes.key?(:'ArchiveViewInfo')
-        self.archive_view_info = attributes[:'ArchiveViewInfo']
-      end
-
-      if attributes.key?(:'CadViewInfo')
-        self.cad_view_info = attributes[:'CadViewInfo']
-      end
-
-      if attributes.key?(:'ProjectManagementViewInfo')
-        self.project_management_view_info = attributes[:'ProjectManagementViewInfo']
-      end
-
-      if attributes.key?(:'OutlookViewInfo')
-        self.outlook_view_info = attributes[:'OutlookViewInfo']
-      end
-
-      if attributes.key?(:'PdfViewInfo')
-        self.pdf_view_info = attributes[:'PdfViewInfo']
       end
 
     end
@@ -142,12 +113,32 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @x.nil?
+        invalid_properties.push("invalid value for 'x', x cannot be nil.")
+      end
+
+      if @y.nil?
+        invalid_properties.push("invalid value for 'y', y cannot be nil.")
+      end
+
+      if @width.nil?
+        invalid_properties.push("invalid value for 'width', width cannot be nil.")
+      end
+
+      if @height.nil?
+        invalid_properties.push("invalid value for 'height', height cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @x.nil?
+      return false if @y.nil?
+      return false if @width.nil?
+      return false if @height.nil?
       return true
     end
 
@@ -156,15 +147,12 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          format_extension == other.format_extension &&
-          format == other.format &&
-          pages == other.pages &&
-          attachments == other.attachments &&
-          archive_view_info == other.archive_view_info &&
-          cad_view_info == other.cad_view_info &&
-          project_management_view_info == other.project_management_view_info &&
-          outlook_view_info == other.outlook_view_info &&
-          pdf_view_info == other.pdf_view_info
+          x == other.x &&
+          y == other.y &&
+          width == other.width &&
+          height == other.height &&
+          value == other.value &&
+          characters == other.characters
     end
 
     # @see the `==` method
@@ -176,7 +164,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format_extension, format, pages, attachments, archive_view_info, cad_view_info, project_management_view_info, outlook_view_info, pdf_view_info].hash
+      [x, y, width, height, value, characters].hash
     end
 
     # Downcases first letter.

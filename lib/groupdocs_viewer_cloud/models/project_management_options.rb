@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="project_management_options.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,10 +31,10 @@ module GroupDocsViewerCloud
   # Rendering options for Project file formats. Project file formats include files with extensions: .mpt, .mpp
   class ProjectManagementOptions
 
-    # The size of the page. Supported values {Unknown|Letter|Ledger|A0|A1|A2|A3}: 1. Unknown - the default, unspecified page size. 2. Letter - the size of the Letter page in points is 792x612. 3. Ledger - the size of the Letter page in points is 1224x792. 4. A0 - the size of the A0 page in points is 3371x2384. 5. A1 - the size of the A1 page in points is 2384x1685. 6. A2 - the size of the A2 page in points is 1684x1190. 7. A3 - the size of the A3 page in points is 1190x842. 8. A4 - the size of the A4 page in points is 842x595.
+    # The size of the page.
     attr_accessor :page_size
 
-    # The time unit to use as minimal point. Supported values {Unknown|Days|ThirdsOfMonths|Months}: 1. Unknown - unknown, unspecified time scale. 2. Days - one day interval. 3. ThirdsOfMonths - one third of the month. 4. Months - one month interval.
+    # The time unit to use as minimal point.
     attr_accessor :time_unit
 
     # The start date of a Gantt Chart View to render.        
@@ -42,6 +42,27 @@ module GroupDocsViewerCloud
 
     # The end date of a Gantt Chart View to render.
     attr_accessor :end_date
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -93,6 +114,14 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @page_size.nil?
+        invalid_properties.push("invalid value for 'page_size', page_size cannot be nil.")
+      end
+
+      if @time_unit.nil?
+        invalid_properties.push("invalid value for 'time_unit', time_unit cannot be nil.")
+      end
+
       if @start_date.nil?
         invalid_properties.push("invalid value for 'start_date', start_date cannot be nil.")
       end
@@ -107,9 +136,43 @@ module GroupDocsViewerCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @page_size.nil?
+      page_size_validator = EnumAttributeValidator.new('String', ["Unspecified", "Letter", "Ledger", "A0", "A1", "A2", "A3", "A4"])
+      return false unless page_size_validator.valid?(@page_size)
+      return false if @time_unit.nil?
+      time_unit_validator = EnumAttributeValidator.new('String', ["Unspecified", "Days", "ThirdsOfMonths", "Months"])
+      return false unless time_unit_validator.valid?(@time_unit)
       return false if @start_date.nil?
       return false if @end_date.nil?
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] page_size Object to be assigned
+    def page_size=(page_size)
+      validator = EnumAttributeValidator.new('String', ["Unspecified", "Letter", "Ledger", "A0", "A1", "A2", "A3", "A4"])
+      if page_size.to_i == 0
+        unless validator.valid?(page_size)
+          raise ArgumentError, "invalid value for 'page_size', must be one of #{validator.allowable_values}."
+        end
+        @page_size = page_size
+      else
+        @page_size = validator.allowable_values[page_size.to_i]
+      end
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] time_unit Object to be assigned
+    def time_unit=(time_unit)
+      validator = EnumAttributeValidator.new('String', ["Unspecified", "Days", "ThirdsOfMonths", "Months"])
+      if time_unit.to_i == 0
+        unless validator.valid?(time_unit)
+          raise ArgumentError, "invalid value for 'time_unit', must be one of #{validator.allowable_values}."
+        end
+        @time_unit = time_unit
+      else
+        @time_unit = validator.allowable_values[time_unit.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.

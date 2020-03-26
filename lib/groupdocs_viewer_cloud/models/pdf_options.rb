@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="image_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="pdf_options.rb">
  #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,8 +28,8 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Options for rendering document into image
-  class ImageOptions
+  # Options for rendering document into PDF
+  class PdfOptions
 
     # Page number from which rendering should be started
     attr_accessor :start_page_number
@@ -82,17 +82,38 @@ module GroupDocsViewerCloud
     # Rendering options for Archive source file formats
     attr_accessor :archive_options
 
-    # Allows to specify output image width.  Specify image width in case when you want to change output image dimensions. When Width has value and Height value is 0 then Height value will be calculated  to save image proportions. 
-    attr_accessor :width
+    # The quality of the JPG images contained by output PDF document; Valid values are between 1 and 100; Default value is 90
+    attr_accessor :jpg_quality
 
-    # Allows to specify output image height.  Specify image height in case when you want to change output image dimensions. When Height has value and Width value is 0 then Width value will be calculated  to save image proportions.
-    attr_accessor :height
+    # The password required to open the PDF document
+    attr_accessor :document_open_password
 
-    # When enabled Viewer will extract text when it's possible (e.g. raster formats don't have text layer) and return it in the viewing result. This option might be useful when you want to add selectable text layer over the image. 
-    attr_accessor :extract_text
+    # The password required to change permission settings; Using a permissions password  you can restrict printing, modification and data extraction
+    attr_accessor :permissions_password
 
-    # Allows to specify quality when rendering as JPG. Valid values are between 1 and 100.  Default value is 90.
-    attr_accessor :jpeg_quality
+    # The PDF document permissions such as printing, modification and data extraction
+    attr_accessor :permissions
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -114,10 +135,10 @@ module GroupDocsViewerCloud
         :'word_processing_options' => :'WordProcessingOptions',
         :'outlook_options' => :'OutlookOptions',
         :'archive_options' => :'ArchiveOptions',
-        :'width' => :'Width',
-        :'height' => :'Height',
-        :'extract_text' => :'ExtractText',
-        :'jpeg_quality' => :'JpegQuality'
+        :'jpg_quality' => :'JpgQuality',
+        :'document_open_password' => :'DocumentOpenPassword',
+        :'permissions_password' => :'PermissionsPassword',
+        :'permissions' => :'Permissions'
       }
     end
 
@@ -141,10 +162,10 @@ module GroupDocsViewerCloud
         :'word_processing_options' => :'WordProcessingOptions',
         :'outlook_options' => :'OutlookOptions',
         :'archive_options' => :'ArchiveOptions',
-        :'width' => :'Integer',
-        :'height' => :'Integer',
-        :'extract_text' => :'BOOLEAN',
-        :'jpeg_quality' => :'Integer'
+        :'jpg_quality' => :'Integer',
+        :'document_open_password' => :'String',
+        :'permissions_password' => :'String',
+        :'permissions' => :'String'
       }
     end
 
@@ -228,20 +249,20 @@ module GroupDocsViewerCloud
         self.archive_options = attributes[:'ArchiveOptions']
       end
 
-      if attributes.key?(:'Width')
-        self.width = attributes[:'Width']
+      if attributes.key?(:'JpgQuality')
+        self.jpg_quality = attributes[:'JpgQuality']
       end
 
-      if attributes.key?(:'Height')
-        self.height = attributes[:'Height']
+      if attributes.key?(:'DocumentOpenPassword')
+        self.document_open_password = attributes[:'DocumentOpenPassword']
       end
 
-      if attributes.key?(:'ExtractText')
-        self.extract_text = attributes[:'ExtractText']
+      if attributes.key?(:'PermissionsPassword')
+        self.permissions_password = attributes[:'PermissionsPassword']
       end
 
-      if attributes.key?(:'JpegQuality')
-        self.jpeg_quality = attributes[:'JpegQuality']
+      if attributes.key?(:'Permissions')
+        self.permissions = attributes[:'Permissions']
       end
 
     end
@@ -270,20 +291,12 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'render_hidden_pages', render_hidden_pages cannot be nil.")
       end
 
-      if @width.nil?
-        invalid_properties.push("invalid value for 'width', width cannot be nil.")
+      if @jpg_quality.nil?
+        invalid_properties.push("invalid value for 'jpg_quality', jpg_quality cannot be nil.")
       end
 
-      if @height.nil?
-        invalid_properties.push("invalid value for 'height', height cannot be nil.")
-      end
-
-      if @extract_text.nil?
-        invalid_properties.push("invalid value for 'extract_text', extract_text cannot be nil.")
-      end
-
-      if @jpeg_quality.nil?
-        invalid_properties.push("invalid value for 'jpeg_quality', jpeg_quality cannot be nil.")
+      if @permissions.nil?
+        invalid_properties.push("invalid value for 'permissions', permissions cannot be nil.")
       end
 
       return invalid_properties
@@ -297,11 +310,25 @@ module GroupDocsViewerCloud
       return false if @render_comments.nil?
       return false if @render_notes.nil?
       return false if @render_hidden_pages.nil?
-      return false if @width.nil?
-      return false if @height.nil?
-      return false if @extract_text.nil?
-      return false if @jpeg_quality.nil?
+      return false if @jpg_quality.nil?
+      return false if @permissions.nil?
+      permissions_validator = EnumAttributeValidator.new('String', ["AllowAll", "DenyPrinting", "DenyModification", "DenyDataExtraction", "DenyAll"])
+      return false unless permissions_validator.valid?(@permissions)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] permissions Object to be assigned
+    def permissions=(permissions)
+      validator = EnumAttributeValidator.new('String', ["AllowAll", "DenyPrinting", "DenyModification", "DenyDataExtraction", "DenyAll"])
+      if permissions.to_i == 0
+        unless validator.valid?(permissions)
+          raise ArgumentError, "invalid value for 'permissions', must be one of #{validator.allowable_values}."
+        end
+        @permissions = permissions
+      else
+        @permissions = validator.allowable_values[permissions.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -326,10 +353,10 @@ module GroupDocsViewerCloud
           word_processing_options == other.word_processing_options &&
           outlook_options == other.outlook_options &&
           archive_options == other.archive_options &&
-          width == other.width &&
-          height == other.height &&
-          extract_text == other.extract_text &&
-          jpeg_quality == other.jpeg_quality
+          jpg_quality == other.jpg_quality &&
+          document_open_password == other.document_open_password &&
+          permissions_password == other.permissions_password &&
+          permissions == other.permissions
     end
 
     # @see the `==` method
@@ -341,7 +368,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, width, height, extract_text, jpeg_quality].hash
+      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, jpg_quality, document_open_password, permissions_password, permissions].hash
     end
 
     # Downcases first letter.

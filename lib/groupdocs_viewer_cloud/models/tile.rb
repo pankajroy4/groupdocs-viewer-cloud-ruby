@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="info_result.rb">
+ # <copyright company="Aspose Pty Ltd" file="tile.rb">
  #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,63 +28,38 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # View result information
-  class InfoResult
+  # Represents drawing region
+  class Tile
 
-    # File format extension
-    attr_accessor :format_extension
+    # The X coordinate of the lowest left point on the drawing where the tile begins
+    attr_accessor :start_point_x
 
-    # File format
-    attr_accessor :format
+    # The Y coordinate of the lowest left point on the drawing where the tile begins
+    attr_accessor :start_point_y
 
-    # View result pages
-    attr_accessor :pages
+    # The width of the tile in pixels
+    attr_accessor :width
 
-    # Attachments
-    attr_accessor :attachments
-
-    # Represents view information for archive file
-    attr_accessor :archive_view_info
-
-    # Represents view information for CAD drawing
-    attr_accessor :cad_view_info
-
-    # Represents view information for MS Project document
-    attr_accessor :project_management_view_info
-
-    # Represents view information for Outlook Data file
-    attr_accessor :outlook_view_info
-
-    # Represents view information for PDF document
-    attr_accessor :pdf_view_info
+    # The height of the tile in pixels
+    attr_accessor :height
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'format_extension' => :'FormatExtension',
-        :'format' => :'Format',
-        :'pages' => :'Pages',
-        :'attachments' => :'Attachments',
-        :'archive_view_info' => :'ArchiveViewInfo',
-        :'cad_view_info' => :'CadViewInfo',
-        :'project_management_view_info' => :'ProjectManagementViewInfo',
-        :'outlook_view_info' => :'OutlookViewInfo',
-        :'pdf_view_info' => :'PdfViewInfo'
+        :'start_point_x' => :'StartPointX',
+        :'start_point_y' => :'StartPointY',
+        :'width' => :'Width',
+        :'height' => :'Height'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'format_extension' => :'String',
-        :'format' => :'String',
-        :'pages' => :'Array<PageInfo>',
-        :'attachments' => :'Array<AttachmentInfo>',
-        :'archive_view_info' => :'ArchiveViewInfo',
-        :'cad_view_info' => :'CadViewInfo',
-        :'project_management_view_info' => :'ProjectManagementViewInfo',
-        :'outlook_view_info' => :'OutlookViewInfo',
-        :'pdf_view_info' => :'PdfViewInfo'
+        :'start_point_x' => :'Integer',
+        :'start_point_y' => :'Integer',
+        :'width' => :'Integer',
+        :'height' => :'Integer'
       }
     end
 
@@ -96,44 +71,20 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FormatExtension')
-        self.format_extension = attributes[:'FormatExtension']
+      if attributes.key?(:'StartPointX')
+        self.start_point_x = attributes[:'StartPointX']
       end
 
-      if attributes.key?(:'Format')
-        self.format = attributes[:'Format']
+      if attributes.key?(:'StartPointY')
+        self.start_point_y = attributes[:'StartPointY']
       end
 
-      if attributes.key?(:'Pages')
-        if (value = attributes[:'Pages']).is_a?(Array)
-          self.pages = value
-        end
+      if attributes.key?(:'Width')
+        self.width = attributes[:'Width']
       end
 
-      if attributes.key?(:'Attachments')
-        if (value = attributes[:'Attachments']).is_a?(Array)
-          self.attachments = value
-        end
-      end
-
-      if attributes.key?(:'ArchiveViewInfo')
-        self.archive_view_info = attributes[:'ArchiveViewInfo']
-      end
-
-      if attributes.key?(:'CadViewInfo')
-        self.cad_view_info = attributes[:'CadViewInfo']
-      end
-
-      if attributes.key?(:'ProjectManagementViewInfo')
-        self.project_management_view_info = attributes[:'ProjectManagementViewInfo']
-      end
-
-      if attributes.key?(:'OutlookViewInfo')
-        self.outlook_view_info = attributes[:'OutlookViewInfo']
-      end
-
-      if attributes.key?(:'PdfViewInfo')
-        self.pdf_view_info = attributes[:'PdfViewInfo']
+      if attributes.key?(:'Height')
+        self.height = attributes[:'Height']
       end
 
     end
@@ -142,12 +93,32 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @start_point_x.nil?
+        invalid_properties.push("invalid value for 'start_point_x', start_point_x cannot be nil.")
+      end
+
+      if @start_point_y.nil?
+        invalid_properties.push("invalid value for 'start_point_y', start_point_y cannot be nil.")
+      end
+
+      if @width.nil?
+        invalid_properties.push("invalid value for 'width', width cannot be nil.")
+      end
+
+      if @height.nil?
+        invalid_properties.push("invalid value for 'height', height cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @start_point_x.nil?
+      return false if @start_point_y.nil?
+      return false if @width.nil?
+      return false if @height.nil?
       return true
     end
 
@@ -156,15 +127,10 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          format_extension == other.format_extension &&
-          format == other.format &&
-          pages == other.pages &&
-          attachments == other.attachments &&
-          archive_view_info == other.archive_view_info &&
-          cad_view_info == other.cad_view_info &&
-          project_management_view_info == other.project_management_view_info &&
-          outlook_view_info == other.outlook_view_info &&
-          pdf_view_info == other.pdf_view_info
+          start_point_x == other.start_point_x &&
+          start_point_y == other.start_point_y &&
+          width == other.width &&
+          height == other.height
     end
 
     # @see the `==` method
@@ -176,7 +142,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format_extension, format, pages, attachments, archive_view_info, cad_view_info, project_management_view_info, outlook_view_info, pdf_view_info].hash
+      [start_point_x, start_point_y, width, height].hash
     end
 
     # Downcases first letter.

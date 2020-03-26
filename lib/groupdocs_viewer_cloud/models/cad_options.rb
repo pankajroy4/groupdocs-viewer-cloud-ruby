@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="cad_options.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -40,12 +40,28 @@ module GroupDocsViewerCloud
     # Height of the output result in pixels     
     attr_accessor :height
 
+    # The drawing regions to render This option supported only for DWG and DWT file types The RenderLayouts and LayoutName options are ignored when rendering by tiles
+    attr_accessor :tiles
+
+    # Indicates whether layouts from CAD document should be rendered
+    attr_accessor :render_layouts
+
+    # The name of the specific layout to render. Layout name is case-sensitive
+    attr_accessor :layout_name
+
+    # The CAD drawing layers to render By default all layers are rendered; Layer names are case-sensitive
+    attr_accessor :layers
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'scale_factor' => :'ScaleFactor',
         :'width' => :'Width',
-        :'height' => :'Height'
+        :'height' => :'Height',
+        :'tiles' => :'Tiles',
+        :'render_layouts' => :'RenderLayouts',
+        :'layout_name' => :'LayoutName',
+        :'layers' => :'Layers'
       }
     end
 
@@ -54,7 +70,11 @@ module GroupDocsViewerCloud
       {
         :'scale_factor' => :'Float',
         :'width' => :'Integer',
-        :'height' => :'Integer'
+        :'height' => :'Integer',
+        :'tiles' => :'Array<Tile>',
+        :'render_layouts' => :'BOOLEAN',
+        :'layout_name' => :'String',
+        :'layers' => :'Array<String>'
       }
     end
 
@@ -78,6 +98,26 @@ module GroupDocsViewerCloud
         self.height = attributes[:'Height']
       end
 
+      if attributes.key?(:'Tiles')
+        if (value = attributes[:'Tiles']).is_a?(Array)
+          self.tiles = value
+        end
+      end
+
+      if attributes.key?(:'RenderLayouts')
+        self.render_layouts = attributes[:'RenderLayouts']
+      end
+
+      if attributes.key?(:'LayoutName')
+        self.layout_name = attributes[:'LayoutName']
+      end
+
+      if attributes.key?(:'Layers')
+        if (value = attributes[:'Layers']).is_a?(Array)
+          self.layers = value
+        end
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -96,6 +136,10 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'height', height cannot be nil.")
       end
 
+      if @render_layouts.nil?
+        invalid_properties.push("invalid value for 'render_layouts', render_layouts cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -105,6 +149,7 @@ module GroupDocsViewerCloud
       return false if @scale_factor.nil?
       return false if @width.nil?
       return false if @height.nil?
+      return false if @render_layouts.nil?
       return true
     end
 
@@ -115,7 +160,11 @@ module GroupDocsViewerCloud
       self.class == other.class &&
           scale_factor == other.scale_factor &&
           width == other.width &&
-          height == other.height
+          height == other.height &&
+          tiles == other.tiles &&
+          render_layouts == other.render_layouts &&
+          layout_name == other.layout_name &&
+          layers == other.layers
     end
 
     # @see the `==` method
@@ -127,7 +176,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [scale_factor, width, height].hash
+      [scale_factor, width, height, tiles, render_layouts, layout_name, layers].hash
     end
 
     # Downcases first letter.

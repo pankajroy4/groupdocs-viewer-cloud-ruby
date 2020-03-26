@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="spreadsheet_options.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -55,6 +55,30 @@ module GroupDocsViewerCloud
     # Enables rendering worksheet(s) sections which is defined as print area. Renders each print area in a worksheet as a separate page.
     attr_accessor :render_print_area_only
 
+    # The text overflow mode for rendering spreadsheet documents into HTML
+    attr_accessor :text_overflow_mode
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -65,7 +89,8 @@ module GroupDocsViewerCloud
         :'render_empty_columns' => :'RenderEmptyColumns',
         :'render_hidden_rows' => :'RenderHiddenRows',
         :'render_hidden_columns' => :'RenderHiddenColumns',
-        :'render_print_area_only' => :'RenderPrintAreaOnly'
+        :'render_print_area_only' => :'RenderPrintAreaOnly',
+        :'text_overflow_mode' => :'TextOverflowMode'
       }
     end
 
@@ -79,7 +104,8 @@ module GroupDocsViewerCloud
         :'render_empty_columns' => :'BOOLEAN',
         :'render_hidden_rows' => :'BOOLEAN',
         :'render_hidden_columns' => :'BOOLEAN',
-        :'render_print_area_only' => :'BOOLEAN'
+        :'render_print_area_only' => :'BOOLEAN',
+        :'text_overflow_mode' => :'String'
       }
     end
 
@@ -123,6 +149,10 @@ module GroupDocsViewerCloud
         self.render_print_area_only = attributes[:'RenderPrintAreaOnly']
       end
 
+      if attributes.key?(:'TextOverflowMode')
+        self.text_overflow_mode = attributes[:'TextOverflowMode']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -161,6 +191,10 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'render_print_area_only', render_print_area_only cannot be nil.")
       end
 
+      if @text_overflow_mode.nil?
+        invalid_properties.push("invalid value for 'text_overflow_mode', text_overflow_mode cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -175,7 +209,24 @@ module GroupDocsViewerCloud
       return false if @render_hidden_rows.nil?
       return false if @render_hidden_columns.nil?
       return false if @render_print_area_only.nil?
+      return false if @text_overflow_mode.nil?
+      text_overflow_mode_validator = EnumAttributeValidator.new('String', ["Overlay", "OverlayIfNextIsEmpty", "AutoFitColumn", "HideText"])
+      return false unless text_overflow_mode_validator.valid?(@text_overflow_mode)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] text_overflow_mode Object to be assigned
+    def text_overflow_mode=(text_overflow_mode)
+      validator = EnumAttributeValidator.new('String', ["Overlay", "OverlayIfNextIsEmpty", "AutoFitColumn", "HideText"])
+      if text_overflow_mode.to_i == 0
+        unless validator.valid?(text_overflow_mode)
+          raise ArgumentError, "invalid value for 'text_overflow_mode', must be one of #{validator.allowable_values}."
+        end
+        @text_overflow_mode = text_overflow_mode
+      else
+        @text_overflow_mode = validator.allowable_values[text_overflow_mode.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -190,7 +241,8 @@ module GroupDocsViewerCloud
           render_empty_columns == other.render_empty_columns &&
           render_hidden_rows == other.render_hidden_rows &&
           render_hidden_columns == other.render_hidden_columns &&
-          render_print_area_only == other.render_print_area_only
+          render_print_area_only == other.render_print_area_only &&
+          text_overflow_mode == other.text_overflow_mode
     end
 
     # @see the `==` method
@@ -202,7 +254,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [paginate_sheets, count_rows_per_page, render_grid_lines, render_empty_rows, render_empty_columns, render_hidden_rows, render_hidden_columns, render_print_area_only].hash
+      [paginate_sheets, count_rows_per_page, render_grid_lines, render_empty_rows, render_empty_columns, render_hidden_rows, render_hidden_columns, render_print_area_only, text_overflow_mode].hash
     end
 
     # Downcases first letter.

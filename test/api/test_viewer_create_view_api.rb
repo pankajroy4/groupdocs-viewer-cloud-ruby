@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -185,7 +185,7 @@ module GroupDocsViewerCloud
       viewOptions = ViewOptions.new
       viewOptions.file_info = file.file_info
       projectManagementOptions = ProjectManagementOptions.new
-      projectManagementOptions.page_size = "Unknown"
+      projectManagementOptions.page_size = "A4"
       projectManagementOptions.time_unit = "Months"
       projectManagementOptions.start_date = "2008/07/01"
       projectManagementOptions.end_date = "2008/07/31"      
@@ -196,7 +196,7 @@ module GroupDocsViewerCloud
 
       response = @view_api.create_view(request)
 
-      assert_equal 2, response.pages.size           
+      assert_equal 1, response.pages.size           
     end
 
     def test_CreateViewWithFontsPathOption

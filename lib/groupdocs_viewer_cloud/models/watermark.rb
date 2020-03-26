@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="watermark.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -37,11 +37,32 @@ module GroupDocsViewerCloud
     # Watermark color. Supported formats {Magenta|(112,222,11)|(50,112,222,11)}. Default value is \"Red\".
     attr_accessor :color
 
-    # Watermark position. Supported positions {Diagonal|TopLeft|TopCenter|TopRight|BottomLeft|BottomCenter|BottomRight}. Default value is \"Diagonal\".
+    # Watermark position. Default value is \"Diagonal\".
     attr_accessor :position
 
     # Watermark size in percents. Default value is 100.
     attr_accessor :size
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -93,6 +114,10 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @position.nil?
+        invalid_properties.push("invalid value for 'position', position cannot be nil.")
+      end
+
       if @size.nil?
         invalid_properties.push("invalid value for 'size', size cannot be nil.")
       end
@@ -103,8 +128,25 @@ module GroupDocsViewerCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @position.nil?
+      position_validator = EnumAttributeValidator.new('String', ["Diagonal", "TopLeft", "TopCenter", "TopRight", "BottomLeft", "BottomCenter", "BottomRight"])
+      return false unless position_validator.valid?(@position)
       return false if @size.nil?
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] position Object to be assigned
+    def position=(position)
+      validator = EnumAttributeValidator.new('String', ["Diagonal", "TopLeft", "TopCenter", "TopRight", "BottomLeft", "BottomCenter", "BottomRight"])
+      if position.to_i == 0
+        unless validator.valid?(position)
+          raise ArgumentError, "invalid value for 'position', must be one of #{validator.allowable_values}."
+        end
+        @position = position
+      else
+        @position = validator.allowable_values[position.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
