@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    groupdocs_viewer_cloud (20.3)
+    groupdocs_viewer_cloud (20.5)
       addressable (~> 2.5.0, >= 2.5.0)
       faraday (~> 0.14.0)
       mimemagic (~> 0.3.2)

@@ -196,7 +196,7 @@ module GroupDocsViewerCloud
 
       response = @view_api.create_view(request)
 
-      assert_equal 1, response.pages.size           
+      assert_operator response.pages.size, :>, 0             
     end
 
     def test_CreateViewWithFontsPathOption

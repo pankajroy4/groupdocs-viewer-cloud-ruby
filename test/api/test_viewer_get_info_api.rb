@@ -95,7 +95,6 @@ module GroupDocsViewerCloud
 
       assert_equal 1, response.pages.size      
       assert_equal 1, response.pages[0].number
-      assert_equal 0, response.pages[0].width
     end
 
     def test_GetInfoWithImageViewFormat
@@ -193,7 +192,7 @@ module GroupDocsViewerCloud
 
       response = @info_api.get_info(request)
 
-      assert_equal 1, response.pages.size           
+      assert_operator response.pages.size, :>, 0         
     end
     
     def test_GetInfoWithImageOptions
