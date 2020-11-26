@@ -59,27 +59,28 @@ Copy the following into your GEM and run `bundle install` to add the dependency.
 gem "groupdocs_viewer_cloud", "~> 20.5"
 ```
 
-## Get a List of Viewable File Formats
+## Render N Consecutive Pages of DOCX as HTML
 
 ```ruby
-# Load the gem
+# For complete examples and data files, please go to https://github.com/groupdocs-viewer-cloud/groupdocs-viewer-cloud-ruby-samples
 require 'groupdocs_viewer_cloud'
+# Get Client Id and Client Secret from https://dashboard.groupdocs.cloud
+$client_id = "XXXX-XXXX-XXXX-XXXX" 
+$client_secret = "XXXXXXXXXXXXXXXX"
 
-# Get your app_sid and app_key at https://dashboard.groupdocs.cloud (free registration is required).
-app_sid = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-app_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+apiInstance = GroupDocsViewerCloud::ViewApi.from_keys($client_id, $client_secret)
 
-# Create instance of the API class
-api = GroupDocsViewerCloud::InfoApi.from_keys(app_sid, app_key)
+viewOptions = GroupDocsViewerCloud::ViewOptions.new
+viewOptions.file_info = GroupDocsViewerCloud::FileInfo.new
+viewOptions.file_info.file_path = "SampleFiles/sample.docx"
+viewOptions.view_format = "HTML"
+viewOptions.render_options = GroupDocsViewerCloud::HtmlOptions.new
+viewOptions.render_options.start_page_number = 1
+viewOptions.render_options.count_pages_to_render = 2
 
-# Retrieve supported file-formats
-response = api.get_supported_file_formats
+request = GroupDocsViewerCloud::CreateViewRequest.new(viewOptions)
+response = apiInstance.create_view(request)
 
-# Print out supported file-formats
-puts("Supported file-formats:")
-response.formats.each do |format|
-  puts("#{format.file_format} (#{format.extension})") 
-end
 ```
 
 ## GroupDocs.Viewer Cloud SDKs in Popular Languages
