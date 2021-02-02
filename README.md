@@ -64,11 +64,14 @@ gem "groupdocs_viewer_cloud", "~> 20.5"
 ```ruby
 # For complete examples and data files, please go to https://github.com/groupdocs-viewer-cloud/groupdocs-viewer-cloud-ruby-samples
 require 'groupdocs_viewer_cloud'
-# Get Client Id and Client Secret from https://dashboard.groupdocs.cloud
-$client_id = "XXXX-XXXX-XXXX-XXXX" 
-$client_secret = "XXXXXXXXXXXXXXXX"
 
-apiInstance = GroupDocsViewerCloud::ViewApi.from_keys($client_id, $client_secret)
+# Get Client Id and Client Secret from https://dashboard.groupdocs.cloud
+$my_client_id = ""
+$my_client_secret = ""
+
+# Create instance of the API
+$configuration = GroupDocsViewerCloud::Configuration.new($my_client_id, $my_client_secret)
+apiInstance = GroupDocsViewerCloud::ViewApi.from_config($configuration)
 
 viewOptions = GroupDocsViewerCloud::ViewOptions.new
 viewOptions.file_info = GroupDocsViewerCloud::FileInfo.new
