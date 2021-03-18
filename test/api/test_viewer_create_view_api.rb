@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2020 Aspose Pty Ltd
+#    Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -143,7 +143,7 @@ module GroupDocsViewerCloud
 
       response = @view_api.create_view(request)
 
-      assert_equal 2, response.pages.size           
+      assert_equal 3, response.pages.size           
     end
 
     def test_CreateViewWithSpreadsheetRenderHiddenRowsOption

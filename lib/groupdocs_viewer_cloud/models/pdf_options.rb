@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="pdf_options.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -91,29 +91,8 @@ module GroupDocsViewerCloud
     # The password required to change permission settings; Using a permissions password  you can restrict printing, modification and data extraction
     attr_accessor :permissions_password
 
-    # The PDF document permissions such as printing, modification and data extraction
+    # The array of PDF document permissions. Allowed values are: AllowAll, DenyPrinting, DenyModification, DenyDataExtraction, DenyAll Default value is AllowAll, if now permissions are set.
     attr_accessor :permissions
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -165,7 +144,7 @@ module GroupDocsViewerCloud
         :'jpg_quality' => :'Integer',
         :'document_open_password' => :'String',
         :'permissions_password' => :'String',
-        :'permissions' => :'String'
+        :'permissions' => :'Array<String>'
       }
     end
 
@@ -262,7 +241,9 @@ module GroupDocsViewerCloud
       end
 
       if attributes.key?(:'Permissions')
-        self.permissions = attributes[:'Permissions']
+        if (value = attributes[:'Permissions']).is_a?(Array)
+          self.permissions = value
+        end
       end
 
     end
@@ -295,10 +276,6 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'jpg_quality', jpg_quality cannot be nil.")
       end
 
-      if @permissions.nil?
-        invalid_properties.push("invalid value for 'permissions', permissions cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -311,24 +288,7 @@ module GroupDocsViewerCloud
       return false if @render_notes.nil?
       return false if @render_hidden_pages.nil?
       return false if @jpg_quality.nil?
-      return false if @permissions.nil?
-      permissions_validator = EnumAttributeValidator.new('String', ["AllowAll", "DenyPrinting", "DenyModification", "DenyDataExtraction", "DenyAll"])
-      return false unless permissions_validator.valid?(@permissions)
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] permissions Object to be assigned
-    def permissions=(permissions)
-      validator = EnumAttributeValidator.new('String', ["AllowAll", "DenyPrinting", "DenyModification", "DenyDataExtraction", "DenyAll"])
-      if permissions.to_i == 0
-        unless validator.valid?(permissions)
-          raise ArgumentError, "invalid value for 'permissions', must be one of #{validator.allowable_values}."
-        end
-        @permissions = permissions
-      else
-        @permissions = validator.allowable_values[permissions.to_i]
-      end
     end
 
     # Checks equality by comparing each attribute.
