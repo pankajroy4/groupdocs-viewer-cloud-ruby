@@ -37,6 +37,9 @@ module GroupDocsViewerCloud
     # The number of rows rendered into one page when PaginateSheets is enabled. Default value is 50.
     attr_accessor :count_rows_per_page
 
+    # The columns count to include into each page when splitting worksheet into pages.
+    attr_accessor :count_columns_per_page
+
     # Indicates whether to render grid lines
     attr_accessor :render_grid_lines
 
@@ -51,6 +54,9 @@ module GroupDocsViewerCloud
 
     # Enables rendering of hidden columns.
     attr_accessor :render_hidden_columns
+
+    # Enables headings rendering.
+    attr_accessor :render_headings
 
     # Enables rendering worksheet(s) sections which is defined as print area. Renders each print area in a worksheet as a separate page.
     attr_accessor :render_print_area_only
@@ -84,11 +90,13 @@ module GroupDocsViewerCloud
       {
         :'paginate_sheets' => :'PaginateSheets',
         :'count_rows_per_page' => :'CountRowsPerPage',
+        :'count_columns_per_page' => :'CountColumnsPerPage',
         :'render_grid_lines' => :'RenderGridLines',
         :'render_empty_rows' => :'RenderEmptyRows',
         :'render_empty_columns' => :'RenderEmptyColumns',
         :'render_hidden_rows' => :'RenderHiddenRows',
         :'render_hidden_columns' => :'RenderHiddenColumns',
+        :'render_headings' => :'RenderHeadings',
         :'render_print_area_only' => :'RenderPrintAreaOnly',
         :'text_overflow_mode' => :'TextOverflowMode'
       }
@@ -99,11 +107,13 @@ module GroupDocsViewerCloud
       {
         :'paginate_sheets' => :'BOOLEAN',
         :'count_rows_per_page' => :'Integer',
+        :'count_columns_per_page' => :'Integer',
         :'render_grid_lines' => :'BOOLEAN',
         :'render_empty_rows' => :'BOOLEAN',
         :'render_empty_columns' => :'BOOLEAN',
         :'render_hidden_rows' => :'BOOLEAN',
         :'render_hidden_columns' => :'BOOLEAN',
+        :'render_headings' => :'BOOLEAN',
         :'render_print_area_only' => :'BOOLEAN',
         :'text_overflow_mode' => :'String'
       }
@@ -125,6 +135,10 @@ module GroupDocsViewerCloud
         self.count_rows_per_page = attributes[:'CountRowsPerPage']
       end
 
+      if attributes.key?(:'CountColumnsPerPage')
+        self.count_columns_per_page = attributes[:'CountColumnsPerPage']
+      end
+
       if attributes.key?(:'RenderGridLines')
         self.render_grid_lines = attributes[:'RenderGridLines']
       end
@@ -143,6 +157,10 @@ module GroupDocsViewerCloud
 
       if attributes.key?(:'RenderHiddenColumns')
         self.render_hidden_columns = attributes[:'RenderHiddenColumns']
+      end
+
+      if attributes.key?(:'RenderHeadings')
+        self.render_headings = attributes[:'RenderHeadings']
       end
 
       if attributes.key?(:'RenderPrintAreaOnly')
@@ -167,6 +185,10 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'count_rows_per_page', count_rows_per_page cannot be nil.")
       end
 
+      if @count_columns_per_page.nil?
+        invalid_properties.push("invalid value for 'count_columns_per_page', count_columns_per_page cannot be nil.")
+      end
+
       if @render_grid_lines.nil?
         invalid_properties.push("invalid value for 'render_grid_lines', render_grid_lines cannot be nil.")
       end
@@ -187,6 +209,10 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'render_hidden_columns', render_hidden_columns cannot be nil.")
       end
 
+      if @render_headings.nil?
+        invalid_properties.push("invalid value for 'render_headings', render_headings cannot be nil.")
+      end
+
       if @render_print_area_only.nil?
         invalid_properties.push("invalid value for 'render_print_area_only', render_print_area_only cannot be nil.")
       end
@@ -203,11 +229,13 @@ module GroupDocsViewerCloud
     def valid?
       return false if @paginate_sheets.nil?
       return false if @count_rows_per_page.nil?
+      return false if @count_columns_per_page.nil?
       return false if @render_grid_lines.nil?
       return false if @render_empty_rows.nil?
       return false if @render_empty_columns.nil?
       return false if @render_hidden_rows.nil?
       return false if @render_hidden_columns.nil?
+      return false if @render_headings.nil?
       return false if @render_print_area_only.nil?
       return false if @text_overflow_mode.nil?
       text_overflow_mode_validator = EnumAttributeValidator.new('String', ["Overlay", "OverlayIfNextIsEmpty", "AutoFitColumn", "HideText"])
@@ -236,11 +264,13 @@ module GroupDocsViewerCloud
       self.class == other.class &&
           paginate_sheets == other.paginate_sheets &&
           count_rows_per_page == other.count_rows_per_page &&
+          count_columns_per_page == other.count_columns_per_page &&
           render_grid_lines == other.render_grid_lines &&
           render_empty_rows == other.render_empty_rows &&
           render_empty_columns == other.render_empty_columns &&
           render_hidden_rows == other.render_hidden_rows &&
           render_hidden_columns == other.render_hidden_columns &&
+          render_headings == other.render_headings &&
           render_print_area_only == other.render_print_area_only &&
           text_overflow_mode == other.text_overflow_mode
     end
@@ -254,7 +284,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [paginate_sheets, count_rows_per_page, render_grid_lines, render_empty_rows, render_empty_columns, render_hidden_rows, render_hidden_columns, render_print_area_only, text_overflow_mode].hash
+      [paginate_sheets, count_rows_per_page, count_columns_per_page, render_grid_lines, render_empty_rows, render_empty_columns, render_hidden_rows, render_hidden_columns, render_headings, render_print_area_only, text_overflow_mode].hash
     end
 
     # Downcases first letter.

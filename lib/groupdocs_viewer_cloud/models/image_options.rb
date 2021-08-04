@@ -82,6 +82,15 @@ module GroupDocsViewerCloud
     # Rendering options for Archive source file formats
     attr_accessor :archive_options
 
+    # Rendering options for Text source file formats
+    attr_accessor :text_options
+
+    # Rendering options for Mail storage (Lotus Notes, MBox) data files.
+    attr_accessor :mail_storage_options
+
+    # Rendering options for Visio source file formats
+    attr_accessor :visio_rendering_options
+
     # Allows to specify output image width.  Specify image width in case when you want to change output image dimensions. When Width has value and Height value is 0 then Height value will be calculated  to save image proportions. 
     attr_accessor :width
 
@@ -93,6 +102,12 @@ module GroupDocsViewerCloud
 
     # Allows to specify quality when rendering as JPG. Valid values are between 1 and 100.  Default value is 90.
     attr_accessor :jpeg_quality
+
+    # Max width of an output image in pixels
+    attr_accessor :max_width
+
+    # Max height of an output image in pixels
+    attr_accessor :max_height
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -114,10 +129,15 @@ module GroupDocsViewerCloud
         :'word_processing_options' => :'WordProcessingOptions',
         :'outlook_options' => :'OutlookOptions',
         :'archive_options' => :'ArchiveOptions',
+        :'text_options' => :'TextOptions',
+        :'mail_storage_options' => :'MailStorageOptions',
+        :'visio_rendering_options' => :'VisioRenderingOptions',
         :'width' => :'Width',
         :'height' => :'Height',
         :'extract_text' => :'ExtractText',
-        :'jpeg_quality' => :'JpegQuality'
+        :'jpeg_quality' => :'JpegQuality',
+        :'max_width' => :'MaxWidth',
+        :'max_height' => :'MaxHeight'
       }
     end
 
@@ -141,10 +161,15 @@ module GroupDocsViewerCloud
         :'word_processing_options' => :'WordProcessingOptions',
         :'outlook_options' => :'OutlookOptions',
         :'archive_options' => :'ArchiveOptions',
+        :'text_options' => :'TextOptions',
+        :'mail_storage_options' => :'MailStorageOptions',
+        :'visio_rendering_options' => :'VisioRenderingOptions',
         :'width' => :'Integer',
         :'height' => :'Integer',
         :'extract_text' => :'BOOLEAN',
-        :'jpeg_quality' => :'Integer'
+        :'jpeg_quality' => :'Integer',
+        :'max_width' => :'Integer',
+        :'max_height' => :'Integer'
       }
     end
 
@@ -228,6 +253,18 @@ module GroupDocsViewerCloud
         self.archive_options = attributes[:'ArchiveOptions']
       end
 
+      if attributes.key?(:'TextOptions')
+        self.text_options = attributes[:'TextOptions']
+      end
+
+      if attributes.key?(:'MailStorageOptions')
+        self.mail_storage_options = attributes[:'MailStorageOptions']
+      end
+
+      if attributes.key?(:'VisioRenderingOptions')
+        self.visio_rendering_options = attributes[:'VisioRenderingOptions']
+      end
+
       if attributes.key?(:'Width')
         self.width = attributes[:'Width']
       end
@@ -242,6 +279,14 @@ module GroupDocsViewerCloud
 
       if attributes.key?(:'JpegQuality')
         self.jpeg_quality = attributes[:'JpegQuality']
+      end
+
+      if attributes.key?(:'MaxWidth')
+        self.max_width = attributes[:'MaxWidth']
+      end
+
+      if attributes.key?(:'MaxHeight')
+        self.max_height = attributes[:'MaxHeight']
       end
 
     end
@@ -286,6 +331,14 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'jpeg_quality', jpeg_quality cannot be nil.")
       end
 
+      if @max_width.nil?
+        invalid_properties.push("invalid value for 'max_width', max_width cannot be nil.")
+      end
+
+      if @max_height.nil?
+        invalid_properties.push("invalid value for 'max_height', max_height cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -301,6 +354,8 @@ module GroupDocsViewerCloud
       return false if @height.nil?
       return false if @extract_text.nil?
       return false if @jpeg_quality.nil?
+      return false if @max_width.nil?
+      return false if @max_height.nil?
       return true
     end
 
@@ -326,10 +381,15 @@ module GroupDocsViewerCloud
           word_processing_options == other.word_processing_options &&
           outlook_options == other.outlook_options &&
           archive_options == other.archive_options &&
+          text_options == other.text_options &&
+          mail_storage_options == other.mail_storage_options &&
+          visio_rendering_options == other.visio_rendering_options &&
           width == other.width &&
           height == other.height &&
           extract_text == other.extract_text &&
-          jpeg_quality == other.jpeg_quality
+          jpeg_quality == other.jpeg_quality &&
+          max_width == other.max_width &&
+          max_height == other.max_height
     end
 
     # @see the `==` method
@@ -341,7 +401,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, width, height, extract_text, jpeg_quality].hash
+      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, text_options, mail_storage_options, visio_rendering_options, width, height, extract_text, jpeg_quality, max_width, max_height].hash
     end
 
     # Downcases first letter.

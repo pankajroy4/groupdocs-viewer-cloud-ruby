@@ -34,17 +34,27 @@ module GroupDocsViewerCloud
     # The folder inside the archive to be rendered
     attr_accessor :folder
 
+    # The filename to display in the header. By default the name of the source file is displayed.
+    attr_accessor :file_name
+
+    # Number of records per page (for rendering to HTML only)             
+    attr_accessor :items_per_page
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'folder' => :'Folder'
+        :'folder' => :'Folder',
+        :'file_name' => :'FileName',
+        :'items_per_page' => :'ItemsPerPage'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'folder' => :'String'
+        :'folder' => :'String',
+        :'file_name' => :'String',
+        :'items_per_page' => :'Integer'
       }
     end
 
@@ -60,18 +70,31 @@ module GroupDocsViewerCloud
         self.folder = attributes[:'Folder']
       end
 
+      if attributes.key?(:'FileName')
+        self.file_name = attributes[:'FileName']
+      end
+
+      if attributes.key?(:'ItemsPerPage')
+        self.items_per_page = attributes[:'ItemsPerPage']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @items_per_page.nil?
+        invalid_properties.push("invalid value for 'items_per_page', items_per_page cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @items_per_page.nil?
       return true
     end
 
@@ -80,7 +103,9 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          folder == other.folder
+          folder == other.folder &&
+          file_name == other.file_name &&
+          items_per_page == other.items_per_page
     end
 
     # @see the `==` method
@@ -92,7 +117,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [folder].hash
+      [folder, file_name, items_per_page].hash
     end
 
     # Downcases first letter.

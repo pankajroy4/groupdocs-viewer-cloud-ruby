@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="word_processing_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="visio_rendering_options.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,43 +28,28 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Provides options for rendering word processing documents
-  class WordProcessingOptions
+  # The Visio files processing documents view options.
+  class VisioRenderingOptions
 
-    # Enables tracked changes (revisions) rendering
-    attr_accessor :render_tracked_changes
+    # Render only Visio figures, not a diagram.
+    attr_accessor :render_figures_only
 
-    # Left page margin (for HTML rendering only)
-    attr_accessor :left_margin
-
-    # Right page margin (for HTML rendering only)
-    attr_accessor :right_margin
-
-    # Top page margin (for HTML rendering only)
-    attr_accessor :top_margin
-
-    # Bottom page margin (for HTML rendering only)
-    attr_accessor :bottom_margin
+    # Figure width, height will be calculated automatically. Default value is 100.
+    attr_accessor :figure_width
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'render_tracked_changes' => :'RenderTrackedChanges',
-        :'left_margin' => :'LeftMargin',
-        :'right_margin' => :'RightMargin',
-        :'top_margin' => :'TopMargin',
-        :'bottom_margin' => :'BottomMargin'
+        :'render_figures_only' => :'RenderFiguresOnly',
+        :'figure_width' => :'FigureWidth'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'render_tracked_changes' => :'BOOLEAN',
-        :'left_margin' => :'Float',
-        :'right_margin' => :'Float',
-        :'top_margin' => :'Float',
-        :'bottom_margin' => :'Float'
+        :'render_figures_only' => :'BOOLEAN',
+        :'figure_width' => :'Integer'
       }
     end
 
@@ -76,24 +61,12 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'RenderTrackedChanges')
-        self.render_tracked_changes = attributes[:'RenderTrackedChanges']
+      if attributes.key?(:'RenderFiguresOnly')
+        self.render_figures_only = attributes[:'RenderFiguresOnly']
       end
 
-      if attributes.key?(:'LeftMargin')
-        self.left_margin = attributes[:'LeftMargin']
-      end
-
-      if attributes.key?(:'RightMargin')
-        self.right_margin = attributes[:'RightMargin']
-      end
-
-      if attributes.key?(:'TopMargin')
-        self.top_margin = attributes[:'TopMargin']
-      end
-
-      if attributes.key?(:'BottomMargin')
-        self.bottom_margin = attributes[:'BottomMargin']
+      if attributes.key?(:'FigureWidth')
+        self.figure_width = attributes[:'FigureWidth']
       end
 
     end
@@ -102,24 +75,12 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @render_tracked_changes.nil?
-        invalid_properties.push("invalid value for 'render_tracked_changes', render_tracked_changes cannot be nil.")
+      if @render_figures_only.nil?
+        invalid_properties.push("invalid value for 'render_figures_only', render_figures_only cannot be nil.")
       end
 
-      if @left_margin.nil?
-        invalid_properties.push("invalid value for 'left_margin', left_margin cannot be nil.")
-      end
-
-      if @right_margin.nil?
-        invalid_properties.push("invalid value for 'right_margin', right_margin cannot be nil.")
-      end
-
-      if @top_margin.nil?
-        invalid_properties.push("invalid value for 'top_margin', top_margin cannot be nil.")
-      end
-
-      if @bottom_margin.nil?
-        invalid_properties.push("invalid value for 'bottom_margin', bottom_margin cannot be nil.")
+      if @figure_width.nil?
+        invalid_properties.push("invalid value for 'figure_width', figure_width cannot be nil.")
       end
 
       return invalid_properties
@@ -128,11 +89,8 @@ module GroupDocsViewerCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @render_tracked_changes.nil?
-      return false if @left_margin.nil?
-      return false if @right_margin.nil?
-      return false if @top_margin.nil?
-      return false if @bottom_margin.nil?
+      return false if @render_figures_only.nil?
+      return false if @figure_width.nil?
       return true
     end
 
@@ -141,11 +99,8 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          render_tracked_changes == other.render_tracked_changes &&
-          left_margin == other.left_margin &&
-          right_margin == other.right_margin &&
-          top_margin == other.top_margin &&
-          bottom_margin == other.bottom_margin
+          render_figures_only == other.render_figures_only &&
+          figure_width == other.figure_width
     end
 
     # @see the `==` method
@@ -157,7 +112,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [render_tracked_changes, left_margin, right_margin, top_margin, bottom_margin].hash
+      [render_figures_only, figure_width].hash
     end
 
     # Downcases first letter.

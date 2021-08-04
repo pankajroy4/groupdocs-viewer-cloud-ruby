@@ -45,6 +45,9 @@ module GroupDocsViewerCloud
 
     # Specifies output image quality for image resources when rendering into HTML. The default value is Low
     attr_accessor :image_quality
+
+    # When this option is set to true, the text is rendered as an image in the output HTML. Enable this option to make text unselectable or to fix characters rendering and make HTML look like PDF. The default value is false. This option is supported when rendering into HTML.
+    attr_accessor :render_text_as_image
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -74,7 +77,8 @@ module GroupDocsViewerCloud
         :'enable_layered_rendering' => :'EnableLayeredRendering',
         :'enable_font_hinting' => :'EnableFontHinting',
         :'render_original_page_size' => :'RenderOriginalPageSize',
-        :'image_quality' => :'ImageQuality'
+        :'image_quality' => :'ImageQuality',
+        :'render_text_as_image' => :'RenderTextAsImage'
       }
     end
 
@@ -85,7 +89,8 @@ module GroupDocsViewerCloud
         :'enable_layered_rendering' => :'BOOLEAN',
         :'enable_font_hinting' => :'BOOLEAN',
         :'render_original_page_size' => :'BOOLEAN',
-        :'image_quality' => :'String'
+        :'image_quality' => :'String',
+        :'render_text_as_image' => :'BOOLEAN'
       }
     end
 
@@ -117,6 +122,10 @@ module GroupDocsViewerCloud
         self.image_quality = attributes[:'ImageQuality']
       end
 
+      if attributes.key?(:'RenderTextAsImage')
+        self.render_text_as_image = attributes[:'RenderTextAsImage']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -143,6 +152,10 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'image_quality', image_quality cannot be nil.")
       end
 
+      if @render_text_as_image.nil?
+        invalid_properties.push("invalid value for 'render_text_as_image', render_text_as_image cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -156,6 +169,7 @@ module GroupDocsViewerCloud
       return false if @image_quality.nil?
       image_quality_validator = EnumAttributeValidator.new('String', ["Low", "Medium", "High"])
       return false unless image_quality_validator.valid?(@image_quality)
+      return false if @render_text_as_image.nil?
       return true
     end
 
@@ -182,7 +196,8 @@ module GroupDocsViewerCloud
           enable_layered_rendering == other.enable_layered_rendering &&
           enable_font_hinting == other.enable_font_hinting &&
           render_original_page_size == other.render_original_page_size &&
-          image_quality == other.image_quality
+          image_quality == other.image_quality &&
+          render_text_as_image == other.render_text_as_image
     end
 
     # @see the `==` method
@@ -194,7 +209,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [disable_chars_grouping, enable_layered_rendering, enable_font_hinting, render_original_page_size, image_quality].hash
+      [disable_chars_grouping, enable_layered_rendering, enable_font_hinting, render_original_page_size, image_quality, render_text_as_image].hash
     end
 
     # Downcases first letter.

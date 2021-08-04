@@ -82,6 +82,15 @@ module GroupDocsViewerCloud
     # Rendering options for Archive source file formats
     attr_accessor :archive_options
 
+    # Rendering options for Text source file formats
+    attr_accessor :text_options
+
+    # Rendering options for Mail storage (Lotus Notes, MBox) data files.
+    attr_accessor :mail_storage_options
+
+    # Rendering options for Visio source file formats
+    attr_accessor :visio_rendering_options
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -101,7 +110,10 @@ module GroupDocsViewerCloud
         :'pdf_document_options' => :'PdfDocumentOptions',
         :'word_processing_options' => :'WordProcessingOptions',
         :'outlook_options' => :'OutlookOptions',
-        :'archive_options' => :'ArchiveOptions'
+        :'archive_options' => :'ArchiveOptions',
+        :'text_options' => :'TextOptions',
+        :'mail_storage_options' => :'MailStorageOptions',
+        :'visio_rendering_options' => :'VisioRenderingOptions'
       }
     end
 
@@ -124,7 +136,10 @@ module GroupDocsViewerCloud
         :'pdf_document_options' => :'PdfDocumentOptions',
         :'word_processing_options' => :'WordProcessingOptions',
         :'outlook_options' => :'OutlookOptions',
-        :'archive_options' => :'ArchiveOptions'
+        :'archive_options' => :'ArchiveOptions',
+        :'text_options' => :'TextOptions',
+        :'mail_storage_options' => :'MailStorageOptions',
+        :'visio_rendering_options' => :'VisioRenderingOptions'
       }
     end
 
@@ -208,6 +223,18 @@ module GroupDocsViewerCloud
         self.archive_options = attributes[:'ArchiveOptions']
       end
 
+      if attributes.key?(:'TextOptions')
+        self.text_options = attributes[:'TextOptions']
+      end
+
+      if attributes.key?(:'MailStorageOptions')
+        self.mail_storage_options = attributes[:'MailStorageOptions']
+      end
+
+      if attributes.key?(:'VisioRenderingOptions')
+        self.visio_rendering_options = attributes[:'VisioRenderingOptions']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -269,7 +296,10 @@ module GroupDocsViewerCloud
           pdf_document_options == other.pdf_document_options &&
           word_processing_options == other.word_processing_options &&
           outlook_options == other.outlook_options &&
-          archive_options == other.archive_options
+          archive_options == other.archive_options &&
+          text_options == other.text_options &&
+          mail_storage_options == other.mail_storage_options &&
+          visio_rendering_options == other.visio_rendering_options
     end
 
     # @see the `==` method
@@ -281,7 +311,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options].hash
+      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, text_options, mail_storage_options, visio_rendering_options].hash
     end
 
     # Downcases first letter.

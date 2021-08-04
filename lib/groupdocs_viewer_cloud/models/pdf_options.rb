@@ -82,6 +82,15 @@ module GroupDocsViewerCloud
     # Rendering options for Archive source file formats
     attr_accessor :archive_options
 
+    # Rendering options for Text source file formats
+    attr_accessor :text_options
+
+    # Rendering options for Mail storage (Lotus Notes, MBox) data files.
+    attr_accessor :mail_storage_options
+
+    # Rendering options for Visio source file formats
+    attr_accessor :visio_rendering_options
+
     # The quality of the JPG images contained by output PDF document; Valid values are between 1 and 100; Default value is 90
     attr_accessor :jpg_quality
 
@@ -93,6 +102,18 @@ module GroupDocsViewerCloud
 
     # The array of PDF document permissions. Allowed values are: AllowAll, DenyPrinting, DenyModification, DenyDataExtraction, DenyAll Default value is AllowAll, if now permissions are set.
     attr_accessor :permissions
+
+    # Max width of an output image in pixels. (When converting single image to HTML only)
+    attr_accessor :image_max_width
+
+    # Max height of an output image in pixels. (When converting single image to HTML only)
+    attr_accessor :image_max_height
+
+    # The width of the output image in pixels. (When converting single image to HTML only)
+    attr_accessor :image_width
+
+    # The height of an output image in pixels. (When converting single image to HTML only)
+    attr_accessor :image_height
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -114,10 +135,17 @@ module GroupDocsViewerCloud
         :'word_processing_options' => :'WordProcessingOptions',
         :'outlook_options' => :'OutlookOptions',
         :'archive_options' => :'ArchiveOptions',
+        :'text_options' => :'TextOptions',
+        :'mail_storage_options' => :'MailStorageOptions',
+        :'visio_rendering_options' => :'VisioRenderingOptions',
         :'jpg_quality' => :'JpgQuality',
         :'document_open_password' => :'DocumentOpenPassword',
         :'permissions_password' => :'PermissionsPassword',
-        :'permissions' => :'Permissions'
+        :'permissions' => :'Permissions',
+        :'image_max_width' => :'ImageMaxWidth',
+        :'image_max_height' => :'ImageMaxHeight',
+        :'image_width' => :'ImageWidth',
+        :'image_height' => :'ImageHeight'
       }
     end
 
@@ -141,10 +169,17 @@ module GroupDocsViewerCloud
         :'word_processing_options' => :'WordProcessingOptions',
         :'outlook_options' => :'OutlookOptions',
         :'archive_options' => :'ArchiveOptions',
+        :'text_options' => :'TextOptions',
+        :'mail_storage_options' => :'MailStorageOptions',
+        :'visio_rendering_options' => :'VisioRenderingOptions',
         :'jpg_quality' => :'Integer',
         :'document_open_password' => :'String',
         :'permissions_password' => :'String',
-        :'permissions' => :'Array<String>'
+        :'permissions' => :'Array<String>',
+        :'image_max_width' => :'Integer',
+        :'image_max_height' => :'Integer',
+        :'image_width' => :'Integer',
+        :'image_height' => :'Integer'
       }
     end
 
@@ -228,6 +263,18 @@ module GroupDocsViewerCloud
         self.archive_options = attributes[:'ArchiveOptions']
       end
 
+      if attributes.key?(:'TextOptions')
+        self.text_options = attributes[:'TextOptions']
+      end
+
+      if attributes.key?(:'MailStorageOptions')
+        self.mail_storage_options = attributes[:'MailStorageOptions']
+      end
+
+      if attributes.key?(:'VisioRenderingOptions')
+        self.visio_rendering_options = attributes[:'VisioRenderingOptions']
+      end
+
       if attributes.key?(:'JpgQuality')
         self.jpg_quality = attributes[:'JpgQuality']
       end
@@ -244,6 +291,22 @@ module GroupDocsViewerCloud
         if (value = attributes[:'Permissions']).is_a?(Array)
           self.permissions = value
         end
+      end
+
+      if attributes.key?(:'ImageMaxWidth')
+        self.image_max_width = attributes[:'ImageMaxWidth']
+      end
+
+      if attributes.key?(:'ImageMaxHeight')
+        self.image_max_height = attributes[:'ImageMaxHeight']
+      end
+
+      if attributes.key?(:'ImageWidth')
+        self.image_width = attributes[:'ImageWidth']
+      end
+
+      if attributes.key?(:'ImageHeight')
+        self.image_height = attributes[:'ImageHeight']
       end
 
     end
@@ -276,6 +339,22 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'jpg_quality', jpg_quality cannot be nil.")
       end
 
+      if @image_max_width.nil?
+        invalid_properties.push("invalid value for 'image_max_width', image_max_width cannot be nil.")
+      end
+
+      if @image_max_height.nil?
+        invalid_properties.push("invalid value for 'image_max_height', image_max_height cannot be nil.")
+      end
+
+      if @image_width.nil?
+        invalid_properties.push("invalid value for 'image_width', image_width cannot be nil.")
+      end
+
+      if @image_height.nil?
+        invalid_properties.push("invalid value for 'image_height', image_height cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -288,6 +367,10 @@ module GroupDocsViewerCloud
       return false if @render_notes.nil?
       return false if @render_hidden_pages.nil?
       return false if @jpg_quality.nil?
+      return false if @image_max_width.nil?
+      return false if @image_max_height.nil?
+      return false if @image_width.nil?
+      return false if @image_height.nil?
       return true
     end
 
@@ -313,10 +396,17 @@ module GroupDocsViewerCloud
           word_processing_options == other.word_processing_options &&
           outlook_options == other.outlook_options &&
           archive_options == other.archive_options &&
+          text_options == other.text_options &&
+          mail_storage_options == other.mail_storage_options &&
+          visio_rendering_options == other.visio_rendering_options &&
           jpg_quality == other.jpg_quality &&
           document_open_password == other.document_open_password &&
           permissions_password == other.permissions_password &&
-          permissions == other.permissions
+          permissions == other.permissions &&
+          image_max_width == other.image_max_width &&
+          image_max_height == other.image_max_height &&
+          image_width == other.image_width &&
+          image_height == other.image_height
     end
 
     # @see the `==` method
@@ -328,7 +418,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, jpg_quality, document_open_password, permissions_password, permissions].hash
+      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, text_options, mail_storage_options, visio_rendering_options, jpg_quality, document_open_password, permissions_password, permissions, image_max_width, image_max_height, image_width, image_height].hash
     end
 
     # Downcases first letter.

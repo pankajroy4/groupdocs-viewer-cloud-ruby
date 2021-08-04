@@ -82,6 +82,15 @@ module GroupDocsViewerCloud
     # Rendering options for Archive source file formats
     attr_accessor :archive_options
 
+    # Rendering options for Text source file formats
+    attr_accessor :text_options
+
+    # Rendering options for Mail storage (Lotus Notes, MBox) data files.
+    attr_accessor :mail_storage_options
+
+    # Rendering options for Visio source file formats
+    attr_accessor :visio_rendering_options
+
     # Controls output HTML document resources (styles, images and fonts) linking. By default this option is disabled and all the resources are embedded into HTML document.
     attr_accessor :external_resources
 
@@ -99,6 +108,24 @@ module GroupDocsViewerCloud
 
     # This option is supported for presentations only. The list of font names, to exclude from HTML document             
     attr_accessor :fonts_to_exclude
+
+    # Indicates whether to optimize output HTML for printing.
+    attr_accessor :for_printing
+
+    # The height of an output image in pixels. (When converting single image to HTML only)
+    attr_accessor :image_height
+
+    # The width of the output image in pixels. (When converting single image to HTML only)
+    attr_accessor :image_width
+
+    # Max height of an output image in pixels. (When converting single image to HTML only)
+    attr_accessor :image_max_height
+
+    # Max width of an output image in pixels. (When converting single image to HTML only)
+    attr_accessor :image_max_width
+
+    # Enables HTML content will be rendered to single page
+    attr_accessor :render_to_single_page
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -120,12 +147,21 @@ module GroupDocsViewerCloud
         :'word_processing_options' => :'WordProcessingOptions',
         :'outlook_options' => :'OutlookOptions',
         :'archive_options' => :'ArchiveOptions',
+        :'text_options' => :'TextOptions',
+        :'mail_storage_options' => :'MailStorageOptions',
+        :'visio_rendering_options' => :'VisioRenderingOptions',
         :'external_resources' => :'ExternalResources',
         :'resource_path' => :'ResourcePath',
         :'is_responsive' => :'IsResponsive',
         :'minify' => :'Minify',
         :'exclude_fonts' => :'ExcludeFonts',
-        :'fonts_to_exclude' => :'FontsToExclude'
+        :'fonts_to_exclude' => :'FontsToExclude',
+        :'for_printing' => :'ForPrinting',
+        :'image_height' => :'ImageHeight',
+        :'image_width' => :'ImageWidth',
+        :'image_max_height' => :'ImageMaxHeight',
+        :'image_max_width' => :'ImageMaxWidth',
+        :'render_to_single_page' => :'RenderToSinglePage'
       }
     end
 
@@ -149,12 +185,21 @@ module GroupDocsViewerCloud
         :'word_processing_options' => :'WordProcessingOptions',
         :'outlook_options' => :'OutlookOptions',
         :'archive_options' => :'ArchiveOptions',
+        :'text_options' => :'TextOptions',
+        :'mail_storage_options' => :'MailStorageOptions',
+        :'visio_rendering_options' => :'VisioRenderingOptions',
         :'external_resources' => :'BOOLEAN',
         :'resource_path' => :'String',
         :'is_responsive' => :'BOOLEAN',
         :'minify' => :'BOOLEAN',
         :'exclude_fonts' => :'BOOLEAN',
-        :'fonts_to_exclude' => :'Array<String>'
+        :'fonts_to_exclude' => :'Array<String>',
+        :'for_printing' => :'BOOLEAN',
+        :'image_height' => :'Integer',
+        :'image_width' => :'Integer',
+        :'image_max_height' => :'Integer',
+        :'image_max_width' => :'Integer',
+        :'render_to_single_page' => :'BOOLEAN'
       }
     end
 
@@ -238,6 +283,18 @@ module GroupDocsViewerCloud
         self.archive_options = attributes[:'ArchiveOptions']
       end
 
+      if attributes.key?(:'TextOptions')
+        self.text_options = attributes[:'TextOptions']
+      end
+
+      if attributes.key?(:'MailStorageOptions')
+        self.mail_storage_options = attributes[:'MailStorageOptions']
+      end
+
+      if attributes.key?(:'VisioRenderingOptions')
+        self.visio_rendering_options = attributes[:'VisioRenderingOptions']
+      end
+
       if attributes.key?(:'ExternalResources')
         self.external_resources = attributes[:'ExternalResources']
       end
@@ -262,6 +319,30 @@ module GroupDocsViewerCloud
         if (value = attributes[:'FontsToExclude']).is_a?(Array)
           self.fonts_to_exclude = value
         end
+      end
+
+      if attributes.key?(:'ForPrinting')
+        self.for_printing = attributes[:'ForPrinting']
+      end
+
+      if attributes.key?(:'ImageHeight')
+        self.image_height = attributes[:'ImageHeight']
+      end
+
+      if attributes.key?(:'ImageWidth')
+        self.image_width = attributes[:'ImageWidth']
+      end
+
+      if attributes.key?(:'ImageMaxHeight')
+        self.image_max_height = attributes[:'ImageMaxHeight']
+      end
+
+      if attributes.key?(:'ImageMaxWidth')
+        self.image_max_width = attributes[:'ImageMaxWidth']
+      end
+
+      if attributes.key?(:'RenderToSinglePage')
+        self.render_to_single_page = attributes[:'RenderToSinglePage']
       end
 
     end
@@ -306,6 +387,30 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'exclude_fonts', exclude_fonts cannot be nil.")
       end
 
+      if @for_printing.nil?
+        invalid_properties.push("invalid value for 'for_printing', for_printing cannot be nil.")
+      end
+
+      if @image_height.nil?
+        invalid_properties.push("invalid value for 'image_height', image_height cannot be nil.")
+      end
+
+      if @image_width.nil?
+        invalid_properties.push("invalid value for 'image_width', image_width cannot be nil.")
+      end
+
+      if @image_max_height.nil?
+        invalid_properties.push("invalid value for 'image_max_height', image_max_height cannot be nil.")
+      end
+
+      if @image_max_width.nil?
+        invalid_properties.push("invalid value for 'image_max_width', image_max_width cannot be nil.")
+      end
+
+      if @render_to_single_page.nil?
+        invalid_properties.push("invalid value for 'render_to_single_page', render_to_single_page cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -321,6 +426,12 @@ module GroupDocsViewerCloud
       return false if @is_responsive.nil?
       return false if @minify.nil?
       return false if @exclude_fonts.nil?
+      return false if @for_printing.nil?
+      return false if @image_height.nil?
+      return false if @image_width.nil?
+      return false if @image_max_height.nil?
+      return false if @image_max_width.nil?
+      return false if @render_to_single_page.nil?
       return true
     end
 
@@ -346,12 +457,21 @@ module GroupDocsViewerCloud
           word_processing_options == other.word_processing_options &&
           outlook_options == other.outlook_options &&
           archive_options == other.archive_options &&
+          text_options == other.text_options &&
+          mail_storage_options == other.mail_storage_options &&
+          visio_rendering_options == other.visio_rendering_options &&
           external_resources == other.external_resources &&
           resource_path == other.resource_path &&
           is_responsive == other.is_responsive &&
           minify == other.minify &&
           exclude_fonts == other.exclude_fonts &&
-          fonts_to_exclude == other.fonts_to_exclude
+          fonts_to_exclude == other.fonts_to_exclude &&
+          for_printing == other.for_printing &&
+          image_height == other.image_height &&
+          image_width == other.image_width &&
+          image_max_height == other.image_max_height &&
+          image_max_width == other.image_max_width &&
+          render_to_single_page == other.render_to_single_page
     end
 
     # @see the `==` method
@@ -363,7 +483,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, external_resources, resource_path, is_responsive, minify, exclude_fonts, fonts_to_exclude].hash
+      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, text_options, mail_storage_options, visio_rendering_options, external_resources, resource_path, is_responsive, minify, exclude_fonts, fonts_to_exclude, for_printing, image_height, image_width, image_max_height, image_max_width, render_to_single_page].hash
     end
 
     # Downcases first letter.

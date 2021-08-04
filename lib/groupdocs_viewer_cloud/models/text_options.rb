@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="word_processing_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="text_options.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,43 +28,28 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Provides options for rendering word processing documents
-  class WordProcessingOptions
+  # Provides options for rendering text documents
+  class TextOptions
 
-    # Enables tracked changes (revisions) rendering
-    attr_accessor :render_tracked_changes
+    # Max chars per row on page. Default value is 85.
+    attr_accessor :max_chars_per_row
 
-    # Left page margin (for HTML rendering only)
-    attr_accessor :left_margin
-
-    # Right page margin (for HTML rendering only)
-    attr_accessor :right_margin
-
-    # Top page margin (for HTML rendering only)
-    attr_accessor :top_margin
-
-    # Bottom page margin (for HTML rendering only)
-    attr_accessor :bottom_margin
+    # Max rows per page. Default value is 55.
+    attr_accessor :max_rows_per_page
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'render_tracked_changes' => :'RenderTrackedChanges',
-        :'left_margin' => :'LeftMargin',
-        :'right_margin' => :'RightMargin',
-        :'top_margin' => :'TopMargin',
-        :'bottom_margin' => :'BottomMargin'
+        :'max_chars_per_row' => :'MaxCharsPerRow',
+        :'max_rows_per_page' => :'MaxRowsPerPage'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'render_tracked_changes' => :'BOOLEAN',
-        :'left_margin' => :'Float',
-        :'right_margin' => :'Float',
-        :'top_margin' => :'Float',
-        :'bottom_margin' => :'Float'
+        :'max_chars_per_row' => :'Integer',
+        :'max_rows_per_page' => :'Integer'
       }
     end
 
@@ -76,24 +61,12 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'RenderTrackedChanges')
-        self.render_tracked_changes = attributes[:'RenderTrackedChanges']
+      if attributes.key?(:'MaxCharsPerRow')
+        self.max_chars_per_row = attributes[:'MaxCharsPerRow']
       end
 
-      if attributes.key?(:'LeftMargin')
-        self.left_margin = attributes[:'LeftMargin']
-      end
-
-      if attributes.key?(:'RightMargin')
-        self.right_margin = attributes[:'RightMargin']
-      end
-
-      if attributes.key?(:'TopMargin')
-        self.top_margin = attributes[:'TopMargin']
-      end
-
-      if attributes.key?(:'BottomMargin')
-        self.bottom_margin = attributes[:'BottomMargin']
+      if attributes.key?(:'MaxRowsPerPage')
+        self.max_rows_per_page = attributes[:'MaxRowsPerPage']
       end
 
     end
@@ -102,24 +75,12 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @render_tracked_changes.nil?
-        invalid_properties.push("invalid value for 'render_tracked_changes', render_tracked_changes cannot be nil.")
+      if @max_chars_per_row.nil?
+        invalid_properties.push("invalid value for 'max_chars_per_row', max_chars_per_row cannot be nil.")
       end
 
-      if @left_margin.nil?
-        invalid_properties.push("invalid value for 'left_margin', left_margin cannot be nil.")
-      end
-
-      if @right_margin.nil?
-        invalid_properties.push("invalid value for 'right_margin', right_margin cannot be nil.")
-      end
-
-      if @top_margin.nil?
-        invalid_properties.push("invalid value for 'top_margin', top_margin cannot be nil.")
-      end
-
-      if @bottom_margin.nil?
-        invalid_properties.push("invalid value for 'bottom_margin', bottom_margin cannot be nil.")
+      if @max_rows_per_page.nil?
+        invalid_properties.push("invalid value for 'max_rows_per_page', max_rows_per_page cannot be nil.")
       end
 
       return invalid_properties
@@ -128,11 +89,8 @@ module GroupDocsViewerCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @render_tracked_changes.nil?
-      return false if @left_margin.nil?
-      return false if @right_margin.nil?
-      return false if @top_margin.nil?
-      return false if @bottom_margin.nil?
+      return false if @max_chars_per_row.nil?
+      return false if @max_rows_per_page.nil?
       return true
     end
 
@@ -141,11 +99,8 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          render_tracked_changes == other.render_tracked_changes &&
-          left_margin == other.left_margin &&
-          right_margin == other.right_margin &&
-          top_margin == other.top_margin &&
-          bottom_margin == other.bottom_margin
+          max_chars_per_row == other.max_chars_per_row &&
+          max_rows_per_page == other.max_rows_per_page
     end
 
     # @see the `==` method
@@ -157,7 +112,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [render_tracked_changes, left_margin, right_margin, top_margin, bottom_margin].hash
+      [max_chars_per_row, max_rows_per_page].hash
     end
 
     # Downcases first letter.
