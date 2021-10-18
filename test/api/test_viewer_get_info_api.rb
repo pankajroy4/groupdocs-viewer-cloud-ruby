@@ -57,7 +57,21 @@ module GroupDocsViewerCloud
       end
 
       assert_equal "Can't find file located at 'some-folder\\notexist.docx'.", error.message            
-    end    
+    end   
+    
+    def test_TestGetInfoPasswordProtected
+      file = TestFile.password_protected_docx;
+      viewOptions = ViewOptions.new
+      viewOptions.file_info = file.file_info
+      viewOptions.file_info.password = nil
+      request = GetInfoRequest.new(viewOptions)    
+
+      error = assert_raises ApiError do
+        @info_api.get_info(request)
+      end
+
+      assert_equal "Please specify password to load the document.", error.message            
+    end      
 
     def test_GetInfoWithMinimalViewOptions
       file = TestFile.password_protected_docx;
