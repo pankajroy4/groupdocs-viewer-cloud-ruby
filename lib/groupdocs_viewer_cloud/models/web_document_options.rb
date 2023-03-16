@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="watermark.rb">
+ # <copyright company="Aspose Pty Ltd" file="web_document_options.rb">
  #   Copyright (c) 2003-2023 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,20 +28,23 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Text watermark
-  class Watermark
+  # This rendering options enables you to customize the appearance of the output HTML/PDF/PNG/JPEG when rendering Web documents.
+  class WebDocumentOptions
 
-    # Watermark text.
-    attr_accessor :text
+    # The size of the output page. The default value is GroupDocs.Viewer.Options.PageSize.Letter 792 x 612 points. When contents does not fit set a larger page size e.g. GroupDocs.Viewer.Options.PageSize.A3.             
+    attr_accessor :page_size
 
-    # Watermark color. Supported formats {Magenta|(112,222,11)|(50,112,222,11)}. Default value is \"Red\".
-    attr_accessor :color
+    # The distance (in points) between the left edge of the page and the left boundary  of the body text. The default value is 5 points.
+    attr_accessor :left_margin
 
-    # Watermark position. Default value is \"Diagonal\".
-    attr_accessor :position
+    # The distance (in points) between the right edge of the page and the right boundary of the body text. The default value is 5 points.
+    attr_accessor :right_margin
 
-    # Watermark size in percents. Default value is 100.
-    attr_accessor :size
+    # The distance (in points) between the top edge of the page and the top boundary of the body text. The default value is 72 points.
+    attr_accessor :top_margin
+
+    # The distance (in points) between the bottom edge of the page and the bottom boundary of the body text. The default value is 72 points.
+    attr_accessor :bottom_margin
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -67,20 +70,22 @@ module GroupDocsViewerCloud
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'text' => :'Text',
-        :'color' => :'Color',
-        :'position' => :'Position',
-        :'size' => :'Size'
+        :'page_size' => :'PageSize',
+        :'left_margin' => :'LeftMargin',
+        :'right_margin' => :'RightMargin',
+        :'top_margin' => :'TopMargin',
+        :'bottom_margin' => :'BottomMargin'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'text' => :'String',
-        :'color' => :'String',
-        :'position' => :'String',
-        :'size' => :'Integer'
+        :'page_size' => :'String',
+        :'left_margin' => :'Float',
+        :'right_margin' => :'Float',
+        :'top_margin' => :'Float',
+        :'bottom_margin' => :'Float'
       }
     end
 
@@ -92,20 +97,24 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'Text')
-        self.text = attributes[:'Text']
+      if attributes.key?(:'PageSize')
+        self.page_size = attributes[:'PageSize']
       end
 
-      if attributes.key?(:'Color')
-        self.color = attributes[:'Color']
+      if attributes.key?(:'LeftMargin')
+        self.left_margin = attributes[:'LeftMargin']
       end
 
-      if attributes.key?(:'Position')
-        self.position = attributes[:'Position']
+      if attributes.key?(:'RightMargin')
+        self.right_margin = attributes[:'RightMargin']
       end
 
-      if attributes.key?(:'Size')
-        self.size = attributes[:'Size']
+      if attributes.key?(:'TopMargin')
+        self.top_margin = attributes[:'TopMargin']
+      end
+
+      if attributes.key?(:'BottomMargin')
+        self.bottom_margin = attributes[:'BottomMargin']
       end
 
     end
@@ -114,12 +123,24 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @position.nil?
-        invalid_properties.push("invalid value for 'position', position cannot be nil.")
+      if @page_size.nil?
+        invalid_properties.push("invalid value for 'page_size', page_size cannot be nil.")
       end
 
-      if @size.nil?
-        invalid_properties.push("invalid value for 'size', size cannot be nil.")
+      if @left_margin.nil?
+        invalid_properties.push("invalid value for 'left_margin', left_margin cannot be nil.")
+      end
+
+      if @right_margin.nil?
+        invalid_properties.push("invalid value for 'right_margin', right_margin cannot be nil.")
+      end
+
+      if @top_margin.nil?
+        invalid_properties.push("invalid value for 'top_margin', top_margin cannot be nil.")
+      end
+
+      if @bottom_margin.nil?
+        invalid_properties.push("invalid value for 'bottom_margin', bottom_margin cannot be nil.")
       end
 
       return invalid_properties
@@ -128,24 +149,27 @@ module GroupDocsViewerCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @position.nil?
-      position_validator = EnumAttributeValidator.new('String', ["Diagonal", "TopLeft", "TopCenter", "TopRight", "BottomLeft", "BottomCenter", "BottomRight"])
-      return false unless position_validator.valid?(@position)
-      return false if @size.nil?
+      return false if @page_size.nil?
+      page_size_validator = EnumAttributeValidator.new('String', ["Unspecified", "Letter", "Ledger", "A0", "A1", "A2", "A3", "A4"])
+      return false unless page_size_validator.valid?(@page_size)
+      return false if @left_margin.nil?
+      return false if @right_margin.nil?
+      return false if @top_margin.nil?
+      return false if @bottom_margin.nil?
       return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] position Object to be assigned
-    def position=(position)
-      validator = EnumAttributeValidator.new('String', ["Diagonal", "TopLeft", "TopCenter", "TopRight", "BottomLeft", "BottomCenter", "BottomRight"])
-      if position.to_i == 0
-        unless validator.valid?(position)
-          raise ArgumentError, "invalid value for 'position', must be one of #{validator.allowable_values}."
+    # @param [Object] page_size Object to be assigned
+    def page_size=(page_size)
+      validator = EnumAttributeValidator.new('String', ["Unspecified", "Letter", "Ledger", "A0", "A1", "A2", "A3", "A4"])
+      if page_size.to_i == 0
+        unless validator.valid?(page_size)
+          raise ArgumentError, "invalid value for 'page_size', must be one of #{validator.allowable_values}."
         end
-        @position = position
+        @page_size = page_size
       else
-        @position = validator.allowable_values[position.to_i]
+        @page_size = validator.allowable_values[page_size.to_i]
       end
     end
 
@@ -154,10 +178,11 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          text == other.text &&
-          color == other.color &&
-          position == other.position &&
-          size == other.size
+          page_size == other.page_size &&
+          left_margin == other.left_margin &&
+          right_margin == other.right_margin &&
+          top_margin == other.top_margin &&
+          bottom_margin == other.bottom_margin
     end
 
     # @see the `==` method
@@ -169,7 +194,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [text, color, position, size].hash
+      [page_size, left_margin, right_margin, top_margin, bottom_margin].hash
     end
 
     # Downcases first letter.

@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="image_options.rb">
- #   Copyright (c) 2003-2021 Aspose Pty Ltd
+ #   Copyright (c) 2003-2023 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -49,6 +49,9 @@ module GroupDocsViewerCloud
     # Default encoding for the plain text files such as .csv, .txt and .eml files when encoding is not specified in header
     attr_accessor :default_encoding
 
+    # This option enables TXT, TSV, and CSV files encoding detection. In case the encoding can't be detected the DefaultEncoding is used.
+    attr_accessor :detect_encoding
+
     # When enabled comments will be rendered to the output
     attr_accessor :render_comments
 
@@ -91,6 +94,9 @@ module GroupDocsViewerCloud
     # Rendering options for Visio source file formats
     attr_accessor :visio_rendering_options
 
+    # This rendering options enables you to customize the appearance of the output HTML/PDF/PNG/JPEG when rendering Web documents.
+    attr_accessor :web_document_options
+
     # Allows to specify output image width.  Specify image width in case when you want to change output image dimensions. When Width has value and Height value is 0 then Height value will be calculated  to save image proportions. 
     attr_accessor :width
 
@@ -118,6 +124,7 @@ module GroupDocsViewerCloud
         :'page_rotations' => :'PageRotations',
         :'default_font_name' => :'DefaultFontName',
         :'default_encoding' => :'DefaultEncoding',
+        :'detect_encoding' => :'DetectEncoding',
         :'render_comments' => :'RenderComments',
         :'render_notes' => :'RenderNotes',
         :'render_hidden_pages' => :'RenderHiddenPages',
@@ -132,6 +139,7 @@ module GroupDocsViewerCloud
         :'text_options' => :'TextOptions',
         :'mail_storage_options' => :'MailStorageOptions',
         :'visio_rendering_options' => :'VisioRenderingOptions',
+        :'web_document_options' => :'WebDocumentOptions',
         :'width' => :'Width',
         :'height' => :'Height',
         :'extract_text' => :'ExtractText',
@@ -150,6 +158,7 @@ module GroupDocsViewerCloud
         :'page_rotations' => :'Array<PageRotation>',
         :'default_font_name' => :'String',
         :'default_encoding' => :'String',
+        :'detect_encoding' => :'BOOLEAN',
         :'render_comments' => :'BOOLEAN',
         :'render_notes' => :'BOOLEAN',
         :'render_hidden_pages' => :'BOOLEAN',
@@ -164,6 +173,7 @@ module GroupDocsViewerCloud
         :'text_options' => :'TextOptions',
         :'mail_storage_options' => :'MailStorageOptions',
         :'visio_rendering_options' => :'VisioRenderingOptions',
+        :'web_document_options' => :'WebDocumentOptions',
         :'width' => :'Integer',
         :'height' => :'Integer',
         :'extract_text' => :'BOOLEAN',
@@ -207,6 +217,10 @@ module GroupDocsViewerCloud
 
       if attributes.key?(:'DefaultEncoding')
         self.default_encoding = attributes[:'DefaultEncoding']
+      end
+
+      if attributes.key?(:'DetectEncoding')
+        self.detect_encoding = attributes[:'DetectEncoding']
       end
 
       if attributes.key?(:'RenderComments')
@@ -263,6 +277,10 @@ module GroupDocsViewerCloud
 
       if attributes.key?(:'VisioRenderingOptions')
         self.visio_rendering_options = attributes[:'VisioRenderingOptions']
+      end
+
+      if attributes.key?(:'WebDocumentOptions')
+        self.web_document_options = attributes[:'WebDocumentOptions']
       end
 
       if attributes.key?(:'Width')
@@ -370,6 +388,7 @@ module GroupDocsViewerCloud
           page_rotations == other.page_rotations &&
           default_font_name == other.default_font_name &&
           default_encoding == other.default_encoding &&
+          detect_encoding == other.detect_encoding &&
           render_comments == other.render_comments &&
           render_notes == other.render_notes &&
           render_hidden_pages == other.render_hidden_pages &&
@@ -384,6 +403,7 @@ module GroupDocsViewerCloud
           text_options == other.text_options &&
           mail_storage_options == other.mail_storage_options &&
           visio_rendering_options == other.visio_rendering_options &&
+          web_document_options == other.web_document_options &&
           width == other.width &&
           height == other.height &&
           extract_text == other.extract_text &&
@@ -401,7 +421,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, text_options, mail_storage_options, visio_rendering_options, width, height, extract_text, jpeg_quality, max_width, max_height].hash
+      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, detect_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, text_options, mail_storage_options, visio_rendering_options, web_document_options, width, height, extract_text, jpeg_quality, max_width, max_height].hash
     end
 
     # Downcases first letter.

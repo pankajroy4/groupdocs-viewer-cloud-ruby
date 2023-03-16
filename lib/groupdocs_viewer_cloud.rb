@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="groupdocs_viewer_cloud.rb">
-#   Copyright (c) 2003-2021 Aspose Pty Ltd
+#   Copyright (c) 2003-2023 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -73,6 +73,7 @@ require_relative 'groupdocs_viewer_cloud/models/view_options'
 require_relative 'groupdocs_viewer_cloud/models/view_result'
 require_relative 'groupdocs_viewer_cloud/models/visio_rendering_options'
 require_relative 'groupdocs_viewer_cloud/models/watermark'
+require_relative 'groupdocs_viewer_cloud/models/web_document_options'
 require_relative 'groupdocs_viewer_cloud/models/word_processing_options'
 require_relative 'groupdocs_viewer_cloud/models/attachment_view'
 require_relative 'groupdocs_viewer_cloud/models/character'
