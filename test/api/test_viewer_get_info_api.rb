@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2023 Aspose Pty Ltd
+#    Copyright (c) 2003-2024 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -39,7 +39,7 @@ module GroupDocsViewerCloud
       viewOptions = ViewOptions.new
       request = GetInfoRequest.new(viewOptions)      
 
-      error = assert_raises ApiError do
+      error = assert_raises ApiClientError do
         @info_api.get_info(request)
       end
 
@@ -52,7 +52,7 @@ module GroupDocsViewerCloud
       viewOptions.file_info = file.file_info
       request = GetInfoRequest.new(viewOptions)    
 
-      error = assert_raises ApiError do
+      error = assert_raises ApiClientError do
         @info_api.get_info(request)
       end
 
@@ -66,7 +66,7 @@ module GroupDocsViewerCloud
       viewOptions.file_info.password = nil
       request = GetInfoRequest.new(viewOptions)    
 
-      error = assert_raises ApiError do
+      error = assert_raises ApiClientError do
         @info_api.get_info(request)
       end
 

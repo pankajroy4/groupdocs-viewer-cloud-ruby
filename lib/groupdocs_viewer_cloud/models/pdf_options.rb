@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="pdf_options.rb">
- #   Copyright (c) 2003-2023 Aspose Pty Ltd
+ #   Copyright (c) 2003-2024 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -97,9 +97,6 @@ module GroupDocsViewerCloud
     # This rendering options enables you to customize the appearance of the output HTML/PDF/PNG/JPEG when rendering Web documents.
     attr_accessor :web_document_options
 
-    # The quality of the JPG images contained by output PDF document; Valid values are between 1 and 100; Default value is 90
-    attr_accessor :jpg_quality
-
     # The password required to open the PDF document
     attr_accessor :document_open_password
 
@@ -108,6 +105,9 @@ module GroupDocsViewerCloud
 
     # The array of PDF document permissions. Allowed values are: AllowAll, DenyPrinting, DenyModification, DenyDataExtraction, DenyAll Default value is AllowAll, if now permissions are set.
     attr_accessor :permissions
+
+    # Contains options for rendering documents into PDF format.
+    attr_accessor :pdf_optimization_options
 
     # Max width of an output image in pixels. (When converting single image to HTML only)
     attr_accessor :image_max_width
@@ -146,10 +146,10 @@ module GroupDocsViewerCloud
         :'mail_storage_options' => :'MailStorageOptions',
         :'visio_rendering_options' => :'VisioRenderingOptions',
         :'web_document_options' => :'WebDocumentOptions',
-        :'jpg_quality' => :'JpgQuality',
         :'document_open_password' => :'DocumentOpenPassword',
         :'permissions_password' => :'PermissionsPassword',
         :'permissions' => :'Permissions',
+        :'pdf_optimization_options' => :'PdfOptimizationOptions',
         :'image_max_width' => :'ImageMaxWidth',
         :'image_max_height' => :'ImageMaxHeight',
         :'image_width' => :'ImageWidth',
@@ -182,10 +182,10 @@ module GroupDocsViewerCloud
         :'mail_storage_options' => :'MailStorageOptions',
         :'visio_rendering_options' => :'VisioRenderingOptions',
         :'web_document_options' => :'WebDocumentOptions',
-        :'jpg_quality' => :'Integer',
         :'document_open_password' => :'String',
         :'permissions_password' => :'String',
         :'permissions' => :'Array<String>',
+        :'pdf_optimization_options' => :'PdfOptimizationOptions',
         :'image_max_width' => :'Integer',
         :'image_max_height' => :'Integer',
         :'image_width' => :'Integer',
@@ -293,10 +293,6 @@ module GroupDocsViewerCloud
         self.web_document_options = attributes[:'WebDocumentOptions']
       end
 
-      if attributes.key?(:'JpgQuality')
-        self.jpg_quality = attributes[:'JpgQuality']
-      end
-
       if attributes.key?(:'DocumentOpenPassword')
         self.document_open_password = attributes[:'DocumentOpenPassword']
       end
@@ -309,6 +305,10 @@ module GroupDocsViewerCloud
         if (value = attributes[:'Permissions']).is_a?(Array)
           self.permissions = value
         end
+      end
+
+      if attributes.key?(:'PdfOptimizationOptions')
+        self.pdf_optimization_options = attributes[:'PdfOptimizationOptions']
       end
 
       if attributes.key?(:'ImageMaxWidth')
@@ -353,10 +353,6 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'render_hidden_pages', render_hidden_pages cannot be nil.")
       end
 
-      if @jpg_quality.nil?
-        invalid_properties.push("invalid value for 'jpg_quality', jpg_quality cannot be nil.")
-      end
-
       if @image_max_width.nil?
         invalid_properties.push("invalid value for 'image_max_width', image_max_width cannot be nil.")
       end
@@ -384,7 +380,6 @@ module GroupDocsViewerCloud
       return false if @render_comments.nil?
       return false if @render_notes.nil?
       return false if @render_hidden_pages.nil?
-      return false if @jpg_quality.nil?
       return false if @image_max_width.nil?
       return false if @image_max_height.nil?
       return false if @image_width.nil?
@@ -419,10 +414,10 @@ module GroupDocsViewerCloud
           mail_storage_options == other.mail_storage_options &&
           visio_rendering_options == other.visio_rendering_options &&
           web_document_options == other.web_document_options &&
-          jpg_quality == other.jpg_quality &&
           document_open_password == other.document_open_password &&
           permissions_password == other.permissions_password &&
           permissions == other.permissions &&
+          pdf_optimization_options == other.pdf_optimization_options &&
           image_max_width == other.image_max_width &&
           image_max_height == other.image_max_height &&
           image_width == other.image_width &&
@@ -438,7 +433,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, detect_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, text_options, mail_storage_options, visio_rendering_options, web_document_options, jpg_quality, document_open_password, permissions_password, permissions, image_max_width, image_max_height, image_width, image_height].hash
+      [start_page_number, count_pages_to_render, pages_to_render, page_rotations, default_font_name, default_encoding, detect_encoding, render_comments, render_notes, render_hidden_pages, spreadsheet_options, cad_options, email_options, project_management_options, pdf_document_options, word_processing_options, outlook_options, archive_options, text_options, mail_storage_options, visio_rendering_options, web_document_options, document_open_password, permissions_password, permissions, pdf_optimization_options, image_max_width, image_max_height, image_width, image_height].hash
     end
 
     # Downcases first letter.

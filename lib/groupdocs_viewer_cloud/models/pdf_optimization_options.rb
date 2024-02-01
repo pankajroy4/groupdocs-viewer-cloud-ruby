@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="pdf_document_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="pdf_optimization_options.rb">
  #   Copyright (c) 2003-2024 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,69 +28,68 @@
 require 'date'
 
 module GroupDocsViewerCloud
-  # Provides options for rendering PDF documents
-  class PdfDocumentOptions
+  # Contains the PDF optimization options to apply to the output PDF file.
+  class PdfOptimizationOptions
 
-    # Disables chars grouping to keep maximum precision during chars positioning when rendering the page
-    attr_accessor :disable_chars_grouping
+    # Enables optimization the output PDF file for viewing online with a web browser. This optimization allows a browser to display the first pages of a PDF file when     you open the document, instead of waiting for the entire file to download.
+    attr_accessor :lineriaze
 
-    # Enables rendering of text and graphics according to z-order in original PDF document  when rendering into HTML
-    attr_accessor :enable_layered_rendering
+    # Enables removing annotation from the output PDF file.
+    attr_accessor :remove_annotations
 
-    # Enables font hinting. The font hinting adjusts the display of an outline font. Supported only for TTF fonts when these fonts are used in source document.
-    attr_accessor :enable_font_hinting
+    # Enables removing form fields from a PDF file.
+    attr_accessor :remove_form_fields
 
-    # When this option enabled the output pages will have the same size in pixels as page size in a source PDF document. By default GroupDocs.Viewer calculates output image page size for better rendering quality. This option is supported when rendering into PNG or JPG formats.
-    attr_accessor :render_original_page_size
+    # Enables converting the output PDF file to a grayscale.
+    attr_accessor :convert_to_gray_scale
 
-    # Specifies output image quality for image resources when rendering into HTML. The default value is Low
+    # Subsets fonts in the output PDF file. If the file uses embedded fonts, it contains all font data. GroupDocs.Viewer can subset embedded fonts to reduce the file size.
+    attr_accessor :subset_fonts
+
+    # Enables compressing images in the output PDF file. Use this option to allow other compressing options: PdfOptimizationOptions.ImageQuality and PdfOptimizationOptions.MaxResolution.
+    attr_accessor :compress_images
+
+    # Sets the image quality in the output PDF file (in percent). To change the image quality, first set the PdfOptimizationOptions.CompressImages property to true.
     attr_accessor :image_quality
 
-    # When this option is set to true, the text is rendered as an image in the output HTML. Enable this option to make text unselectable or to fix characters rendering and make HTML look like PDF. The default value is false. This option is supported when rendering into HTML.
-    attr_accessor :render_text_as_image
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    # Enables setting the maximum resolution in the output PDF file. To allow this option, set the GroupDocs.Viewer.Options.PdfOptimizationOptions.CompressImages property to true. This option allows setting the GroupDocs.Viewer.Options.PdfOptimizationOptions.MaxResolution property.
+    attr_accessor :resize_images
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
+    # Sets the maximum resolution in the output PDF file. To allow this option, set the GroupDocs.Viewer.Options.PdfOptimizationOptions.CompressImages and GroupDocs.Viewer.Options.PdfOptimizationOptions.MaxResolution properties to true. The default value is 300.
+    attr_accessor :max_resolution
 
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Enables optimization of spreadsheets in the PDF files. This optimization allows to reduce the output file size by setting up border lines. Besides that, it removes the Arial and Times New Roman characters of 32-127 codes.
+    attr_accessor :optimize_spreadsheets
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'disable_chars_grouping' => :'DisableCharsGrouping',
-        :'enable_layered_rendering' => :'EnableLayeredRendering',
-        :'enable_font_hinting' => :'EnableFontHinting',
-        :'render_original_page_size' => :'RenderOriginalPageSize',
+        :'lineriaze' => :'Lineriaze',
+        :'remove_annotations' => :'RemoveAnnotations',
+        :'remove_form_fields' => :'RemoveFormFields',
+        :'convert_to_gray_scale' => :'ConvertToGrayScale',
+        :'subset_fonts' => :'SubsetFonts',
+        :'compress_images' => :'CompressImages',
         :'image_quality' => :'ImageQuality',
-        :'render_text_as_image' => :'RenderTextAsImage'
+        :'resize_images' => :'ResizeImages',
+        :'max_resolution' => :'MaxResolution',
+        :'optimize_spreadsheets' => :'OptimizeSpreadsheets'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'disable_chars_grouping' => :'BOOLEAN',
-        :'enable_layered_rendering' => :'BOOLEAN',
-        :'enable_font_hinting' => :'BOOLEAN',
-        :'render_original_page_size' => :'BOOLEAN',
-        :'image_quality' => :'String',
-        :'render_text_as_image' => :'BOOLEAN'
+        :'lineriaze' => :'BOOLEAN',
+        :'remove_annotations' => :'BOOLEAN',
+        :'remove_form_fields' => :'BOOLEAN',
+        :'convert_to_gray_scale' => :'BOOLEAN',
+        :'subset_fonts' => :'BOOLEAN',
+        :'compress_images' => :'BOOLEAN',
+        :'image_quality' => :'Integer',
+        :'resize_images' => :'BOOLEAN',
+        :'max_resolution' => :'Integer',
+        :'optimize_spreadsheets' => :'BOOLEAN'
       }
     end
 
@@ -102,28 +101,44 @@ module GroupDocsViewerCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'DisableCharsGrouping')
-        self.disable_chars_grouping = attributes[:'DisableCharsGrouping']
+      if attributes.key?(:'Lineriaze')
+        self.lineriaze = attributes[:'Lineriaze']
       end
 
-      if attributes.key?(:'EnableLayeredRendering')
-        self.enable_layered_rendering = attributes[:'EnableLayeredRendering']
+      if attributes.key?(:'RemoveAnnotations')
+        self.remove_annotations = attributes[:'RemoveAnnotations']
       end
 
-      if attributes.key?(:'EnableFontHinting')
-        self.enable_font_hinting = attributes[:'EnableFontHinting']
+      if attributes.key?(:'RemoveFormFields')
+        self.remove_form_fields = attributes[:'RemoveFormFields']
       end
 
-      if attributes.key?(:'RenderOriginalPageSize')
-        self.render_original_page_size = attributes[:'RenderOriginalPageSize']
+      if attributes.key?(:'ConvertToGrayScale')
+        self.convert_to_gray_scale = attributes[:'ConvertToGrayScale']
+      end
+
+      if attributes.key?(:'SubsetFonts')
+        self.subset_fonts = attributes[:'SubsetFonts']
+      end
+
+      if attributes.key?(:'CompressImages')
+        self.compress_images = attributes[:'CompressImages']
       end
 
       if attributes.key?(:'ImageQuality')
         self.image_quality = attributes[:'ImageQuality']
       end
 
-      if attributes.key?(:'RenderTextAsImage')
-        self.render_text_as_image = attributes[:'RenderTextAsImage']
+      if attributes.key?(:'ResizeImages')
+        self.resize_images = attributes[:'ResizeImages']
+      end
+
+      if attributes.key?(:'MaxResolution')
+        self.max_resolution = attributes[:'MaxResolution']
+      end
+
+      if attributes.key?(:'OptimizeSpreadsheets')
+        self.optimize_spreadsheets = attributes[:'OptimizeSpreadsheets']
       end
 
     end
@@ -132,28 +147,44 @@ module GroupDocsViewerCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @disable_chars_grouping.nil?
-        invalid_properties.push("invalid value for 'disable_chars_grouping', disable_chars_grouping cannot be nil.")
+      if @lineriaze.nil?
+        invalid_properties.push("invalid value for 'lineriaze', lineriaze cannot be nil.")
       end
 
-      if @enable_layered_rendering.nil?
-        invalid_properties.push("invalid value for 'enable_layered_rendering', enable_layered_rendering cannot be nil.")
+      if @remove_annotations.nil?
+        invalid_properties.push("invalid value for 'remove_annotations', remove_annotations cannot be nil.")
       end
 
-      if @enable_font_hinting.nil?
-        invalid_properties.push("invalid value for 'enable_font_hinting', enable_font_hinting cannot be nil.")
+      if @remove_form_fields.nil?
+        invalid_properties.push("invalid value for 'remove_form_fields', remove_form_fields cannot be nil.")
       end
 
-      if @render_original_page_size.nil?
-        invalid_properties.push("invalid value for 'render_original_page_size', render_original_page_size cannot be nil.")
+      if @convert_to_gray_scale.nil?
+        invalid_properties.push("invalid value for 'convert_to_gray_scale', convert_to_gray_scale cannot be nil.")
+      end
+
+      if @subset_fonts.nil?
+        invalid_properties.push("invalid value for 'subset_fonts', subset_fonts cannot be nil.")
+      end
+
+      if @compress_images.nil?
+        invalid_properties.push("invalid value for 'compress_images', compress_images cannot be nil.")
       end
 
       if @image_quality.nil?
         invalid_properties.push("invalid value for 'image_quality', image_quality cannot be nil.")
       end
 
-      if @render_text_as_image.nil?
-        invalid_properties.push("invalid value for 'render_text_as_image', render_text_as_image cannot be nil.")
+      if @resize_images.nil?
+        invalid_properties.push("invalid value for 'resize_images', resize_images cannot be nil.")
+      end
+
+      if @max_resolution.nil?
+        invalid_properties.push("invalid value for 'max_resolution', max_resolution cannot be nil.")
+      end
+
+      if @optimize_spreadsheets.nil?
+        invalid_properties.push("invalid value for 'optimize_spreadsheets', optimize_spreadsheets cannot be nil.")
       end
 
       return invalid_properties
@@ -162,29 +193,17 @@ module GroupDocsViewerCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @disable_chars_grouping.nil?
-      return false if @enable_layered_rendering.nil?
-      return false if @enable_font_hinting.nil?
-      return false if @render_original_page_size.nil?
+      return false if @lineriaze.nil?
+      return false if @remove_annotations.nil?
+      return false if @remove_form_fields.nil?
+      return false if @convert_to_gray_scale.nil?
+      return false if @subset_fonts.nil?
+      return false if @compress_images.nil?
       return false if @image_quality.nil?
-      image_quality_validator = EnumAttributeValidator.new('String', ["Low", "Medium", "High"])
-      return false unless image_quality_validator.valid?(@image_quality)
-      return false if @render_text_as_image.nil?
+      return false if @resize_images.nil?
+      return false if @max_resolution.nil?
+      return false if @optimize_spreadsheets.nil?
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] image_quality Object to be assigned
-    def image_quality=(image_quality)
-      validator = EnumAttributeValidator.new('String', ["Low", "Medium", "High"])
-      if image_quality.to_i == 0
-        unless validator.valid?(image_quality)
-          raise ArgumentError, "invalid value for 'image_quality', must be one of #{validator.allowable_values}."
-        end
-        @image_quality = image_quality
-      else
-        @image_quality = validator.allowable_values[image_quality.to_i]
-      end
     end
 
     # Checks equality by comparing each attribute.
@@ -192,12 +211,16 @@ module GroupDocsViewerCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          disable_chars_grouping == other.disable_chars_grouping &&
-          enable_layered_rendering == other.enable_layered_rendering &&
-          enable_font_hinting == other.enable_font_hinting &&
-          render_original_page_size == other.render_original_page_size &&
+          lineriaze == other.lineriaze &&
+          remove_annotations == other.remove_annotations &&
+          remove_form_fields == other.remove_form_fields &&
+          convert_to_gray_scale == other.convert_to_gray_scale &&
+          subset_fonts == other.subset_fonts &&
+          compress_images == other.compress_images &&
           image_quality == other.image_quality &&
-          render_text_as_image == other.render_text_as_image
+          resize_images == other.resize_images &&
+          max_resolution == other.max_resolution &&
+          optimize_spreadsheets == other.optimize_spreadsheets
     end
 
     # @see the `==` method
@@ -209,7 +232,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [disable_chars_grouping, enable_layered_rendering, enable_font_hinting, render_original_page_size, image_quality, render_text_as_image].hash
+      [lineriaze, remove_annotations, remove_form_fields, convert_to_gray_scale, subset_fonts, compress_images, image_quality, resize_images, max_resolution, optimize_spreadsheets].hash
     end
 
     # Downcases first letter.
