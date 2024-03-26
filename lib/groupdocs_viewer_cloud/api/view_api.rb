@@ -64,6 +64,73 @@ module GroupDocsViewerCloud
       return new(config)
     end
 
+    # Converts input document file to format specified
+    # 
+    # @param request convert_and_download_request
+    # @return [File]
+    def convert_and_download(request)
+      data, _status_code, _headers = convert_and_download_with_http_info(request)
+      data
+    end
+
+    # Converts input document file to format specified
+    # 
+    # @param request convert_and_download_request
+    # @return [Array<(File, Fixnum, Hash)>]
+    # File data, response status code and response headers
+    def convert_and_download_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? ConvertAndDownloadRequest
+
+      @api_client.config.logger.debug 'Calling API: ViewApi.convert_and_download ...' if @api_client.config.debugging
+      # verify the required parameter 'format' is set
+      raise ArgumentError, 'Missing the required parameter format when calling ViewApi.convert_and_download' if @api_client.config.client_side_validation && request.format.nil?
+      # verify the required parameter 'file' is set
+      raise ArgumentError, 'Missing the required parameter file when calling ViewApi.convert_and_download' if @api_client.config.client_side_validation && request.file.nil?
+      # resource path
+      local_var_path = '/viewer/convertAndDownload'
+
+      # query parameters
+      query_params = {}
+      query_params[downcase_first_letter('format')] = request.format
+
+      if local_var_path.include? ('{' + downcase_first_letter('pages') + '}')
+        local_var_path = local_var_path.sub('{' + downcase_first_letter('pages') + '}', request.pages.to_s)
+      else
+        query_params[downcase_first_letter('pages')] = request.pages unless request.pages.nil?
+      end
+      if local_var_path.include? ('{' + downcase_first_letter('password') + '}')
+        local_var_path = local_var_path.sub('{' + downcase_first_letter('password') + '}', request.password.to_s)
+      else
+        query_params[downcase_first_letter('password')] = request.password unless request.password.nil?
+      end
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data'])
+
+      # form parameters
+      form_params = {}
+      form_params[downcase_first_letter('File')] = request.file
+
+      # http body (model)
+      post_body = nil
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path,
+                                                        header_params: header_params,
+                                                        query_params: query_params,
+                                                        form_params: form_params,
+                                                        body: post_body,
+                                                        access_token: get_access_token,
+                                                        return_type: 'File')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called:
+        ViewApi#convert_and_download\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      [data, status_code, headers]
+    end
+
     # Render document pages
     # 
     # @param request create_view_request
@@ -219,6 +286,63 @@ module GroupDocsViewerCloud
         require file
       end
     end
+  end
+end
+ #
+ # --------------------------------------------------------------------------------------------------------------------
+ # <copyright company="Aspose Pty Ltd" file="convert_and_download_request.rb">
+ #   Copyright (c) 2003-2024 Aspose Pty Ltd
+ # </copyright>
+ # <summary>
+ #  Permission is hereby granted, free of charge, to any person obtaining a copy
+ #  of this software and associated documentation files (the "Software"), to deal
+ #  in the Software without restriction, including without limitation the rights
+ #  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ #  copies of the Software, and to permit persons to whom the Software is
+ #  furnished to do so, subject to the following conditions:
+ # 
+ #  The above copyright notice and this permission notice shall be included in all
+ #  copies or substantial portions of the Software.
+ # 
+ #  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ #  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ #  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ #  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ #  SOFTWARE.
+ # </summary>
+ # --------------------------------------------------------------------------------------------------------------------
+ #
+
+module GroupDocsViewerCloud
+
+  #
+  # Request model for convert_and_download operation.
+  #
+  class ConvertAndDownloadRequest
+
+        # Requested conversion format: HTML, JPG, PNG or PDF
+        attr_accessor :format
+        # Input file to convert
+        attr_accessor :file
+        # Pages range to render, like \"1,2\" or \"3-5,10\"
+        attr_accessor :pages
+        # Input document password
+        attr_accessor :password
+	
+        #
+        # Initializes a new instance.
+        # @param format Requested conversion format: HTML, JPG, PNG or PDF
+        # @param file Input file to convert
+        # @param pages Pages range to render, like \"1,2\" or \"3-5,10\"
+        # @param password Input document password
+        def initialize(format, file, pages = nil, password = nil)
+           self.format = format
+           self.file = file
+           self.pages = pages
+           self.password = password
+        end
   end
 end
  #

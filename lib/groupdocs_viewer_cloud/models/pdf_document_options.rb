@@ -48,6 +48,15 @@ module GroupDocsViewerCloud
 
     # When this option is set to true, the text is rendered as an image in the output HTML. Enable this option to make text unselectable or to fix characters rendering and make HTML look like PDF. The default value is false. This option is supported when rendering into HTML.
     attr_accessor :render_text_as_image
+
+    # Enables rendering the PDF and EPUB documents to HTML with a fixed layout.
+    attr_accessor :fixed_layout
+
+    # Enables wrapping each image in the output HTML document in SVG tag to improve the output quality.
+    attr_accessor :wrap_images_in_svg
+
+    # Disables any license restrictions for all fonts in the current XPS/OXPS document.
+    attr_accessor :disable_font_license_verifications
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -78,7 +87,10 @@ module GroupDocsViewerCloud
         :'enable_font_hinting' => :'EnableFontHinting',
         :'render_original_page_size' => :'RenderOriginalPageSize',
         :'image_quality' => :'ImageQuality',
-        :'render_text_as_image' => :'RenderTextAsImage'
+        :'render_text_as_image' => :'RenderTextAsImage',
+        :'fixed_layout' => :'FixedLayout',
+        :'wrap_images_in_svg' => :'WrapImagesInSvg',
+        :'disable_font_license_verifications' => :'DisableFontLicenseVerifications'
       }
     end
 
@@ -90,7 +102,10 @@ module GroupDocsViewerCloud
         :'enable_font_hinting' => :'BOOLEAN',
         :'render_original_page_size' => :'BOOLEAN',
         :'image_quality' => :'String',
-        :'render_text_as_image' => :'BOOLEAN'
+        :'render_text_as_image' => :'BOOLEAN',
+        :'fixed_layout' => :'BOOLEAN',
+        :'wrap_images_in_svg' => :'BOOLEAN',
+        :'disable_font_license_verifications' => :'BOOLEAN'
       }
     end
 
@@ -126,6 +141,18 @@ module GroupDocsViewerCloud
         self.render_text_as_image = attributes[:'RenderTextAsImage']
       end
 
+      if attributes.key?(:'FixedLayout')
+        self.fixed_layout = attributes[:'FixedLayout']
+      end
+
+      if attributes.key?(:'WrapImagesInSvg')
+        self.wrap_images_in_svg = attributes[:'WrapImagesInSvg']
+      end
+
+      if attributes.key?(:'DisableFontLicenseVerifications')
+        self.disable_font_license_verifications = attributes[:'DisableFontLicenseVerifications']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -156,6 +183,18 @@ module GroupDocsViewerCloud
         invalid_properties.push("invalid value for 'render_text_as_image', render_text_as_image cannot be nil.")
       end
 
+      if @fixed_layout.nil?
+        invalid_properties.push("invalid value for 'fixed_layout', fixed_layout cannot be nil.")
+      end
+
+      if @wrap_images_in_svg.nil?
+        invalid_properties.push("invalid value for 'wrap_images_in_svg', wrap_images_in_svg cannot be nil.")
+      end
+
+      if @disable_font_license_verifications.nil?
+        invalid_properties.push("invalid value for 'disable_font_license_verifications', disable_font_license_verifications cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -170,6 +209,9 @@ module GroupDocsViewerCloud
       image_quality_validator = EnumAttributeValidator.new('String', ["Low", "Medium", "High"])
       return false unless image_quality_validator.valid?(@image_quality)
       return false if @render_text_as_image.nil?
+      return false if @fixed_layout.nil?
+      return false if @wrap_images_in_svg.nil?
+      return false if @disable_font_license_verifications.nil?
       return true
     end
 
@@ -197,7 +239,10 @@ module GroupDocsViewerCloud
           enable_font_hinting == other.enable_font_hinting &&
           render_original_page_size == other.render_original_page_size &&
           image_quality == other.image_quality &&
-          render_text_as_image == other.render_text_as_image
+          render_text_as_image == other.render_text_as_image &&
+          fixed_layout == other.fixed_layout &&
+          wrap_images_in_svg == other.wrap_images_in_svg &&
+          disable_font_license_verifications == other.disable_font_license_verifications
     end
 
     # @see the `==` method
@@ -209,7 +254,7 @@ module GroupDocsViewerCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [disable_chars_grouping, enable_layered_rendering, enable_font_hinting, render_original_page_size, image_quality, render_text_as_image].hash
+      [disable_chars_grouping, enable_layered_rendering, enable_font_hinting, render_original_page_size, image_quality, render_text_as_image, fixed_layout, wrap_images_in_svg, disable_font_license_verifications].hash
     end
 
     # Downcases first letter.

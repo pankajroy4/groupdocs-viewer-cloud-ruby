@@ -30,6 +30,8 @@ require_relative 'groupdocs_viewer_cloud/version'
 require_relative 'groupdocs_viewer_cloud/configuration'
 
 # Models
+require_relative 'groupdocs_viewer_cloud/models/api_error'
+require_relative 'groupdocs_viewer_cloud/models/api_error_response'
 require_relative 'groupdocs_viewer_cloud/models/archive_options'
 require_relative 'groupdocs_viewer_cloud/models/archive_view_info'
 require_relative 'groupdocs_viewer_cloud/models/attachment_info'

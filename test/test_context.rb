@@ -64,10 +64,14 @@ module GroupDocsViewerCloud
         request = DeleteFolderRequest.new(folder, nil, true)
         @folder_api.delete_folder request
       end
+      
+      def get_test_path
+        "test\\test_files\\"
+      end
 
       def upload_test_files
         unless @@test_files_uploaded then
-          test_file_path = "test\\test_files\\"
+          test_file_path = get_test_path()
 
           TestFile.test_files_list.each do |test_file|
 

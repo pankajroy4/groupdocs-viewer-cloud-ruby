@@ -109,16 +109,16 @@ module GroupDocsViewerCloud
     # Contains options for rendering documents into PDF format.
     attr_accessor :pdf_optimization_options
 
-    # Max width of an output image in pixels. (When converting single image to HTML only)
+    # Max width of an output image in pixels. (When converting single image to PDF only)
     attr_accessor :image_max_width
 
-    # Max height of an output image in pixels. (When converting single image to HTML only)
+    # Max height of an output image in pixels. (When converting single image to PDF only)
     attr_accessor :image_max_height
 
-    # The width of the output image in pixels. (When converting single image to HTML only)
+    # The width of the output image in pixels. (When converting single image to PDF only)
     attr_accessor :image_width
 
-    # The height of an output image in pixels. (When converting single image to HTML only)
+    # The height of an output image in pixels. (When converting single image to PDF only)
     attr_accessor :image_height
 
     # Attribute mapping from ruby-style variable name to JSON key.
