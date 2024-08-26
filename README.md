@@ -12,7 +12,7 @@ gem install groupdocs_viewer_cloud
 To add dependency to your app copy following into your Gemfile and run `bundle install`:
 
 ```
-gem "groupdocs_viewer_cloud", "~> 24.3"
+gem "groupdocs_viewer_cloud", "~> 24.8"
 ```
 
 ## Getting Started
